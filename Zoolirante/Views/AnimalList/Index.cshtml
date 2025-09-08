@@ -1,34 +1,27 @@
 ﻿@model IEnumerable<Zoolirante.Models.Species>
 
-
 @{
     ViewData["Title"] = "Index";
 }
-
-
 
 <h1>    Animals </h1>
 
 <p> Zoolirante is the home of ... .... animals..... Write Description </p>
 
-
-
 <div class="row">
-
-    @foreach (var a in Model)
-
-    {
+    @foreach (var a in Model) {
         <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm text-white bg-success">
+            <div class="card h-100 shadow-sm text-white bg-dark">
                 <div class="card-body text-center">
                     <h5 class="card-title">@a.Name</h5>
                     <p class="card-text">
                         <img src="@a.SpeciesImage" alt="@a.Name" class="img-fluid rounded" style="max-height:200px; object-fit:cover;" />
                     </p>
                 </div>
+                <!-- ak to add admin check here for buttons -->
                 <div class="card-footer text-center border-0">
-                    <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-light">Edit</a>
-                    <a asp-action="Details" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-warning">Details</a>
+                    <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-light">Details</a>
                     <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger">Delete</a>
                 </div>
             </div>
