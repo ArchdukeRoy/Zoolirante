@@ -20,9 +20,25 @@ namespace Zoolirante.Controllers
         }
 
         // GET: Merchandise
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchMerchandise)
         {
-            return View(await _context.Merchandises.ToListAsync());
+            
+            var items = from i in _context.Merchandises select i;
+            if (!string.IsNullOrEmpty(searchMerchandise))
+            {
+                items = items.Where(i =>
+                    i.ItemName.Contains(searchMerchandise) ||
+                    i.ItemDescription.Contains(searchMerchandise));
+            }
+            if (!items.Any())
+            {
+                return NotFound("Merchandise not found or invalid merchandise name");
+            }
+
+            // Keep the search term in the input
+            ViewData["CurrentFilter"] = searchMerchandise;
+
+            return View(await items.ToListAsync());
         }
 
         // GET: Merchandise/Details/5
