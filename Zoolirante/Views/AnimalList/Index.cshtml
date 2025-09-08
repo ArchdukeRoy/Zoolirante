@@ -17,22 +17,23 @@
     <div class="row">
         @foreach (var a in Model) {
             <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm text-white bg-light hover-grow" style="border-radius: 2rem;">
-                    <div class="card-header bg-dark " style="border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
-                        <h5 class="card-title mb-0 mt-2">@a.Name</h5>
+                <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
+                    <div class="card h-100 shadow-sm text-white bg-light hover-grow" style="border-radius: 2rem;">
+                        <div class="card-header bg-dark " style="border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
+                            <h5 class="card-title mb-0 mt-2">@a.Name</h5>
+                        </div>
+                        <div class="card-body bg-dark p-0">
+                            <p class="card-text">
+                                <img src="@a.SpeciesImage" alt="@a.Name" class="img-fluid w-100" style="max-height:200px; object-fit:cover" />
+                            </p>
+                        </div>
+                        <!-- ak to add admin check here for buttons -->
+                        <div class="card-footer text-end" style="background-color: rgb(255, 132, 56); border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
+                            <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark" style="border-radius: 2rem;">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger" style="border-radius: 2rem;">Delete</a>
+                        </div>
                     </div>
-                    <div class="card-body bg-dark p-0">
-                        <p class="card-text">
-                            <img src="@a.SpeciesImage" alt="@a.Name" class="img-fluid w-100" style="max-height:200px; object-fit:cover" />
-                        </p>
-                    </div>
-                    <!-- ak to add admin check here for buttons -->
-                    <div class="card-footer text-end" style="background-color: rgb(255, 132, 56); border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
-                        <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark" style="border-radius: 2rem;">Edit</a>
-                        <a asp-action="Details" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark" style="border-radius: 2rem;">Details</a>
-                        <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger" style="border-radius: 2rem;">Delete</a>
-                    </div>
-                </div>
+                </a>
             </div>
         }
     </div>
