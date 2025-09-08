@@ -4,28 +4,37 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>    Animals </h1>
+<div class="bg-dark text-white py-5 mx-0 text-center" style="width: 100%;">
+    <h1>Animals</h1>
+</div>
 
-<p> Zoolirante is the home of ... .... animals..... Write Description </p>
+<div class="container"> 
+    <p class="my-3">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+   <hr />
 
-<div class="row">
-    @foreach (var a in Model) {
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm text-white bg-dark">
-                <div class="card-body text-center">
-                    <h5 class="card-title">@a.Name</h5>
-                    <p class="card-text">
-                        <img src="@a.SpeciesImage" alt="@a.Name" class="img-fluid rounded" style="max-height:200px; object-fit:cover;" />
-                    </p>
-                </div>
-                <!-- ak to add admin check here for buttons -->
-                <div class="card-footer text-center border-0">
-                    <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-primary">Edit</a>
-                    <a asp-action="Details" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-light">Details</a>
-                    <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger">Delete</a>
+    <div class="row">
+        @foreach (var a in Model) {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm text-white bg-light hover-grow" style="border-radius: 2rem;">
+                    <div class="card-header bg-dark " style="border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
+                        <h5 class="card-title mb-0 mt-2">@a.Name</h5>
+                    </div>
+                    <div class="card-body bg-dark p-0">
+                        <p class="card-text">
+                            <img src="@a.SpeciesImage" alt="@a.Name" class="img-fluid w-100" style="max-height:200px; object-fit:cover" />
+                        </p>
+                    </div>
+                    <!-- ak to add admin check here for buttons -->
+                    <div class="card-footer text-end" style="background-color: rgb(255, 132, 56); border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
+                        <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark" style="border-radius: 2rem;">Edit</a>
+                        <a asp-action="Details" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark" style="border-radius: 2rem;">Details</a>
+                        <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger" style="border-radius: 2rem;">Delete</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 
