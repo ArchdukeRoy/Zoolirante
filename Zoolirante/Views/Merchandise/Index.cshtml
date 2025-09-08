@@ -3,17 +3,18 @@
     ViewData["Title"] = "Merchandise";
 }
 
-<h3>Merchandise</h3>
+<div class="bg-dark text-white py-5 mx-0 text-center mb-3" style="width: 100%;">
+    <h1>Merchandise</h1>
+</div>
 
-
+<div class="container" >
 <div class="row"> 
 @foreach (var item in Model)
 {
-    var img = string.IsNullOrWhiteSpace(item.ItemImage) ? Url.Content("~/images/placeholder-merch.jpg") : item.ItemImage;
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card h-100 shadow-sm border-0">
+        <div class="card product-card h-100 shadow-sm border-0 hover-grow">
             <div class="position-relative">
-                <img src="@img"
+                <img src="@item.ItemImage"
                      alt="@item.ItemName"
                      class="card-img-top"
                      style="height:220px; object-fit:cover;">
@@ -27,10 +28,19 @@
                 <p class="card-text text-muted line-clamp-2 mb-3">@item.ItemDescription</p>
 
                 <div class="mt-auto d-flex gap-2">
-                    <a asp-action="Details" asp-route-id="@item.ItemId" class="btn btn-outline-success btn-sm">View</a>
+                    <a asp-action="Details" asp-route-id="@item.ItemId" class="stretched-link" aria-label="View @item.ItemName details"></a>
+
+                    <!--Add to card form need a MerchInOrder controller for cart-->
+                    <form asp-controller="Cart" asp-action="Add" method="post" class="d-flex gap-2">
+                        <input type="hidden" name="id" value="@item.ItemId" />
+                        <input type="number" name="qty" value="1" min="1" class="form-control form-control-sm" style="width:70px;" />
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-success btn-sm">Add to cart</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 }
+</div>
 </div>
