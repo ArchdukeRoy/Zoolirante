@@ -8,3 +8,23 @@
 .hover-grow:hover {
     transform: scale(1.02);
 }
+
+.bg-zoolirante {
+    background-color: rgb(255, 132, 56);
+}
+
+.text-zoolirante {
+    color: rgb(255, 132, 56);
+}
+
+.bg-zoolirante-secondary {
+    background-color: rgb(250, 236, 209);
+}
+
+.text-zoolirante-secondary {
+    color: rgb(250, 236, 209);
+}
+
+.radius-2 {
+    border-radius: 2rem;
+}

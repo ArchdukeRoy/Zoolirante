@@ -18,7 +18,7 @@
         @foreach (var a in Model) {
             <div class="col-md-4 mb-4">
                 <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
-                    <div class="card h-100 shadow-sm text-white bg-light hover-grow" style="border-radius: 2rem;">
+                    <div class="card h-100 shadow-sm text-white bg-light hover-grow radius-2">
                         <div class="card-header bg-dark " style="border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
                             <h5 class="card-title mb-0 mt-2">@a.Name</h5>
                         </div>
@@ -28,9 +28,9 @@
                             </p>
                         </div>
                         <!-- ak to add admin check here for buttons -->
-                        <div class="card-footer text-end" style="background-color: rgb(255, 132, 56); border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
-                            <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark" style="border-radius: 2rem;">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger" style="border-radius: 2rem;">Delete</a>
+                        <div class="card-footer text-end bg-zoolirante" style="border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
+                            <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark radius-2">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger radius-2">Delete</a>
                         </div>
                     </div>
                 </a>
