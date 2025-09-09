@@ -19,26 +19,47 @@ namespace Zoolirante.Controllers
             _context = context;
         }
 
-        // GET: Merchandise
-        public async Task<IActionResult> Index(string searchMerchandise)
+        /* search and filter feature*/
+        public async Task<IActionResult> Index(string searchMerchandise, string priceFilter)
         {
-            
-            var items = from i in _context.Merchandises select i;
+            var merch = from i in _context.Merchandises
+                        select i;
+
+            // Search feature
             if (!string.IsNullOrEmpty(searchMerchandise))
             {
-                items = items.Where(i =>
+                merch = merch.Where(i =>
                     i.ItemName.Contains(searchMerchandise) ||
                     i.ItemDescription.Contains(searchMerchandise));
             }
-            if (!items.Any())
+
+            // Filter feature
+            if (!string.IsNullOrEmpty(priceFilter))
             {
-                return NotFound("Merchandise not found or invalid merchandise name");
+                switch (priceFilter)
+                {
+                    case "low price":
+                        merch = merch.Where(i => i.ItemCost < 20);
+                        break;
+                    case "medium price":
+                        merch = merch.Where(i => i.ItemCost >= 20 && i.ItemCost <= 30);
+                        break;
+                    case "high price":
+                        merch = merch.Where(i => i.ItemCost > 30);
+                        break;
+                }
             }
 
-            // Keep the search term in the input
-            ViewData["CurrentFilter"] = searchMerchandise;
+            //  "no results" error
+            if (!await merch.AnyAsync())
+            {
+                return NotFound("No merchandise in that price range!");
+            }
 
-            return View(await items.ToListAsync());
+            ViewData["PresentFilter"] = searchMerchandise;
+            ViewData["PresentPriceFilter"] = priceFilter;
+
+            return View(await merch.ToListAsync());
         }
 
         // GET: Merchandise/Details/5

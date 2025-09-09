@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Zoolirante.Models.Merchandise>
+@removeTagHelper "Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers"
 
 @{
     ViewData["Title"] = "Index";
@@ -14,13 +15,29 @@
 <h2>
 <form asp-action="Index" method="get" class="row mb-5">
     <div class="col-5">
-        <input type="text" name="searchMerchandise" class="form-control" placeholder="Search Merchandise" value="@ViewData["CurrentFilter"]">
+            <input type="text" name="searchMerchandise" class="form-control" placeholder="Search Merchandise" value="@ViewData["PresentFilter"]">
     </div>
     <div class="col-1">
         <button type="submit" class="btn btn-primary">Search</button>
     </div>
 </form>
 </h2>
+
+@* Filter Feature *@
+<form asp-action="Index" method="get" class="row mb-5"> 
+    <div class="col-3">
+    <select name="priceFilter" class="form-select">
+        <option value="" @(ViewData["PresentPriceFilter"] == null ? "selected" : "")>All Prices</option>
+        <option value="low price" @(ViewData["PresentPriceFilter"]?.ToString() == "low price" ? "selected" : "")>Below $20</option>
+            <option value="medium price" @(ViewData["PresentPriceFilter"]?.ToString() == "medium price" ? "selected" : "")>$20 - $30</option>
+            <option value="high price" @(ViewData["PresentPriceFilter"]?.ToString() == "high price" ? "selected" : "")>Above $30</option>
+    </select>
+</div>
+
+    <div class="col-2">
+        <button type="submit" class="btn btn-primary">Apply</button>
+    </div>
+</form>
 
 <table class="table">
     <thead>
