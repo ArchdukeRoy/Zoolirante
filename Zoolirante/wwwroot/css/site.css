@@ -18,6 +18,20 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
-    background-color: #f5f1e8;
+  margin-bottom: 60px;
+}
+
+.product-card .card-title {
+    text-decoration: none;
+    transition: text-decoration-color .15s ease-in-out, color .15s ease-in-out;
+    text-underline-offset: 2px;
+}
+
+.product-card:hover .card-title,
+.product-card:focus-within .card-title {
+    text-decoration: underline;
+}
+
+.product-card .stretched-link {
+    cursor: pointer;
 }

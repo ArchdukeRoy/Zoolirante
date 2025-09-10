@@ -1,0 +1,51 @@
+﻿
+
+
+.hover-grow {
+    transition: transform 0.3s ease;
+}
+
+.hover-grow:hover {
+    transform: scale(1.02);
+}
+
+.hover-tint {
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.hover-tint::after {
+    content: "";
+    position: absolute;
+    inset: 0; 
+    background: rgba(255, 132, 56, 0.5); 
+    border-radius: 2rem;
+    z-index: 1;
+}
+
+.hover-tint:hover {
+    opacity: 90%;
+}
+
+
+
+
+.bg-zoolirante {
+    background-color: rgb(255, 132, 56);
+}
+
+.text-zoolirante {
+    color: rgb(255, 132, 56);
+}
+
+.bg-zoolirante-secondary {
+    background-color: rgb(250, 236, 209);
+}
+
+.text-zoolirante-secondary {
+    color: rgb(250, 236, 209);
+}
+
+.radius-2 {
+    border-radius: 2rem;
+}
