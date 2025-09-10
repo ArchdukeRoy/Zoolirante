@@ -1,42 +1,106 @@
 ﻿@model Zoolirante.Models.Merchandise
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.ItemName;
+
 }
 
-<h1>Details</h1>
+<div class="container ">
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="mb-3 pt-3">
+        <ol class="breadcrumb small">
+            <li class="breadcrumb-item"><a href="~/">Home</a></li>
+            <li class="breadcrumb-item"><a asp-action="Index">Merch</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.ItemName</li>
+        </ol>
+    </nav>
 
-<div>
-    <h4>Merchandise</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ItemName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ItemName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ItemDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ItemDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ItemCost)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ItemCost)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ItemImage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ItemImage)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ItemId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="row g-4">
+        <!-- Gallery -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm position-relative">
+                <img src="@Model.ItemImage" alt="@Model.ItemName" class="card-img-top" style="object-fit:cover; max-height:520px;" />
+            </div>
+        </div>
+
+        <!-- Purchase panel -->
+        <div class="col-lg-6">
+            <div class="border rounded-3 p-3 p-md-4 shadow-sm">
+                <h1 class="h3 mb-2">@Model.ItemName</h1>
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <span class="fs-4 fw-semibold text-success">@Model.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))</span>
+                </div>
+
+                <p class="text-muted mb-3">@Model.ItemDescription</p>
+
+                <form asp-action="AddToCart" method="post" class="mt-3">
+                    <input type="hidden" name="id" value="@Model.ItemId" />
+
+                    <div class="d-flex align-items-center gap-2 mb-3" style="max-width:280px;">
+                        <label for="qty" class="form-label mb-0 me-2">Quantity</label>
+                        <div class="input-group">
+                            <button class="btn btn-outline-secondary" type="button" onclick="var i=document.getElementById('qty'); if(+i.value>1) i.value=+i.value-1;">−</button>
+                            <input id="qty" name="quantity" type="number" class="form-control text-center" value="1" min="1" />
+                            <button class="btn btn-outline-secondary" type="button" onclick="var i=document.getElementById('qty'); i.value=+i.value+1;">+</button>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mb-3">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-cart-plus me-1"></i> Add to cart
+                        </button>
+                    </div>
+
+                    <!-- Payment -->
+                    <div class="border rounded-3 p-2 bg-light small">
+                        <div class="d-flex flex-wrap align-items-center gap-3">
+                            <span class="text-muted">We accept:</span>
+                            <span class="fw-semibold">Visa</span>
+                            <span class="fw-semibold">Mastercard</span>
+                            <span class="fw-semibold">Amex</span>
+                            <span class="fw-semibold">PayPal</span>
+                            <span class="ms-auto text-success fw-semibold">Secure checkout</span>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Description & Returns -->
+    <div class="row mt-5">
+        <div class="col-lg-10">
+
+            <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc"
+                            type="button" role="tab" aria-controls="desc" aria-selected="true">
+                        Description
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="returns-tab" data-bs-toggle="tab" data-bs-target="#returns"
+                            type="button" role="tab" aria-controls="returns" aria-selected="false">
+                        Returns & Exchanges
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content border border-top-0 p-3 rounded-bottom" id="productTabsContent">
+                <div class="tab-pane fade show active" id="desc" role="tabpanel" aria-labelledby="desc-tab">
+                    <p>@Model.ItemDescription</p>
+                </div>
+                <div class="tab-pane fade" id="returns" role="tabpanel" aria-labelledby="returns-tab">
+                    <p>
+                        We accept returns/exchanges within <strong>30 days</strong> if items are
+                        unused and in original packaging; change-of-mind return postage is paid by the customer.
+                    </p>
+                    <ul>
+                        <li>Refund to original payment, exchange, or store credit.</li>
+                        <li>Faulty items are covered in full.</li>
+                        <li>Contact support before returning.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
