@@ -19,7 +19,9 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: #FAECD1;
+    /*    background-color: #FAECD1;*/
+    background-image: url(/Images/background.jpg);
+    background-size: cover;
 }
 
 .product-card .card-title {
