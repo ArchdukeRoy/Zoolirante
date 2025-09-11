@@ -1,11 +1,15 @@
 ﻿@model IEnumerable<Zoolirante.Models.Merchandise>
+
 @removeTagHelper "Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers"
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Merchandise";
 }
 
-<h1>Index</h1>
+<div class="bg-dark text-white py-5 mx-0 text-center mb-3" style="width: 100%;">
+    <h1>Merchandise</h1>
+</div>
+
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -78,6 +82,41 @@
                 <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
             </td>
         </tr>
+
+<div class="container" >
+<div class="row"> 
+@foreach (var item in Model)
+{
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card product-card h-100 shadow-sm border-0 hover-grow">
+            <div class="position-relative">
+                <img src="@item.ItemImage"
+                     alt="@item.ItemName"
+                     class="card-img-top"
+                     style="height:220px; object-fit:cover;">
+                <span class="badge bg-success price-badge">
+                    @item.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))
+                </span>
+            </div>
+
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title mb-2">@item.ItemName</h5>
+                <p class="card-text text-muted line-clamp-2 mb-3">@item.ItemDescription</p>
+
+                <div class="mt-auto d-flex gap-2">
+                    <a asp-action="Details" asp-route-id="@item.ItemId" class="stretched-link" aria-label="View @item.ItemName details"></a>
+
+                    <!--Add to card form need a MerchInOrder controller for cart-->
+                    <form asp-controller="Cart" asp-action="Add" method="post" class="d-flex gap-2">
+                        <input type="hidden" name="id" value="@item.ItemId" />
+                        <input type="number" name="qty" value="1" min="1" class="form-control form-control-sm" style="width:70px;" />
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-success btn-sm">Add to cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-    </tbody>
-</table>
+</div>
+</div>
