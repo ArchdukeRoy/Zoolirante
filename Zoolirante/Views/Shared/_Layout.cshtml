@@ -17,21 +17,21 @@
                     <img class="navbar-logo" src="/Images/logo.png" alt="Zoolirante">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                       ria-expanded="false" aria-label="Toggle navigation">
+                        ria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item me-4">
-                            <a class="nav-link"  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 
                         </li>
                         <li class="nav-item me-4">
-                            <a class="nav-link"  asp-area="" asp-controller="AnimalList" asp-action="Index">Animals</a>
+                            <a class="nav-link" asp-area="" asp-controller="AnimalList" asp-action="Index">Animals</a>
                         </li>
                         <li class="nav-item me-4">
-                            <a class="nav-link"  asp-area="" asp-controller="" asp-action="">Events</a>
-                          
+                            <a class="nav-link" asp-area="" asp-controller="" asp-action="">Events</a>
+
                         </li>
                         <li class="nav-item me-4">
                             <a class="nav-link" asp-area="" asp-controller="Merchandise" asp-action="Index">Merch</a>
@@ -61,6 +61,55 @@
         </main>
     </div>
 
+    <section class="bottom-section">
+
+        <div class="container">
+
+            <div class="row custom-row">
+
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">Location</h1>
+
+                    <p class="text"> Somewhere in the middle of Australia</p>
+
+                    <h1 class="header-bottom">Hours</h1>
+
+                    <p class="text"> 9AM - 5PM (Weekday)</p>
+
+                    <p class="text"> 10AM - 5PM (Weekend</p>
+
+                </div>
+
+
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">Ticket & Membership</h1>
+
+                </div>
+
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">Visit</h1>
+
+                    <a href="/AnimalList/Index" class="bottomsection-link"> Find Animals</a>
+                    <br />
+                    <a href="/Merchandise/Index" class="bottomsection-link"> Visit Merch Shop</a>
+
+
+
+                </div>
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">Events & Experience</h1>
+
+                </div>
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">About Us</h1>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </section>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - Zoolirante - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
