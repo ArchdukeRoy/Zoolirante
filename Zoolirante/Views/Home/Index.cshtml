@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Zoolirante.ViewModels.DefaultViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -147,6 +149,9 @@
 
     </div>
 
+@if (!string.IsNullOrEmpty(Model.username)) {
+    <h5 class="text-danger">@Model.username</h5>
+}
 
     <div class="section-map">
 

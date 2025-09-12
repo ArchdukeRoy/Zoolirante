@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Zoolirante.Models.Person>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<body class="container pt-5 bg-zoolirante-light">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card shadow" style="width: 35%;">
+            <div class="card-header radius-top-2 bg-zoolirante text-white" style="">
+                <h5 class="card-title mt-3 mb-0">Welcome</h5>
+                <h5 class=" fw-lighter mb-3" style="font-size: 0.8rem;">Please enter your details</h5>
+            </div>
+            <div class="d-flex justify-content-center card-body bg-light text-black">
+                <div style="width: 70%;">
+                    @if (!string.IsNullOrEmpty(ViewBag.Error)) {
+                        <div class="alert alert-danger py-1">
+                            @ViewBag.Error
+                        </div>
+                    }
+                    <form asp-controller="Account" asp-action="Index" method="post">
+                        <h5 class="h6 mb-1 fw-light">Username</h5>
+                        <input type="text" name="username" class="form-control" style="height: 30px"/>
+                        <h5 class="h6 mt-2 mb-1 fw-light">Password</h5>
+                        <input type="password" name="password" class="form-control" style="height: 30px" />
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <button type="submit" class="btn py-0" style="height: 30px; background-color: #FF9A00;">Sign in</button>
+                            <a asp-action="Create" class="text-info">Create New Account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
