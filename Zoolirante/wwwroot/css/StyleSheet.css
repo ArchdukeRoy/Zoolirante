@@ -58,8 +58,241 @@
     font-weight: bold;
 }
 
-.navbar-brand {
-    max-height: 10px;
-    width: auto;
+
+.navbar.fixed-top {
+    height: 70px; 
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
+
+.navbar-brand {
+    height: 100%; 
+    display: flex;
+    align-items: center; 
+    padding: 0.25rem 1rem !important;
+}
+
+.navbar-brand img {
+        max-height: 45px;
+        height: auto;
+        width: auto;
+        object-fit: contain;
+    }
+
+
+.dropdown-menu-custom{
+
+    display: none;
+    position: absolute;
+
+}
+
+.dropdown-hover{
+    position: relative;
+}
+
+.dropdown-hover:hover .dropdown-menu-custom{
+
+    display:block;
+}
+
+
+.dropdown-item-custom {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+    background-color: black;
+    font-family: Arial, sans-serif;
+}
+
+.dropdown-item-custom:last-child {
+    border-bottom: none;
+}
+`
+.dropdown-item-custom:hover {
+    background-color: #f8f9fa;
+    color: #FF8C42;
+}
+
+
+.card.card-tickets {
+    background-color: #6b8e23 !important;
+    outline-color: none;
+    border: none !important;
+    height: 650px;
+
+}
+
+.card-body{
+
+    color: white;
+}
+
+
+.card.card-merchandise {
+    background-color: #FF8C42 !important;
+    outline-color: none;
+    border: none !important;
+    height: 650px;
+}
+
+
+
+
+.card.card-events {
+    background-color: #a0522d !important;
+    outline-color: none;
+    border: none !important;
+    height: 650px;
+}
+
+.card-title{
+
+    margin-bottom: 30px;
+}
+
+
+.card-text{
+
+    margin-bottom: 30px;
+    font-weight:300;
+    font-family: Arial;
+}
+
+.card-img-top{
+
+    width: 100%;
+    height: 460px;
+
+}
+
+
+.custom-btn-ticket {
+    background-color: indianred !important;
+    border: none !important;
+    border-radius: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.custom-btn-event {
+    background-color: darkslategrey !important;
+    border: none !important;
+    border-radius: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.custom-btn {
+    background-color: indianred !important;
+    border: none !important;
+    border-radius: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+
+.animalpage-btn {
+    background-color: darkslategrey;
+    border: none !important;
+    margin-top: 30px;
+    font-family: Arial;
+}
+
+
+.animal-page-section {
+    background-image: url('../Images/background.jpg');
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    width: 100%;
+    font-family: Arial;
+}
+
+.description-half{
+
+    margin-top: 200px;
+    padding-left: 15rem;
+    text-align: center;
+    
+}
+
+.zoosection-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 80px;
+}
+
+.animal-showcase-half{
+
+
+}
+
+
+.lion-card {
+    margin-top: 200px;
+    background-color: indianred;
+    width: 100%;
+    height: 600px;
+}
+
+.giraffe-card {
+    margin-top: 200px;
+    background-color: orange;
+    width: 100%;
+    height: 600px;
+}
+
+.btn.btn-primary.discovermore-btn {
+    margin-top: 25px;
+    border-radius: 16px;
+    margin-left: 330px;
+    background-color: darkslategrey;
+    border: none;
+}
+
+.custom-title{
+
+    font-weight: 300;
+    text-align:center;
+    margin-top: 18px;
+    font-family: Arial;
+
+}
+
+.custom-header{
+
+    font-weight: bold;
+    text-align: center;
+    font-size: 28px;
+}
+
+
+.custom-bodytext{
+
+    text-align: center;
+    font-weight: 300;
+}
+
+lioncard-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 80px;
+}
+
+giraffecard-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 80px;
+}
+
 
