@@ -1,6 +1,3 @@
-﻿
-
-
 .hover-grow {
     transition: transform 0.3s ease;
 }
@@ -27,9 +24,6 @@
     opacity: 90%;
 }
 
-
-
-
 .bg-zoolirante {
 /*    background-color: rgb(255, 132, 56);*/
     background-color: #FF8C42;
@@ -51,13 +45,11 @@
     border-radius: 2rem;
 }
 
-
 .navbar-nav .nav-link {
     color: white !important;
     font-size: 1.2rem;
     font-weight: bold;
 }
-
 
 .navbar.fixed-top {
     height: 70px; 
@@ -73,18 +65,15 @@
 }
 
 .navbar-brand img {
-        max-height: 45px;
-        height: auto;
-        width: auto;
-        object-fit: contain;
-    }
-
+    max-height: 45px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
 
 .dropdown-menu-custom{
-
     display: none;
     position: absolute;
-
 }
 
 .dropdown-hover{
@@ -92,10 +81,8 @@
 }
 
 .dropdown-hover:hover .dropdown-menu-custom{
-
     display:block;
 }
-
 
 .dropdown-item-custom {
     display: block;
@@ -110,26 +97,22 @@
 .dropdown-item-custom:last-child {
     border-bottom: none;
 }
-`
+
 .dropdown-item-custom:hover {
     background-color: #f8f9fa;
     color: #FF8C42;
 }
-
 
 .card.card-tickets {
     background-color: #6b8e23 !important;
     outline-color: none;
     border: none !important;
     height: 650px;
-
 }
 
 .card-body{
-
     color: white;
 }
-
 
 .card.card-merchandise {
     background-color: #FF8C42 !important;
@@ -137,9 +120,6 @@
     border: none !important;
     height: 650px;
 }
-
-
-
 
 .card.card-events {
     background-color: #a0522d !important;
@@ -149,25 +129,19 @@
 }
 
 .card-title{
-
     margin-bottom: 30px;
 }
 
-
 .card-text{
-
     margin-bottom: 30px;
     font-weight:300;
     font-family: Arial;
 }
 
 .card-img-top{
-
     width: 100%;
     height: 460px;
-
 }
-
 
 .custom-btn-ticket {
     background-color: indianred !important;
@@ -193,14 +167,12 @@
     font-family: Arial;
 }
 
-
 .animalpage-btn {
     background-color: darkslategrey;
     border: none !important;
     margin-top: 30px;
     font-family: Arial;
 }
-
 
 .animal-page-section {
     background-image: url('../Images/background.jpg');
@@ -212,12 +184,50 @@
     font-family: Arial;
 }
 
-.description-half{
+/* MAP SECTION STYLES */
+.section-map {
+}
 
+.section-description {
+    margin-top: 80px;
+    margin-left: 200px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.title{
+    margin-top:10px;
+    margin-bottom: 30px;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.map-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 1200px; 
+    aspect-ratio: 16/9; 
+    margin: 40px auto;
+    background: url('/Images/ZOOMAP.png') center/contain no-repeat;
+}
+
+.pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 8px 12px;
+    background: rgba(255, 128, 0, .9);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+/* ANIMAL SHOWCASE & PAGE STYLES */
+.description-half{
     margin-top: 200px;
     padding-left: 15rem;
     text-align: center;
-    
 }
 
 .zoosection-image {
@@ -229,10 +239,7 @@
 }
 
 .animal-showcase-half{
-
-
 }
-
 
 .lion-card {
     margin-top: 200px;
@@ -257,29 +264,24 @@
 }
 
 .custom-title{
-
     font-weight: 300;
     text-align:center;
     margin-top: 18px;
     font-family: Arial;
-
 }
 
 .custom-header{
-
     font-weight: bold;
     text-align: center;
     font-size: 28px;
 }
 
-
 .custom-bodytext{
-
     text-align: center;
     font-weight: 300;
 }
 
-lioncard-img {
+.lioncard-img {
     width: 100%;
     height: 200px;
     object-fit: cover;
@@ -287,12 +289,10 @@ lioncard-img {
     margin-bottom: 80px;
 }
 
-giraffecard-img {
+.giraffecard-img {
     width: 100%;
     height: 200px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 80px;
 }
-
-
