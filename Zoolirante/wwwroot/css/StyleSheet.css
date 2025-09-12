@@ -73,16 +73,18 @@
     
 }
 
-.section-description{
-
-    margin-top: 200px;
+.section-description {
+    margin-top: 80px;
+    margin-left: 200px;
     text-align: center;
+    font-size: 30px;
 }
 
 .title{
 
-    margin-left:200px;
-    font-size: 30px;
+    margin-top:10px;
+    margin-bottom: 30px;
+    font-size: 50px;
     font-weight: bold;
     font-family: Arial;
 }
@@ -90,8 +92,8 @@
 .map-wrap {
     position: relative;
     width: 100%;
-    max-width: 1200px; /* your desired max width */
-    aspect-ratio: 16/9; /* match your map's real aspect ratio */
+    max-width: 1200px; 
+    aspect-ratio: 16/9; 
     margin: 40px auto;
     background: url('/Images/ZOOMAP.png') center/contain no-repeat;
 }
