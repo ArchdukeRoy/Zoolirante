@@ -11,38 +11,6 @@
          style="width: 100%; max-width: 1500px; height: auto; max-height: 600px; object-fit: contain;">
 </div>
 
- <section class="section-map">
-
-     <div class="section-description">
-
-      <div class=" description-map ">
-
-         <h5 class="title"> Explore Zoolirante Through Our Interactive Map</h5>
-            <p> Our interactive map brings the zoo to online, 
-                Click on the animals to uncover their stories, and plan your perfect visit with ease. 
-                Discover fascinating facts, photos, and highlights as you navigate the zoo right from your screen.</p>
-
-        </div>
-
-     </div>
-
-
-     <div class="section-map">
-
-        <div class="map-wrap">
-            <a class="pin" href="/AnimalList/Details/4" style="top: 30%; left: 20%; background: rgba(255, 128, 0, .9);">Pandas</a>
-            <a class="pin" href="/AnimalList/Details/1" style="top: 56%; left: 68%; background: rgba(255, 128, 0, .9);">Lions</a>
-            <a class="pin" href="/AnimalList/Details/3" style="top: 76%;left: 30%;background: rgba(255, 128, 0, .9);">Giraffes</a>
-            <a class="pin" href="/AnimalList/Details/2" style="top: 40%; left: 50%; background: rgba(255, 128, 0, .9);">Elephants</a>
-            <a class="pin" href="/AnimalList/Details/5" style="top: 95%;left: 64%;background: rgba(255, 128, 0, .9);">Zebras</a>
-            <a class="pin" href="/AnimalList/Details/12" style="top: 20%; left: 80%; background: rgba(255, 128, 0, .9);">Polar Bears</a>
-            <!-- add more pins... -->
-        </div>
-
-
-     </div>
-
- </section>
 
 <div class="container-fluid">
 <div class="row">
@@ -164,8 +132,41 @@
  
 </section>
 
+<section class="section-map">
+
+    <div class="section-description">
+
+        <div class=" description-map ">
+
+            <h5 class="title"> Explore Zoolirante Through Our Interactive Map</h5>
+            <p>
+                Our interactive map brings the zoo to online,
+                Click on the animals to uncover their stories, and plan your perfect visit with ease.
+                Discover fascinating facts, photos, and highlights as you navigate the zoo right from your screen.
+            </p>
+
+        </div>
+
+    </div>
 
 @if (!string.IsNullOrEmpty(Model.username)) {
     <h5 class="text-danger">@Model.username</h5>
 }
+
+    <div class="section-map">
+
+        <div class="map-wrap">
+            <a class="pin" href="/AnimalList/Details/4" style="top: 30%; left: 20%; background: rgba(255, 128, 0, .9);">Pandas</a>
+            <a class="pin" href="/AnimalList/Details/1" style="top: 56%; left: 68%; background: rgba(255, 128, 0, .9);">Lions</a>
+            <a class="pin" href="/AnimalList/Details/3" style="top: 76%;left: 30%;background: rgba(255, 128, 0, .9);">Giraffes</a>
+            <a class="pin" href="/AnimalList/Details/5" style="top: 40%; left: 50%; background: rgba(255, 128, 0, .9);">Elephants</a>
+            <a class="pin" href="/AnimalList/Details/5" style="top: 95%;left: 64%;background: rgba(255, 128, 0, .9);">Zebras</a>
+            <a class="pin" href="/AnimalList/Details/12" style="top: 20%; left: 80%; background: rgba(255, 128, 0, .9);">Polar Bears</a>
+
+        </div>
+
+
+    </div>
+
+</section>
 

@@ -201,18 +201,22 @@
 
 /* MAP SECTION STYLES */
 .section-map {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
 }
 
 .section-description {
     margin-top: 80px;
     margin-left: 200px;
-    text-align: center;
+    text-align: left;
     font-size: 30px;
 }
 
 .title{
     margin-top:10px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     font-size: 50px;
     font-weight: bold;
     font-family: Arial;
