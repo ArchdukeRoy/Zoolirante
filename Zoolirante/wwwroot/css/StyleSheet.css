@@ -114,4 +114,83 @@
 .dropdown-item-custom:hover {
     background-color: #f8f9fa;
     color: #FF8C42;
+}}
+
+
+.card.card-tickets {
+    background-color: #6b8e23 !important;
+    outline-color: none;
+    border: none !important;
+    height: 650px;
+
 }
+
+.card-body{
+
+    color: white;
+}
+
+
+.card.card-merchandise {
+    background-color: #FF8C42 !important;
+    outline-color: none;
+    border: none !important;
+    height: 650px;
+}
+
+
+
+
+.card.card-events {
+    background-color: #a0522d !important;
+    outline-color: none;
+    border: none !important;
+    height: 650px;
+}
+
+.card-title{
+
+    margin-bottom: 30px;
+}
+
+
+.card-text{
+
+    margin-bottom: 30px;
+    font-weight:300;
+    font-family: Arial;
+}
+
+.card-img-top{
+
+    width: 100%;
+    height: 460px;
+
+}
+
+
+.custom-btn-ticket {
+    background-color: indianred !important;
+    border: none !important;
+    border-radius: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.custom-btn-event {
+    background-color: darkslategrey !important;
+    border: none !important;
+    border-radius: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.custom-btn {
+    background-color: indianred !important;
+    border: none !important;
+    border-radius: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+
