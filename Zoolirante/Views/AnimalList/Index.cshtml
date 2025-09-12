@@ -4,28 +4,34 @@
     ViewData["Title"] = "Index";
 }
 
+<div class="container"> 
+    <p class="pt-5 pb-3">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+   <hr />
+    @* Search feature *@
+    <h2>
+        <form asp-action="Index" method="get" class="row mb-5">
+            <div class="col-5">
+                <input type="text" name="searchAnimal" class="form-control" placeholder="Search Animal" value="@ViewData["PresentFilter"]">
+            </div>
+            <div class="col-1">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </h2>
 
-<body class="bg-zoolirante-light">
-    <div class="bg-dark text-white py-5 mx-0 text-center" style="width: 100%;">
-        <h1>Animals</h1>
-    </div>
-
-    <div class="container"> 
-        <p class="pt-5 pb-3">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-       <hr />
-
-        <div class="row">
-            @foreach (var a in Model) {
-                <div class="col-md-4 mb-4">
-                    <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
-                        <div class="card h-100 shadow-sm text-white bg-light radius-2">
-                            <div class="card-body bg-opacity-100 p-0 hover-tint">
-                                <img src="@a.SpeciesImage" alt="@a.Name" class="card-img img-fluid w-100 radius-2" style="max-height:200px; object-fit:cover;" />
-                                <div class="card-img-overlay d-flex justify-content-center align-items-center" style="z-index: 2;">
-                                    <h5 class="card-title mb-0 mt-2 fw-bold fs-2">@a.Name</h5>
-                                </div>
+    <div class="row">
+        @foreach (var a in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
+                    <div class="card h-100 shadow-sm text-white bg-light radius-2">
+                        <div class="card-body bg-opacity-100 p-0 hover-tint">
+                            <img src="@a.SpeciesImage" alt="@a.Name" class="card-img img-fluid w-100 radius-2" style="max-height:200px; object-fit:cover;" />
+                            <div class="card-img-overlay d-flex justify-content-center align-items-center" style="z-index: 2;">
+                                <h5 class="card-title mb-0 mt-2 fw-bold fs-2">@a.Name</h5>
+                              
                             </div>
                             <!-- ak to add admin check here for buttons -->
                             @if (true) {
@@ -40,4 +46,3 @@
             }
         </div>
     </div>
-</body>

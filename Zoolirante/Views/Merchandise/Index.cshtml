@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Zoolirante.Models.Merchandise>
+
+@removeTagHelper "Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers"
+
 @{
     ViewData["Title"] = "Merchandise";
 }
@@ -7,40 +10,89 @@
     <h1>Merchandise</h1>
 </div>
 
-<div class="container" >
-<div class="row"> 
-@foreach (var item in Model)
-{
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card product-card h-100 shadow-sm border-0 hover-grow">
-            <div class="position-relative">
-                <img src="@item.ItemImage"
-                     alt="@item.ItemName"
-                     class="card-img-top"
-                     style="height:220px; object-fit:cover;">
-                <span class="badge bg-success price-badge">
-                    @item.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))
-                </span>
-            </div>
+<!-- create new if you need it
+<p>
+    <a asp-action="Create">Create New</a>
+</p
+-->
 
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title mb-2">@item.ItemName</h5>
-                <p class="card-text text-muted line-clamp-2 mb-3">@item.ItemDescription</p>
+<hr class="mt-4">
 
-                <div class="mt-auto d-flex gap-2">
-                    <a asp-action="Details" asp-route-id="@item.ItemId" class="stretched-link" aria-label="View @item.ItemName details"></a>
-
-                    <!--Add to card form need a MerchInOrder controller for cart-->
-                    <form asp-controller="Cart" asp-action="Add" method="post" class="d-flex gap-2">
-                        <input type="hidden" name="id" value="@item.ItemId" />
-                        <input type="number" name="qty" value="1" min="1" class="form-control form-control-sm" style="width:70px;" />
-                        @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-success btn-sm">Add to cart</button>
-                    </form>
+<div class="container mb-4">
+    <div class="row g-4 align-items-end">
+        <!-- Search -->
+        <div class="col-12 col-md-6">
+            <form asp-action="Index" method="get" class="row gx-2">
+                <div class="col">
+                    <input type="text"
+                           name="searchMerchandise"
+                           class="form-control"
+                           placeholder="Search Merchandise"
+                           value='@ViewData["PresentFilter"]'>
                 </div>
-            </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Filter -->
+        <div class="col-12 col-md-6">
+            <form asp-action="Index" method="get" class="row gx-2">
+                <div class="col">
+                    <select name="priceFilter" class="form-select">
+                        <option value="" @(ViewData["PresentPriceFilter"] == null ? "selected" : "")>All Prices</option>
+                        <option value="low price" @(ViewData["PresentPriceFilter"]?.ToString() == "low price" ? "selected" : "")>Below $20</option>
+                        <option value="medium price" @(ViewData["PresentPriceFilter"]?.ToString() == "medium price" ? "selected" : "")>$20–$50</option>
+                        <option value="high price" @(ViewData["PresentPriceFilter"]?.ToString() == "high price" ? "selected" : "")>Above $50</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-outline-secondary">Filter</button>
+                </div>
+            </form>
         </div>
     </div>
-}
 </div>
+
+<hr class="mt-4">
+
+<div class="container" >
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100 shadow-sm border-0 position-relative product-card text-center">
+                    <!-- Merch image -->
+                    <img src="@item.ItemImage"
+                         alt="@item.ItemName"
+                         class="card-img-top"
+                         style="height:220px; object-fit:cover;">
+
+                    <!-- Orange info section -->
+                    <div class="card-body bg-zoolirante text-center text-white d-flex flex-column justify-content-end p-3">
+
+                        <h6 class="fw-bold text-uppercase mb-1">@item.ItemName</h6>
+
+                        <p class="mb-3">@item.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))</p>
+
+                        <!-- Add to cart button -->
+                        <form asp-action="AddToCart" method="post" class="d-inline-block position-relative" style="z-index:2;">
+                            <input type="hidden" name="id" value="@item.ItemId" />
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-outline-light w-100">
+                                Add to cart
+                            </button>
+                        </form>
+
+                        <!-- card clickable except button -->
+                        <a asp-action="Details"
+                           asp-route-id="@item.ItemId"
+                           class="stretched-link"
+                           aria-label="View @item.ItemName details"></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

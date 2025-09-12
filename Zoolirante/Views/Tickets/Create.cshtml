@@ -1,0 +1,53 @@
+﻿@model Zoolirante.Models.Ticket
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="bg-dark text-white py-5 mx-0 text-center" style="width: 100%;">
+    <h1>Book a Ticket now!</h1>
+</div>
+
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body p-4">
+                    <h5 class="card-title mb-3">Book!</h5>
+
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label for="DateOfEntry" class="control-label">Date of entry:</label>
+                            <input asp-for="DateOfEntry" class="form-control" />
+                            <span asp-validation-for="DateOfEntry" class="text-danger"></span>
+                        </div>
+                        <!-- FOR VISITOR ID:
+                            I was thinking we make a guest user and set all tickets bought to guest user's ID if they are not logged 
+                        <div class="form-group">
+                            <label asp-for="DatePaid" class="control-label"></label>
+                            <input asp-for="DatePaid" class="form-control" />
+                            <span asp-validation-for="DatePaid" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="VisitorId" class="control-label"></label>
+                            <select asp-for="VisitorId" class="form-control" asp-items="ViewBag.VisitorId"></select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Book now!" class="btn btn-primary" />
+                        </div>
+                        -->
+                    <p>
+                        <a asp-action="Create">Create an Account...</a>
+                    </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
