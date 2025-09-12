@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Zoolirante.Models.Merchandise>
+
+@removeTagHelper "Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers"
+
 @{
     ViewData["Title"] = "Merchandise";
 }
@@ -7,8 +10,55 @@
     <h1>Merchandise</h1>
 </div>
 
+<!-- create new if you need it
+<p>
+    <a asp-action="Create">Create New</a>
+</p
+-->
+
+<hr class="mt-4">
+
+<div class="container mb-4">
+    <div class="row g-4 align-items-end">
+        <!-- Search -->
+        <div class="col-12 col-md-6">
+            <form asp-action="Index" method="get" class="row gx-2">
+                <div class="col">
+                    <input type="text"
+                           name="searchMerchandise"
+                           class="form-control"
+                           placeholder="Search Merchandise"
+                           value='@ViewData["PresentFilter"]'>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Filter -->
+        <div class="col-12 col-md-6">
+            <form asp-action="Index" method="get" class="row gx-2">
+                <div class="col">
+                    <select name="priceFilter" class="form-select">
+                        <option value="" @(ViewData["PresentPriceFilter"] == null ? "selected" : "")>All Prices</option>
+                        <option value="low price" @(ViewData["PresentPriceFilter"]?.ToString() == "low price" ? "selected" : "")>Below $20</option>
+                        <option value="medium price" @(ViewData["PresentPriceFilter"]?.ToString() == "medium price" ? "selected" : "")>$20–$50</option>
+                        <option value="high price" @(ViewData["PresentPriceFilter"]?.ToString() == "high price" ? "selected" : "")>Above $50</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-outline-secondary">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr class="mt-4">
+
 <div class="container" >
-<div class="row"> 
+<div class="row g-4"> 
 @foreach (var item in Model)
 {
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -31,7 +81,7 @@
                     <a asp-action="Details" asp-route-id="@item.ItemId" class="stretched-link" aria-label="View @item.ItemName details"></a>
 
                     <!--Add to card form need a MerchInOrder controller for cart-->
-                    <form asp-controller="Cart" asp-action="Add" method="post" class="d-flex gap-2">
+                        <form asp-controller="MerchInOrder" asp-action="Add" method="post" class="d-flex gap-2">
                         <input type="hidden" name="id" value="@item.ItemId" />
                         <input type="number" name="qty" value="1" min="1" class="form-control form-control-sm" style="width:70px;" />
                         @Html.AntiForgeryToken()
@@ -42,5 +92,5 @@
         </div>
     </div>
 }
-</div>
+    </div>
 </div>

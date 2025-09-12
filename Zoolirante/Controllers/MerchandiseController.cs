@@ -19,10 +19,47 @@ namespace Zoolirante.Controllers
             _context = context;
         }
 
-        // GET: Merchandise
-        public async Task<IActionResult> Index()
+        /* search and filter feature*/
+        public async Task<IActionResult> Index(string searchMerchandise, string priceFilter)
         {
-            return View(await _context.Merchandises.ToListAsync());
+            var merch = from i in _context.Merchandises
+                        select i;
+
+            // Search feature
+            if (!string.IsNullOrEmpty(searchMerchandise))
+            {
+                merch = merch.Where(i =>
+                    i.ItemName.Contains(searchMerchandise) ||
+                    i.ItemDescription.Contains(searchMerchandise));
+            }
+
+            // Filter feature
+            if (!string.IsNullOrEmpty(priceFilter))
+            {
+                switch (priceFilter)
+                {
+                    case "low price":
+                        merch = merch.Where(i => i.ItemCost < 20);
+                        break;
+                    case "medium price":
+                        merch = merch.Where(i => i.ItemCost >= 20 && i.ItemCost <= 30);
+                        break;
+                    case "high price":
+                        merch = merch.Where(i => i.ItemCost > 30);
+                        break;
+                }
+            }
+
+            //  "no results" error
+            if (!await merch.AnyAsync())
+            {
+                return NotFound("No merchandise in that price range!");
+            }
+
+            ViewData["PresentFilter"] = searchMerchandise;
+            ViewData["PresentPriceFilter"] = priceFilter;
+
+            return View(await merch.ToListAsync());
         }
 
         // GET: Merchandise/Details/5

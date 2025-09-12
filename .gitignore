@@ -1,0 +1,37 @@
+# Visual Studio files
+.vs/
+
+# Build output
+bin/
+obj/".vs/"
+"bin/"
+"obj/"
+Zoolirante/appsettings.json
+Zoolirante/appsettings.json
+Zoolirante/obj/Debug/net8.0/apphost.exe
+Zoolirante/obj/Debug/net8.0/ref/Zoolirante.dll
+Zoolirante/obj/Debug/net8.0/refint/Zoolirante.dll
+Zoolirante/obj/Debug/net8.0/rjimswa.dswa.cache.json
+Zoolirante/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json
+Zoolirante/obj/Debug/net8.0/rjsmrazor.dswa.cache.json
+Zoolirante/obj/Debug/net8.0/rpswa.dswa.cache.json
+Zoolirante/obj/Debug/net8.0/staticwebassets.build.endpoints.json
+Zoolirante/obj/Debug/net8.0/staticwebassets.build.json
+Zoolirante/obj/Debug/net8.0/staticwebassets.build.json.cache
+Zoolirante/obj/Debug/net8.0/staticwebassets.development.json
+Zoolirante/obj/Debug/net8.0/staticwebassets.upToDateCheck.txt
+Zoolirante/obj/Debug/net8.0/Zoolirante.AssemblyInfo.cs
+Zoolirante/obj/Debug/net8.0/Zoolirante.AssemblyInfoInputs.cache
+Zoolirante/obj/Debug/net8.0/Zoolirante.assets.cache
+Zoolirante/obj/Debug/net8.0/Zoolirante.csproj.AssemblyReference.cache
+Zoolirante/obj/Debug/net8.0/Zoolirante.csproj.CoreCompileInputs.cache
+Zoolirante/obj/Debug/net8.0/Zoolirante.csproj.FileListAbsolute.txt
+Zoolirante/obj/Debug/net8.0/Zoolirante.dll
+Zoolirante/obj/Debug/net8.0/Zoolirante.GeneratedMSBuildEditorConfig.editorconfig
+Zoolirante/obj/Debug/net8.0/Zoolirante.genruntimeconfig.cache
+Zoolirante/obj/Debug/net8.0/Zoolirante.pdb
+Zoolirante/obj/Debug/net8.0/Zoolirante.sourcelink.json
+Zoolirante/obj/project.assets.json
+Zoolirante/obj/project.nuget.cache
+Zoolirante/obj/Zoolirante.csproj.nuget.dgspec.json
+Zoolirante/obj/Zoolirante.csproj.nuget.g.props

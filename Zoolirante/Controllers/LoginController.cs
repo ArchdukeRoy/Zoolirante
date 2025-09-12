@@ -1,56 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Zoolirante.Data;
 using Zoolirante.Models;
 
 namespace Zoolirante.Controllers
 {
-    public class AnimalListController : Controller
+    public class LoginController : Controller
     {
         private readonly ZooliranteContext _context;
 
-        public AnimalListController(ZooliranteContext context)
+        public LoginController(ZooliranteContext context)
         {
             _context = context;
         }
-       //search feature
-        public async Task<IActionResult> Index(string? searchAnimal)
+
+        // GET: Login
+        public async Task<IActionResult> Index()
         {
-            var species = from s in _context.Species
-                          select s;
-            //var animal = from a in _context.Animals select a;
-
-            // Search feature
-            if (!string.IsNullOrEmpty(searchAnimal))
-            {
-                species = species.Where(s => s.Name.Contains(searchAnimal));
-            }
-
-            if (!await species.AnyAsync())
-            {
-                return NotFound("Animal not found or invalid animal name");
-            }
-
-            // the search term will be displayed in the input
-            ViewData["PresentFilter"] = searchAnimal;
-
-            return View("index", await species.ToListAsync());
+            var zooliranteContext = _context.Visitors.Include(v => v.VisitorNavigation);
+            return View(await zooliranteContext.ToListAsync());
         }
 
-
-        // GET: AnimalList
-        public async Task<IActionResult> DisplayIndex()
-        {
-            return View(await _context.Species.ToListAsync());
-        }
-
-        // GET: AnimalList/Details/5
+        // GET: Login/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -58,39 +34,42 @@ namespace Zoolirante.Controllers
                 return NotFound();
             }
 
-            var species = await _context.Species
-                .FirstOrDefaultAsync(m => m.SpeciesId == id);
-            if (species == null)
+            var visitor = await _context.Visitors
+                .Include(v => v.VisitorNavigation)
+                .FirstOrDefaultAsync(m => m.VisitorId == id);
+            if (visitor == null)
             {
                 return NotFound();
             }
 
-            return View(species);
+            return View(visitor);
         }
 
-        // GET: AnimalList/Create
+        // GET: Login/Create
         public IActionResult Create()
         {
+            ViewData["VisitorId"] = new SelectList(_context.People, "PersonId", "PersonId");
             return View();
         }
 
-        // POST: AnimalList/Create
+        // POST: Login/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SpeciesId,Name,SpeciesImage")] Species species)
+        public async Task<IActionResult> Create([Bind("VisitorId,Username,PasswordHash,Contact,PaymentMethod")] Visitor visitor)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(species);
+                _context.Add(visitor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(species);
+            ViewData["VisitorId"] = new SelectList(_context.People, "PersonId", "PersonId", visitor.VisitorId);
+            return View(visitor);
         }
 
-        // GET: AnimalList/Edit/5
+        // GET: Login/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,22 +77,23 @@ namespace Zoolirante.Controllers
                 return NotFound();
             }
 
-            var species = await _context.Species.FindAsync(id);
-            if (species == null)
+            var visitor = await _context.Visitors.FindAsync(id);
+            if (visitor == null)
             {
                 return NotFound();
             }
-            return View(species);
+            ViewData["VisitorId"] = new SelectList(_context.People, "PersonId", "PersonId", visitor.VisitorId);
+            return View(visitor);
         }
 
-        // POST: AnimalList/Edit/5
+        // POST: Login/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SpeciesId,Name,SpeciesImage")] Species species)
+        public async Task<IActionResult> Edit(int id, [Bind("VisitorId,Username,PasswordHash,Contact,PaymentMethod")] Visitor visitor)
         {
-            if (id != species.SpeciesId)
+            if (id != visitor.VisitorId)
             {
                 return NotFound();
             }
@@ -122,12 +102,12 @@ namespace Zoolirante.Controllers
             {
                 try
                 {
-                    _context.Update(species);
+                    _context.Update(visitor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SpeciesExists(species.SpeciesId))
+                    if (!VisitorExists(visitor.VisitorId))
                     {
                         return NotFound();
                     }
@@ -138,10 +118,11 @@ namespace Zoolirante.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(species);
+            ViewData["VisitorId"] = new SelectList(_context.People, "PersonId", "PersonId", visitor.VisitorId);
+            return View(visitor);
         }
 
-        // GET: AnimalList/Delete/5
+        // GET: Login/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,34 +130,35 @@ namespace Zoolirante.Controllers
                 return NotFound();
             }
 
-            var species = await _context.Species
-                .FirstOrDefaultAsync(m => m.SpeciesId == id);
-            if (species == null)
+            var visitor = await _context.Visitors
+                .Include(v => v.VisitorNavigation)
+                .FirstOrDefaultAsync(m => m.VisitorId == id);
+            if (visitor == null)
             {
                 return NotFound();
             }
 
-            return View(species);
+            return View(visitor);
         }
 
-        // POST: AnimalList/Delete/5
+        // POST: Login/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var species = await _context.Species.FindAsync(id);
-            if (species != null)
+            var visitor = await _context.Visitors.FindAsync(id);
+            if (visitor != null)
             {
-                _context.Species.Remove(species);
+                _context.Visitors.Remove(visitor);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SpeciesExists(int id)
+        private bool VisitorExists(int id)
         {
-            return _context.Species.Any(e => e.SpeciesId == id);
+            return _context.Visitors.Any(e => e.VisitorId == id);
         }
     }
 }
