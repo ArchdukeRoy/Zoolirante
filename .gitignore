@@ -3,4 +3,6 @@
 
 # Build output
 bin/
-obj/
+obj/".vs/"
+"bin/"
+"obj/"

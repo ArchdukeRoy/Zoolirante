@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Zoolirante.Data;
 using Zoolirante.Models;
 
@@ -18,9 +19,33 @@ namespace Zoolirante.Controllers
         {
             _context = context;
         }
+       //search feature
+        public async Task<IActionResult> Index(string? searchAnimal)
+        {
+            var species = from s in _context.Species
+                          select s;
+            //var animal = from a in _context.Animals select a;
+
+            // Search feature
+            if (!string.IsNullOrEmpty(searchAnimal))
+            {
+                species = species.Where(s => s.Name.Contains(searchAnimal));
+            }
+
+            if (!await species.AnyAsync())
+            {
+                return NotFound("Animal not found or invalid animal name");
+            }
+
+            // the search term will be displayed in the input
+            ViewData["PresentFilter"] = searchAnimal;
+
+            return View("index", await species.ToListAsync());
+        }
+
 
         // GET: AnimalList
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> DisplayIndex()
         {
             return View(await _context.Species.ToListAsync());
         }
