@@ -43,8 +43,8 @@
                     <select name="priceFilter" class="form-select">
                         <option value="" @(ViewData["PresentPriceFilter"] == null ? "selected" : "")>All Prices</option>
                         <option value="low price" @(ViewData["PresentPriceFilter"]?.ToString() == "low price" ? "selected" : "")>Below $20</option>
-                        <option value="medium price" @(ViewData["PresentPriceFilter"]?.ToString() == "medium price" ? "selected" : "")>$20–$50</option>
-                        <option value="high price" @(ViewData["PresentPriceFilter"]?.ToString() == "high price" ? "selected" : "")>Above $50</option>
+                        <option value="medium price" @(ViewData["PresentPriceFilter"]?.ToString() == "medium price" ? "selected" : "")>$20–$30</option>
+                        <option value="high price" @(ViewData["PresentPriceFilter"]?.ToString() == "high price" ? "selected" : "")>Above $30</option>
                     </select>
                 </div>
                 <div class="col-auto">
