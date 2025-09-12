@@ -315,3 +315,39 @@
     border-radius: 8px;
     margin-bottom: 80px;
 }
+
+.bottom-section {
+    background-color: #6B5B47;
+}
+
+
+
+
+    .bottom-section p {
+        color: white;
+        font-weight: 200;
+    }
+
+
+.custom-row {
+    margin-left: 150px;
+}
+
+
+.header-bottom {
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    margin-top: 20px;
+}
+
+.bottomsection-link {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+
+.bottomsection-link:hover {
+        color: grey;
+    }
