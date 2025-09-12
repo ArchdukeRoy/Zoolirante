@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Zoolirante.Models.Merchandise>
+
+@removeTagHelper "Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers"
+
 @{
     ViewData["Title"] = "Merchandise";
 }
@@ -6,6 +9,83 @@
 <div class="bg-dark text-white py-5 mx-0 text-center mb-3" style="width: 100%;">
     <h1>Merchandise</h1>
 </div>
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@* Search feature *@
+<h2>
+<form asp-action="Index" method="get" class="row mb-5">
+    <div class="col-5">
+            <input type="text" name="searchMerchandise" class="form-control" placeholder="Search Merchandise" value="@ViewData["PresentFilter"]">
+    </div>
+    <div class="col-1">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+</h2>
+
+@* Filter Feature *@
+<form asp-action="Index" method="get" class="row mb-6"> 
+    <div class="col-3">
+    <select name="priceFilter" class="form-select">
+        <option value="" @(ViewData["PresentPriceFilter"] == null ? "selected" : "")>All Prices</option>
+        <option value="low price" @(ViewData["PresentPriceFilter"]?.ToString() == "low price" ? "selected" : "")>Below $20</option>
+            <option value="medium price" @(ViewData["PresentPriceFilter"]?.ToString() == "medium price" ? "selected" : "")>$20 - $30</option>
+            <option value="high price" @(ViewData["PresentPriceFilter"]?.ToString() == "high price" ? "selected" : "")>Above $30</option>
+    </select>
+</div>
+    <div class="col-2">
+        <button type="submit" class="btn btn-primary">Apply</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemImage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemImage)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+  
 
 <div class="container" >
 <div class="row"> 
@@ -31,7 +111,7 @@
                     <a asp-action="Details" asp-route-id="@item.ItemId" class="stretched-link" aria-label="View @item.ItemName details"></a>
 
                     <!--Add to card form need a MerchInOrder controller for cart-->
-                    <form asp-controller="Cart" asp-action="Add" method="post" class="d-flex gap-2">
+                        <form asp-controller="MerchInOrder" asp-action="Add" method="post" class="d-flex gap-2">
                         <input type="hidden" name="id" value="@item.ItemId" />
                         <input type="number" name="qty" value="1" min="1" class="form-control form-control-sm" style="width:70px;" />
                         @Html.AntiForgeryToken()
@@ -42,5 +122,5 @@
         </div>
     </div>
 }
-</div>
+    </div>
 </div>

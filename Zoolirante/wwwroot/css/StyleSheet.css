@@ -31,7 +31,8 @@
 
 
 .bg-zoolirante {
-    background-color: rgb(255, 132, 56);
+/*    background-color: rgb(255, 132, 56);*/
+    background-color: #FF8C42;
 }
 
 .text-zoolirante {
@@ -49,3 +50,16 @@
 .radius-2 {
     border-radius: 2rem;
 }
+
+
+.navbar-nav .nav-link {
+    color: white !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.navbar-brand {
+    max-height: 10px;
+    width: auto;
+}
+
