@@ -1,0 +1,57 @@
+﻿@model Zoolirante.ViewModels.AccountViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<body class="container pt-5 bg-zoolirante-light">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card shadow" style="width: 35%;">
+            <div class="card-header radius-top-2 bg-zoolirante text-white" style="">
+                <h5 class="card-title mt-3 mb-0">Create New Account</h5>
+                <h5 class=" fw-lighter mb-3" style="font-size: 0.8rem;">Please enter your details</h5>
+            </div>
+            <div class="d-flex justify-content-center card-body bg-light text-black">
+                <div style="width: 70%;">
+                    @if (!string.IsNullOrEmpty(ViewBag.Error)) {
+                        <div class="alert alert-danger py-1">
+                            @ViewBag.Error
+                        </div>
+                    }
+                    <form asp-controller="Account" asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <h5 class="h6 mb-1 fw-light">First Name</h5>
+                        <input asp-for="Person.FirstName" class="form-control" style="height: 30px" />
+                        <span asp-validation-for="Person.FirstName" class="text-danger"></span>
+                        
+                        <h5 class="h6 mt-2 mb-1 fw-light">Last Name</h5>
+                        <input asp-for="Person.LastName" class="form-control" style="height: 30px" />
+                        <span asp-validation-for="Person.LastName" class="text-danger"></span>
+                        
+                        <h5 class="h6 mt-2 mb-1 fw-light">Email</h5>
+                        <input asp-for="Person.Email" class="form-control" style="height: 30px" />
+                        <span asp-validation-for="Person.Email" class="text-danger"></span>
+                        
+                        <h5 class="h6 mt-2 mb-1 fw-light">Username</h5>
+                        <input asp-for="Visitor.Username" class="form-control" style="height: 30px" />
+                        <span asp-validation-for="Visitor.Username" class="text-danger"></span>
+                        
+                        <h5 class="h6 mt-2 mb-1 fw-light">Password</h5>
+                        <input asp-for="Visitor.PasswordHash" class="form-control" type="password" style="height: 30px" />
+                        <span asp-validation-for="Visitor.PasswordHash" class="text-danger"></span>
+                        
+                        <h5 class="h6 mt-2 mb-1 fw-light">Phone Number</h5>
+                        <input asp-for="Visitor.Contact" class="form-control" style="height: 30px" />
+                        <span asp-validation-for="Visitor.Contact" class="text-danger"></span>
+
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <button type="submit" class="btn py-0" style="height: 30px; background-color: #FF9A00;">Create</button>
+                            <a asp-action="Index" class="text-info">Return</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

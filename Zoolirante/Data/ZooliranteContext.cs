@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Zoolirante.Models;
+using Zoolirante.ViewModels;
 
 namespace Zoolirante.Data;
 
@@ -405,4 +406,6 @@ public partial class ZooliranteContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+public DbSet<Zoolirante.ViewModels.DefaultViewModel> DefaultViewModel { get; set; } = default!;
 }
