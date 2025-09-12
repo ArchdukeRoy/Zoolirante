@@ -63,3 +63,47 @@
     width: auto;
 }
 
+
+.section-map {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    width: 100%;
+    font-family: Arial;
+    
+}
+
+.section-description{
+
+    margin-top: 200px;
+    text-align: center;
+}
+
+.title{
+
+    margin-left:200px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.map-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 1200px; /* your desired max width */
+    aspect-ratio: 16/9; /* match your map's real aspect ratio */
+    margin: 40px auto;
+    background: url('/Images/ZOOMAP.png') center/contain no-repeat;
+}
+
+.pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 8px 12px;
+    background: rgba(255, 128, 0, .9);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    /* optional: improve tap targets on mobile */
+    font-size: 0.95rem;
+}
