@@ -1,21 +1,32 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Zoolirante.Data;
 using Zoolirante.Models;
+using Zoolirante.ViewModels;
+using System.Text.Json;
 
 namespace Zoolirante.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ZooliranteContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ZooliranteContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (!string.IsNullOrEmpty(vmJson)) {
+                var vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson);
+                return View(vm);
+            }
+
+            return View(new DefaultViewModel()) ;
         }
 
         public IActionResult Privacy()

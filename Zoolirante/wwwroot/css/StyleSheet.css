@@ -34,12 +34,16 @@
     background-color: rgb(255, 132, 56);
 }
 
-.text-zoolirante {
-    color: rgb(255, 132, 56);
+.bg-zoolirante-light {
+    background-color: #F2F2F2
 }
 
 .bg-zoolirante-secondary {
     background-color: rgb(250, 236, 209);
+}
+
+.text-zoolirante {
+    color: rgb(255, 132, 56);
 }
 
 .text-zoolirante-secondary {
@@ -48,4 +52,14 @@
 
 .radius-2 {
     border-radius: 2rem;
+}
+
+.radius-top-2 {
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+
+.radius-bottom-2 {
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
 }

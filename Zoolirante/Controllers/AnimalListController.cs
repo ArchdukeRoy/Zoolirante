@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Zoolirante.Data;
 using Zoolirante.Models;
+using Zoolirante.ViewModels;
 
 namespace Zoolirante.Controllers
 {
@@ -22,7 +23,11 @@ namespace Zoolirante.Controllers
         // GET: AnimalList
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Species.ToListAsync());
+
+            var speciesDb = _context.Species
+                .ToListAsync();
+
+            return View(await speciesDb);
         }
 
         // GET: AnimalList/Details/5
