@@ -1,28 +1,36 @@
-﻿@model IEnumerable<Zoolirante.Models.Species>
+﻿@model Zoolirante.ViewModels.AnimalListViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
+<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
+    <h1>Our Animal Showcase</h1>
+</div>
+<div class="w-100 bg-zoolirante-light py-1 shadow"></div>
+
 <div class="container"> 
-    <p class="pt-5 pb-3">
+    <p class="pt-4 pb-3">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </p>
    <hr />
     @* Search feature *@
-    <h2>
-        <form asp-action="Index" method="get" class="row mb-5">
-            <div class="col-5">
-                <input type="text" name="searchAnimal" class="form-control" placeholder="Search Animal" value="@ViewData["PresentFilter"]">
+    <div>
+        @if (!string.IsNullOrEmpty(ViewBag.Error)) {
+            <div class="alert alert-danger py-1" style="width: 30%">
+                @ViewBag.Error
             </div>
-            <div class="col-1">
-                <button type="submit" class="btn btn-primary">Search</button>
+        }
+        <form asp-action="Index" method="get" class="row mb-4">
+            <div class="input-group" style="max-width: 500px">
+                <input type="text" name="searchAnimal" class="form-control" placeholder="Filter Animal" value="@ViewData["PresentFilter"]">
+                <button type="submit" class="btn btn-dark">Search</button>
             </div>
         </form>
-    </h2>
+    </div>
 
     <div class="row">
-        @foreach (var a in Model)
+        @foreach (var a in Model.SpeciesList)
         {
             <div class="col-md-4 mb-4">
                 <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
@@ -31,29 +39,17 @@
                             <img src="@a.SpeciesImage" alt="@a.Name" class="card-img img-fluid w-100 radius-2" style="max-height:200px; object-fit:cover;" />
                             <div class="card-img-overlay d-flex justify-content-center align-items-center" style="z-index: 2;">
                                 <h5 class="card-title mb-0 mt-2 fw-bold fs-2">@a.Name</h5>
-                              
                             </div>
-                            <!-- ak to add admin check here for buttons -->
-                            @if (true) {
-                                <div class="card-footer text-end">
-                                    <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark radius-2">Edit</a>
-                                    <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger radius-2">Delete</a>
-                                </div>
-                            }
                         </div>
-                        <!-- ak to add admin check here for buttons -->
-                        @if (true)
-                        {
+                        @if (Model.DefaultVM.admin == true) {
                             <div class="card-footer text-end">
                                 <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark radius-2">Edit</a>
                                 <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger radius-2">Delete</a> 
-
                             </div>
                         }
                     </div>
                 </a>
             </div>
-
-            }
-        </div>
+        }
     </div>
+</div>

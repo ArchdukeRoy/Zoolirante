@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Zoolirante.Data;
 using Zoolirante.Models;
 using Zoolirante.ViewModels;
+using System.Text.Json;
 
 namespace Zoolirante.Controllers
 {
@@ -21,11 +22,9 @@ namespace Zoolirante.Controllers
             _context = context;
         }
        //search feature
-        public async Task<IActionResult> Index(string? searchAnimal)
-        {
+        public async Task<IActionResult> Index(string? searchAnimal, AnimalListViewModel vm) { 
             var species = from s in _context.Species
-                          select s;
-            //var animal = from a in _context.Animals select a;
+                        select s;
 
             // Search feature
             if (!string.IsNullOrEmpty(searchAnimal))
@@ -35,13 +34,17 @@ namespace Zoolirante.Controllers
 
             if (!await species.AnyAsync())
             {
-                return NotFound("Animal not found or invalid animal name");
+                ViewBag.Error = "Animal not found";
             }
 
-            // the search term will be displayed in the input
             ViewData["PresentFilter"] = searchAnimal;
 
-            return View("index", await species.ToListAsync());
+            vm.SpeciesList = await species.ToListAsync();
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (!string.IsNullOrEmpty(vmJson)) {
+                vm.DefaultVM = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+            }
+            return View(vm);
         }
 
 
