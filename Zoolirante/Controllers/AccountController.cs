@@ -62,6 +62,7 @@ namespace Zoolirante.Controllers
             }
 
             HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(_defaultViewModel));
+            HttpContext.Session.SetInt32("id", _defaultViewModel.id);
             return RedirectToAction("Index", "Home");
         }
 
