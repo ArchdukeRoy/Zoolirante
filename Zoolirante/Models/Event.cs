@@ -12,4 +12,6 @@ public partial class Event
     public string? Description { get; set; }
 
     public virtual ICollection<EventRollCall> EventRollCalls { get; set; } = new List<EventRollCall>();
+
+    public virtual ICollection<Species> Species { get; set; } = new List<Species>();
 }

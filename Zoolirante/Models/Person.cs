@@ -6,7 +6,6 @@ namespace Zoolirante.Models;
 
 public partial class Person
 {
-    [Key]
     public int PersonId { get; set; }
 
     [Required(ErrorMessage = "First Name is required")]
