@@ -29,6 +29,12 @@
         </form>
     </div>
 
+    @if (TempData["Liked"] != null) {
+        <div class="alert alert-info py-1">
+            @TempData["Liked"]
+        </div>
+    }
+
     <div class="row">
         @foreach (var a in Model.SpeciesList)
         {

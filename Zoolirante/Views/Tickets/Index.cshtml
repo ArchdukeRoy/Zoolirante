@@ -1,47 +1,20 @@
-﻿@model IEnumerable<Zoolirante.Models.Ticket>
+﻿@model Zoolirante.ViewModels.DefaultViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
+    <h1>Entry Tickets</h1>
+</div>
+<div class="w-100 bg-zoolirante-light py-1 shadow"></div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfEntry)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DatePaid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Visitor)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfEntry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DatePaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Visitor.VisitorId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TicketId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TicketId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TicketId">Delete</a>
-            </td>
-        </tr>
+@if (!string.IsNullOrEmpty(Model.username)) {
+    <div class="alert alert-info mx-5 mt-3 py-2">
+        Do stuff here
+    </div>
+} else {
+    <div class="alert alert-danger mx-5 mt-3 py-2">
+        Please log in to purchase tickets.
+    </div>
 }
-    </tbody>
-</table>

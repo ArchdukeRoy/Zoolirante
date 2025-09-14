@@ -4,17 +4,22 @@
     ViewData["Title"] = "Home Page";
 }
 
+@*Welcome On Login*@
+@if (!string.IsNullOrEmpty(Model.username)) {
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between" style="margin-top: -2px">
+        @if (Model.admin == true) {
+            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
+        }
+        <p class="mb-1 fw-light mx-3">Welcome, @Model.username</p>
+    </div>
+}
 
+@*Banner*@
 <div class="mx-0" style="width: 100vw; text-align: center; margin-bottom: 40px; margin-top: -2px;">
     <img src="/Images/./panda-banner.jpg"
          alt="Banner Image"
          style="width: 100%; height: auto; max-height: 600px; object-fit: contain;">
 </div>
-
-@*Example of Login Details Showing*@
-@if (!string.IsNullOrEmpty(Model.username)) {
-    <h5 class="text-danger">@Model.username</h5>
-}
 
 <div class="container-fluid">
     <div class="row">
