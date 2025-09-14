@@ -60,10 +60,19 @@ namespace Zoolirante.Controllers
             } else {
                 _defaultViewModel.admin = false;
             }
+            
+            var faDB = await _context.FavouriteAnimals
+                .Where(i => i.VisitorId == user.VisitorId)
+                .ToListAsync();
+            _defaultViewModel.favouriteAnimals = faDB.Select(f => new FavouriteAnimalDataTransfer {
+                FavAnimalsId = f.FavAnimalsId,
+                AnimalId = f.AnimalId,
+                VisitorId = f.VisitorId
+            }).ToList();
 
             HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(_defaultViewModel));
             HttpContext.Session.SetInt32("id", _defaultViewModel.id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home"); 
         }
 
         // GET: Account/Create
@@ -92,8 +101,8 @@ namespace Zoolirante.Controllers
                     errors.Add($"{state.Key}: {error.ErrorMessage}");
                 }
             }
-
             ViewBag.Error = string.Join("<br/>", errors);
+
             return View(vm);
         }
 

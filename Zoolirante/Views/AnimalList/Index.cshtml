@@ -33,8 +33,23 @@
         @foreach (var a in Model.SpeciesList)
         {
             <div class="col-md-4 mb-4">
-                <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
-                    <div class="card h-100 shadow-sm text-white bg-light radius-2">
+                <div class="card h-100 shadow-sm text-white bg-light radius-2 position-relative">
+                    @if (Context.Session.GetInt32("id").HasValue && Context.Session.GetInt32("id") != 0) {
+                        <form asp-action="Like" asp-route-id="@a.SpeciesId" method="post">
+                            <button type="submit" class="btn btn-dark btn-sm position-absolute top-0 end-0 m-3 d-flex align-items-center justify-content-center" 
+                                    style="border-radius: 0.8rem; width: 32px; height: 32px; z-index: 3;"
+                                    title="Add to liked list">
+
+                                @if (Model.DefaultVM.favouriteAnimals.Where(i => i.AnimalId == a.SpeciesId).FirstOrDefault() != null) {
+                                    <i class="bi-heart-fill text-danger" style="margin-right: 1px; margin-top: 2px"></i>
+                                } else {
+                                    <i class="bi-heart-fill text-light" style="margin-right: 1px; margin-top: 2px"></i>
+                                }
+
+                            </button>
+                        </form>
+                    }
+                    <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
                         <div class="card-body bg-opacity-100 p-0 hover-tint">
                             <img src="@a.SpeciesImage" alt="@a.Name" class="card-img img-fluid w-100 radius-2" style="max-height:200px; object-fit:cover;" />
                             <div class="card-img-overlay d-flex justify-content-center align-items-center" style="z-index: 2;">
@@ -47,8 +62,8 @@
                                 <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger radius-2">Delete</a> 
                             </div>
                         }
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         }
     </div>

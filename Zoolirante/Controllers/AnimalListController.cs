@@ -47,6 +47,24 @@ namespace Zoolirante.Controllers
             return View(vm);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Like(int id) {
+
+            var faM = new FavouriteAnimal();
+            faM.AnimalId = id;
+            faM.VisitorId = HttpContext.Session.GetInt32("id")!.Value;
+            
+            if (ModelState.IsValid) {
+                _context.Add(faM);
+                await _context.SaveChangesAsync();
+                TempData["Liked"] = "Added to liked list";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
         // GET: AnimalList
         public async Task<IActionResult> DisplayIndex()
