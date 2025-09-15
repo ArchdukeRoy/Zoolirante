@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Zoolirante")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a1a984b995836a37ef73316c653455fbcd32e267")]
 [assembly: System.Reflection.AssemblyProductAttribute("Zoolirante")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Zoolirante")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
