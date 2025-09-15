@@ -423,4 +423,5 @@ public partial class ZooliranteContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    public DbSet<Zoolirante.ViewModels.DefaultViewModel> DefaultViewModel { get; set; } = default!;
 }
