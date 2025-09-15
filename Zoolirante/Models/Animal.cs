@@ -19,6 +19,8 @@ public partial class Animal
 
     public string? AnimalImage { get; set; }
 
+    public string? AnimalImage2 { get; set; }
+
     public virtual ICollection<FavouriteAnimal> FavouriteAnimals { get; set; } = new List<FavouriteAnimal>();
 
     public virtual Species Species { get; set; } = null!;

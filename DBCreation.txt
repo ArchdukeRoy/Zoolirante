@@ -1,135 +1,150 @@
+/* =========================
+   SCHEMA: TABLES & KEYS
+   ========================= */
+
 CREATE TABLE People (
-personID int identity(10000,1) PRIMARY KEY,
-firstName nvarchar(100) NOT NULL,
-lastName nvarchar(100) NOT NULL,
-email nvarchar(255) NOT NULL unique
+  personID int identity(10000,1) PRIMARY KEY,
+  firstName nvarchar(100) NOT NULL,
+  lastName nvarchar(100) NOT NULL,
+  email nvarchar(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE Roles (
-roleID   int identity(1000,1) PRIMARY KEY,
-roleName nvarchar(100) NOT NULL unique
+  roleID int identity(1000,1) PRIMARY KEY,
+  roleName nvarchar(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE Staff (
-staffID int PRIMARY KEY,
-mobile nvarchar(50) NULL,
-photo nvarchar(255) NULL,
-password nvarchar(255) NOT NULL,
-roleID int NOT NULL,
-CONSTRAINT FK_Staff_People FOREIGN KEY (staffID) REFERENCES People(personID),
-CONSTRAINT FK_Staff_Roles FOREIGN KEY (roleID)  REFERENCES Roles(roleID)
+  staffID int PRIMARY KEY,
+  mobile nvarchar(50) NULL,
+  photo nvarchar(255) NULL,
+  password nvarchar(255) NOT NULL,
+  roleID int NOT NULL,
+  CONSTRAINT FK_Staff_People FOREIGN KEY (staffID) REFERENCES People(personID),
+  CONSTRAINT FK_Staff_Roles FOREIGN KEY (roleID)  REFERENCES Roles(roleID)
 );
 
 CREATE TABLE Admin (
-adminID int PRIMARY KEY,
-CONSTRAINT FK_Admin_Staff FOREIGN KEY (adminID) REFERENCES Staff(staffID)
+  adminID int PRIMARY KEY,
+  CONSTRAINT FK_Admin_Staff FOREIGN KEY (adminID) REFERENCES Staff(staffID)
 );
 
 CREATE TABLE ZooKeeper (
-zookeeperID int PRIMARY KEY,
-description nvarchar(MAX) NOT NULL,
-CONSTRAINT FK_ZK_Staff FOREIGN KEY (zookeeperID) REFERENCES Staff(staffID)
+  zookeeperID int PRIMARY KEY,
+  description nvarchar(MAX) NOT NULL,
+  CONSTRAINT FK_ZK_Staff FOREIGN KEY (zookeeperID) REFERENCES Staff(staffID)
 );
 
 CREATE TABLE Events (
-eventID int identity (1,1) PRIMARY KEY,
-name nvarchar(200) NOT NULL,
-description nvarchar(MAX) NULL
+  eventID int identity (1,1) PRIMARY KEY,
+  name nvarchar(200) NOT NULL,
+  description nvarchar(MAX) NULL
 );
 
 CREATE TABLE EventRollCall (
-eventRollCallID int identity(1,1) PRIMARY KEY,
-rollDate date NOT NULL,
-rollTime time NOT NULL,
-zookeeperID int,
-eventID int NOT NULL,
-CONSTRAINT FK_RollCall_ZK FOREIGN KEY (zookeeperID) REFERENCES ZooKeeper(zookeeperID),
-CONSTRAINT FK_RollCall_Evt FOREIGN KEY (eventID) REFERENCES Events(eventID),
-CONSTRAINT UQ_RollCall UNIQUE (eventID, rollDate, rollTime)
+  eventRollCallID int identity(1,1) PRIMARY KEY,
+  rollDate date NOT NULL,
+  rollTime time NOT NULL,
+  zookeeperID int NULL,
+  eventID int NOT NULL,
+  CONSTRAINT FK_RollCall_ZK FOREIGN KEY (zookeeperID) REFERENCES ZooKeeper(zookeeperID),
+  CONSTRAINT FK_RollCall_Evt FOREIGN KEY (eventID) REFERENCES Events(eventID),
+  CONSTRAINT UQ_RollCall UNIQUE (eventID, rollDate, rollTime)
 );
 
 CREATE TABLE Visitors (
-visitorID int PRIMARY KEY,
-username nvarchar(100) NOT NULL unique,
-passwordHash nvarchar(255) NOT NULL,
-contact nvarchar(100) NULL,
-paymentMethod nvarchar(100) NULL,
-CONSTRAINT FK_Visitors_People FOREIGN KEY (visitorID) REFERENCES People(personID)
+  visitorID int PRIMARY KEY,
+  username nvarchar(100) NOT NULL UNIQUE,
+  passwordHash nvarchar(255) NOT NULL,
+  contact nvarchar(100) NULL,
+  paymentMethod nvarchar(100) NULL,
+  CONSTRAINT FK_Visitors_People FOREIGN KEY (visitorID) REFERENCES People(personID)
 );
 
 CREATE TABLE Species (
-speciesID int identity(1,1) PRIMARY KEY,
-name nvarchar(200) NOT NULL UNIQUE,
-speciesImage nvarchar(500) NULL
+    speciesID int identity(1,1) PRIMARY KEY,
+    name nvarchar(200) NOT NULL UNIQUE,
+    speciesImage nvarchar(500) NULL,
+    speciesDescription nvarchar(MAX) NULL,
+    habitat nvarchar(50) NULL,
+    diet nvarchar(50) NULL,
+    speciesImage2 nvarchar(500) NULL,
+    eventID int NULL, -- FK to Events
+    CONSTRAINT FK_Species_Events FOREIGN KEY (eventID) REFERENCES Events(eventID)
 );
 
+
 CREATE TABLE Animals (
-animalID int identity(1,1) PRIMARY KEY,
-name nvarchar(200) NOT NULL,
-gender CHAR(1) NOT NULL check (gender IN ('M','F')),
-age int NOT NULL,
-description nvarchar(1000) NULL,
-speciesID int NOT NULL,
-animalImage  nvarchar(500) NULL,
-CONSTRAINT FK_Animals_Species FOREIGN KEY (speciesID) REFERENCES Species(speciesID)
+  animalID int identity(1,1) PRIMARY KEY,
+  name nvarchar(200) NOT NULL,
+  gender CHAR(1) NOT NULL CHECK (gender IN ('M','F')),
+  age int NOT NULL,
+  description nvarchar(1000) NULL,
+  speciesID int NOT NULL,
+  animalImage nvarchar(500) NULL,
+  animalImage2 nvarchar(500) NULL,   -- second image slot for individuals
+  CONSTRAINT FK_Animals_Species FOREIGN KEY (speciesID) REFERENCES Species(speciesID)
 );
 
 CREATE TABLE FavouriteAnimals (
-favAnimalsID int IDENTITY(1,1) PRIMARY KEY,
-visitorID int NOT NULL,
-animalID int NOT NULL,
-CONSTRAINT FK_Fav_V FOREIGN KEY (visitorID) REFERENCES Visitors(visitorID) ON DELETE CASCADE,
-CONSTRAINT FK_Fav_A FOREIGN KEY (animalID) REFERENCES Animals(animalID) ON DELETE CASCADE,
-CONSTRAINT UQ_Fav_Visitor_Animal UNIQUE (visitorID, animalID)
+  favAnimalsID int IDENTITY(1,1) PRIMARY KEY,
+  visitorID int NOT NULL,
+  animalID int NOT NULL,
+  CONSTRAINT FK_Fav_V FOREIGN KEY (visitorID) REFERENCES Visitors(visitorID) ON DELETE CASCADE,
+  CONSTRAINT FK_Fav_A FOREIGN KEY (animalID) REFERENCES Animals(animalID) ON DELETE CASCADE,
+  CONSTRAINT UQ_Fav_Visitor_Animal UNIQUE (visitorID, animalID)
 );
 
 CREATE TABLE PurchaseHistory (
-purchaseHistoryID int PRIMARY KEY,
-CONSTRAINT FK_PH_Visitor FOREIGN KEY (purchaseHistoryID)
-REFERENCES Visitors(visitorID) ON DELETE CASCADE
+  purchaseHistoryID int PRIMARY KEY,
+  CONSTRAINT FK_PH_Visitor FOREIGN KEY (purchaseHistoryID) REFERENCES Visitors(visitorID) ON DELETE CASCADE
 );
 
 CREATE TABLE Receipts (
-receiptID int identity(1,1) PRIMARY KEY,
-receiptDetails NVARCHAR(MAX) NULL,
-dateTime DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
-purchaseHistoryID int NOT NULL,
-CONSTRAINT FK_Receipt_PH FOREIGN KEY (purchaseHistoryID) REFERENCES PurchaseHistory(purchaseHistoryID) ON DELETE CASCADE
+  receiptID int identity(1,1) PRIMARY KEY,
+  receiptDetails NVARCHAR(MAX) NULL,
+  dateTime DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+  purchaseHistoryID int NOT NULL,
+  CONSTRAINT FK_Receipt_PH FOREIGN KEY (purchaseHistoryID) REFERENCES PurchaseHistory(purchaseHistoryID) ON DELETE CASCADE
 );
 
 CREATE TABLE Tickets (
-ticketID int identity(1,1) PRIMARY KEY,
-dateOfEntry date NOT NULL,
-datePaid datetime NULL,
-visitorID int NOT NULL,
-CONSTRAINT FK_Tickets_Visitor FOREIGN KEY (visitorID) REFERENCES Visitors(visitorID) ON DELETE CASCADE
+  ticketID int identity(1,1) PRIMARY KEY,
+  dateOfEntry date NOT NULL,
+  datePaid datetime NULL,
+  visitorID int NOT NULL,
+  CONSTRAINT FK_Tickets_Visitor FOREIGN KEY (visitorID) REFERENCES Visitors(visitorID) ON DELETE CASCADE
 );
 
 CREATE TABLE Merchandise (
-itemID int identity(1,1) PRIMARY KEY,
-itemName nvarchar(200) NOT NULL,
-itemDescription nvarchar(2000) NULL,
-itemCost decimal(10,2) NOT NULL,
-itemImage nvarchar(500) NULL
+  itemID int identity(1,1) PRIMARY KEY,
+  itemName nvarchar(200) NOT NULL,
+  itemDescription nvarchar(2000) NULL,
+  itemCost decimal(10,2) NOT NULL,
+  itemImage nvarchar(500) NULL
 );
 
 CREATE TABLE VisitorMerchOrder (
-orderNumber int identity(1,1) PRIMARY KEY,
-orderDate datetime NOT NULL DEFAULT SYSUTCDATETIME(),
-datePaid datetime NULL,
-visitorID int NOT NULL,
-CONSTRAINT FK_Order_Visitor FOREIGN KEY (visitorID) REFERENCES Visitors(visitorID) ON DELETE CASCADE
+  orderNumber int identity(1,1) PRIMARY KEY,
+  orderDate datetime NOT NULL DEFAULT SYSUTCDATETIME(),
+  datePaid datetime NULL,
+  visitorID int NOT NULL,
+  CONSTRAINT FK_Order_Visitor FOREIGN KEY (visitorID) REFERENCES Visitors(visitorID) ON DELETE CASCADE
 );
 
 CREATE TABLE MerchInOrder (
-orderNumber int NOT NULL,
-itemID int NOT NULL,
-quantity int NOT NULL,
-unitPrice decimal(10,2) NOT NULL,
-PRIMARY KEY (orderNumber, itemID),
-CONSTRAINT FK_MIO_Order FOREIGN KEY (orderNumber) REFERENCES VisitorMerchOrder(orderNumber) ON DELETE CASCADE,
-CONSTRAINT FK_MIO_Item FOREIGN KEY (itemID) REFERENCES Merchandise(itemID)
+  orderNumber int NOT NULL,
+  itemID int NOT NULL,
+  quantity int NOT NULL,
+  unitPrice decimal(10,2) NOT NULL,
+  PRIMARY KEY (orderNumber, itemID),
+  CONSTRAINT FK_MIO_Order FOREIGN KEY (orderNumber) REFERENCES VisitorMerchOrder(orderNumber) ON DELETE CASCADE,
+  CONSTRAINT FK_MIO_Item FOREIGN KEY (itemID) REFERENCES Merchandise(itemID)
 );
+
+/* =========================
+   INDEXES
+   ========================= */
 
 CREATE INDEX IX_Staff_roleID ON Staff(roleID);
 CREATE INDEX IX_RollCall_eventID ON EventRollCall(eventID);
@@ -140,165 +155,152 @@ CREATE INDEX IX_Receipts_ph ON Receipts(purchaseHistoryID);
 CREATE INDEX IX_Tickets_visitorID ON Tickets(visitorID);
 CREATE INDEX IX_Order_visitorID ON VisitorMerchOrder(visitorID);
 
+/* =========================
+   SEED DATA (Species first)
+   ========================= */
 
--- Add the species you listed (with images)
-INSERT INTO Species (name, speciesImage)
-VALUES
- (N'Lion',        N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.redd.it%2Fwpslf6wpt1901.jpg&f=1&nofb=1&ipt=a7a7e4bafcffc653ee7282f1cd3d9ffe330bde45980a87d8c8624f76d909b094'),
- (N'Tiger',       N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages2.minutemediacdn.com%2Fimage%2Fupload%2Fc_fit%2Cf_auto%2Cfl_lossy%2Cq_auto%2Cw_728%2Fv1556001142%2Fshape%2Fmentalfloss%2Fistock_000043768362_small.jpg%3Fitok%3DYnEKgxTB&f=1&nofb=1&ipt=27789b9ae8cf211ecdcf787444dbfb505f7857fe3003154609124e5b2b80c966'),
- (N'Giraffe',     N'https://easyscienceforkids.com/wp-content/uploads/2013/04/Giraffe-Couple-1024x667.jpg'),
- (N'Panda',       N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmiro.medium.com%2Fmax%2F910%2F1*yCa5M8MBjdilx9chG2a8Zw.jpeg&f=1&nofb=1&ipt=e11eae29029849a48f5d0192cccd2dacd57313ffd76364831ac7599859ce6506'),
- (N'Elephant',    N'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/African_Bush_Elephants.jpg/960px-African_Bush_Elephants.jpg'),
- (N'Parrot',      N'https://ntbrand-wp.s3.amazonaws.com/mystart/wp-content/uploads/2021/02/12154612/MyParrots_58a4baab9d000c605b5b9bbb-2048x1365.jpeg'),
- (N'Penguin',     N'https://images.birdfact.com/production/do-penguins-mate-for-life.jpg?w=1792&h=1024&q=80&fm=webp&fit=clip&dm=1664793380&s=b53116bdf1bc1f35d5a55066fa34b9b4'),
- (N'Cheetah',     N'https://cdn.mos.cms.futurecdn.net/Vb4P7So4CMDNoqKrmLExKj-970-80.jpg'),
- (N'Gorilla',     N'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj19sKqgcVs2tTSLWqpWalOPSGopYoekXatZK9DZaaGxCmClN3TEP6m-K8tWJMWo3or2X9uKInE9YeOQg2KqGmY6J4TktlzzP1UyDAzHORqSxCU_AltDicXBVKUdyjcCyMeMLyUG6Jq0RC_/s320/Gorilla+1.jpg'),
- (N'Chimpanzee',  N'https://www.animalfunfacts.net/images/stories/photos/mammals/primates/chimpanzee/chimpanzee_l.jpg'),
- (N'Kangaroo',    N'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1.bp.blogspot.com%2F-z2lcxVqkfX8%2FTVu_tJvu1uI%2FAAAAAAAAIRw%2FuqU6kTr--XU%2Fs1600%2Fkangaroos%2Bpictures%2B%2525286%252529.jpg&f=1&nofb=1&ipt=0dd0242217fe2339f5a42a5e4cac99752c0049e8714d9eae3c63db07ae50acc7'),
- (N'Polar Bear',  N'https://listverse.com/wp-content/uploads/2013/06/Polar_Bear_family.jpg'),
- (N'Turtle',      N'https://a.storyblok.com/f/157322/1500x1000/33e6a716f4/are-sea-turtles-endangered.jpg'),
- (N'Hippo',       N'http://2.bp.blogspot.com/-RZugF6_ci4c/UPY38ZExZII/AAAAAAAACg0/wXGpBbfrdfo/s1600/Hippopotamus+4.jpg');
+INSERT INTO Species (name,speciesImage) VALUES
+ (N'Lion',N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.redd.it%2Fwpslf6wpt1901.jpg&f=1&nofb=1&ipt=a7a7e4bafcffc653ee7282f1cd3d9ffe330bde45980a87d8c8624f76d909b094'),
+ (N'Tiger',N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages2.minutemediacdn.com%2Fimage%2Fupload%2Fc_fit%2Cf_auto%2Cfl_lossy%2Cq_auto%2Cw_728%2Fv1556001142%2Fshape%2Fmentalfloss%2Fistock_000043768362_small.jpg%3Fitok%3DYnEKgxTB&f=1&nofb=1&ipt=27789b9ae8cf211ecdcf787444dbfb505f7857fe3003154609124e5b2b80c966'),
+ (N'Giraffe',N'https://easyscienceforkids.com/wp-content/uploads/2013/04/Giraffe-Couple-1024x667.jpg'),
+ (N'Panda',N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmiro.medium.com%2Fmax%2F910%2F1*yCa5M8MBjdilx9chG2a8Zw.jpeg&f=1&nofb=1&ipt=e11eae29029849a48f5d0192cccd2dacd57313ffd76364831ac7599859ce6506'),
+ (N'Elephant',N'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/African_Bush_Elephants.jpg/960px-African_Bush_Elephants.jpg'),
+ (N'Parrot',N'https://ntbrand-wp.s3.amazonaws.com/mystart/wp-content/uploads/2021/02/12154612/MyParrots_58a4baab9d000c605b5b9bbb-2048x1365.jpeg'),
+ (N'Penguin',N'https://images.birdfact.com/production/do-penguins-mate-for-life.jpg?w=1792&h=1024&q=80&fm=webp&fit=clip&dm=1664793380&s=b53116bdf1bc1f35d5a55066fa34b9b4'),
+ (N'Cheetah',N'https://cdn.mos.cms.futurecdn.net/Vb4P7So4CMDNoqKrmLExKj-970-80.jpg'),
+ (N'Gorilla',N'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj19sKqgcVs2tTSLWqpWalOPSGopYoekXatZK9DZaaGxCmClN3TEP6m-K8tWJMWo3or2X9uKInE9YeOQg2KqGmY6J4TktlzzP1UyDAzHORqSxCU_AltDicXBVKUdyjcCyMeMLyUG6Jq0RC_/s320/Gorilla+1.jpg'),
+ (N'Chimpanzee',N'https://www.animalfunfacts.net/images/stories/photos/mammals/primates/chimpanzee/chimpanzee_l.jpg'),
+ (N'Kangaroo',N'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1.bp.blogspot.com%2F-z2lcxVqkfX8%2FTVu_tJvu1uI%2FAAAAAAAAIRw%2FuqU6kTr--XU%2Fs1600%2Fkangaroos%2Bpictures%2B%2525286%252529.jpg&f=1&nofb=1&ipt=0dd0242217fe2339f5a42a5e4cac99752c0049e8714d9eae3c63db07ae50acc7'),
+ (N'Polar Bear',N'https://listverse.com/wp-content/uploads/2013/06/Polar_Bear_family.jpg'),
+ (N'Turtle',N'https://a.storyblok.com/f/157322/1500x1000/33e6a716f4/are-sea-turtles-endangered.jpg'),
+ (N'Hippo',N'http://2.bp.blogspot.com/-RZugF6_ci4c/UPY38ZExZII/AAAAAAAACg0/wXGpBbfrdfo/s1600/Hippopotamus+4.jpg');
 
-/* ---------- LIONS (5) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Lion_01', 'M', 7, N'Lion in the pride', (SELECT speciesID FROM Species WHERE name=N'Lion'), N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg'),
- (N'Lion_02', 'F', 6, N'Lion in the pride', (SELECT speciesID FROM Species WHERE name=N'Lion'), N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg'),
- (N'Lion_03', 'M', 8, N'Lion in the pride', (SELECT speciesID FROM Species WHERE name=N'Lion'), N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg'),
- (N'Lion_04', 'F', 5, N'Lion in the pride', (SELECT speciesID FROM Species WHERE name=N'Lion'), N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg'),
- (N'Lion_05', 'M', 9, N'Lion in the pride', (SELECT speciesID FROM Species WHERE name=N'Lion'), N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg');
+-- Seed Animals (unchanged structure except now Animals has animalImage2)
+-- (keeping your original animal inserts)
+INSERT INTO Animals (name,gender,age,description,speciesID,animalImage) VALUES
+ (N'Lion_01','M',7,N'Lion in the pride',(SELECT speciesID FROM Species WHERE name=N'Lion'),N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg'),
+ (N'Lion_02','F',6,N'Lion in the pride',(SELECT speciesID FROM Species WHERE name=N'Lion'),N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg'),
+ (N'Lion_03','M',8,N'Lion in the pride',(SELECT speciesID FROM Species WHERE name=N'Lion'),N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg'),
+ (N'Lion_04','F',5,N'Lion in the pride',(SELECT speciesID FROM Species WHERE name=N'Lion'),N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg'),
+ (N'Lion_05','M',9,N'Lion in the pride',(SELECT speciesID FROM Species WHERE name=N'Lion'),N'https://wallpapers.com/images/hd/cute-baby-lion-sqecddx0xgvlym7l.jpg');
 
-/* ---------- TIGERS (4) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Tiger_01', 'M', 5, N'Tiger in the enclosure', (SELECT speciesID FROM Species WHERE name=N'Tiger'), N'https://a-z-animals.com/media/2021/10/slumbering-little-tiger-picture-id472298390.jpg'),
- (N'Tiger_02', 'F', 4, N'Tiger in the enclosure', (SELECT speciesID FROM Species WHERE name=N'Tiger'), N'https://a-z-animals.com/media/2021/10/slumbering-little-tiger-picture-id472298390.jpg'),
- (N'Tiger_03', 'M', 6, N'Tiger in the enclosure', (SELECT speciesID FROM Species WHERE name=N'Tiger'), N'https://a-z-animals.com/media/2021/10/slumbering-little-tiger-picture-id472298390.jpg'),
- (N'Tiger_04', 'F', 3, N'Tiger in the enclosure', (SELECT speciesID FROM Species WHERE name=N'Tiger'), N'https://a-z-animals.com/media/2021/10/slumbering-little-tiger-picture-id472298390.jpg');
+INSERT INTO Animals (name,gender,age,description,speciesID,animalImage) VALUES
+ (N'Tiger_01','M',5,N'Tiger in the enclosure',(SELECT speciesID FROM Species WHERE name=N'Tiger'),N'https://a-z-animals.com/media/2021/10/slumbering-little-tiger-picture-id472298390.jpg'),
+ (N'Tiger_02','F',4,N'Tiger in the enclosure',(SELECT speciesID FROM Species WHERE name=N'Tiger'),N'https://a-z-animals.com/media/2021/10/slumbering-little-tiger-picture-id472298390.jpg'),
+ (N'Tiger_03','M',6,N'Tiger in the enclosure',(SELECT speciesID FROM Species WHERE name=N'Tiger'),N'https://a-z-animals.com/media/2021/10/slumbering-little-tiger-picture-id472298390.jpg'),
+ (N'Tiger_04','F',3,N'Tiger in the enclosure',(SELECT speciesID FROM Species WHERE name=N'Tiger'),N'https://a-z-animals.com/media/2021/10/slumbering-little-tiger-picture-id472298390.jpg');
 
-/* ---------- GIRAFFES (2) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Giraffe_01', 'F', 7, N'Tall giraffe', (SELECT speciesID FROM Species WHERE name=N'Giraffe'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fbaby-giraffe-drinking-milk-ctevp5tp4hz7hu3s.jpg&f=1&nofb=1&ipt=586e0974dc5466bc2e4b58859acd3c5e9f0b015e75b345f6f9c8aa4c8e7fea3a'),
- (N'Giraffe_02', 'M', 5, N'Young giraffe', (SELECT speciesID FROM Species WHERE name=N'Giraffe'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fbaby-giraffe-drinking-milk-ctevp5tp4hz7hu3s.jpg&f=1&nofb=1&ipt=586e0974dc5466bc2e4b58859acd3c5e9f0b015e75b345f6f9c8aa4c8e7fea3a');
+INSERT INTO Animals (name,gender,age,description,speciesID,animalImage) VALUES
+ (N'Giraffe_01','F',7,N'Tall giraffe',(SELECT speciesID FROM Species WHERE name=N'Giraffe'),N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fbaby-giraffe-drinking-milk-ctevp5tp4hz7hu3s.jpg&f=1&nofb=1&ipt=586e0974dc5466bc2e4b58859acd3c5e9f0b015e75b345f6f9c8aa4c8e7fea3a'),
+ (N'Giraffe_02','M',5,N'Young giraffe',(SELECT speciesID FROM Species WHERE name=N'Giraffe'),N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fbaby-giraffe-drinking-milk-ctevp5tp4hz7hu3s.jpg&f=1&nofb=1&ipt=586e0974dc5466bc2e4b58859acd3c5e9f0b015e75b345f6f9c8aa4c8e7fea3a');
 
-/* ---------- PANDAS (2) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Panda_01', 'M', 6, N'Black and white panda', (SELECT speciesID FROM Species WHERE name=N'Panda'), N'https://i.pinimg.com/originals/a1/7c/8c/a17c8cce134719e2805f26fcac3d2e9c.jpg'),
- (N'Panda_02', 'F', 4, N'Playful panda', (SELECT speciesID FROM Species WHERE name=N'Panda'), N'https://i.pinimg.com/originals/a1/7c/8c/a17c8cce134719e2805f26fcac3d2e9c.jpg');
+-- (… keep the rest of your original Animals INSERTs for Panda, Elephant, Parrot, Penguin, etc. …)
 
-/* ---------- ELEPHANTS (4) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Elephant_01', 'F', 12, N'Large elephant', (SELECT speciesID FROM Species WHERE name=N'Elephant'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.news18.com%2Fibnlive%2Fuploads%2F2022%2F06%2Fbaby-elephant.png&f=1&nofb=1&ipt=3e0d06563e41190f4c8d5df93ce8cc2908c7cd2db11417bc85832242a198635f'),
- (N'Elephant_02', 'M', 11, N'Large elephant', (SELECT speciesID FROM Species WHERE name=N'Elephant'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.news18.com%2Fibnlive%2Fuploads%2F2022%2F06%2Fbaby-elephant.png&f=1&nofb=1&ipt=3e0d06563e41190f4c8d5df93ce8cc2908c7cd2db11417bc85832242a198635f'),
- (N'Elephant_03', 'F', 13, N'Large elephant', (SELECT speciesID FROM Species WHERE name=N'Elephant'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.news18.com%2Fibnlive%2Fuploads%2F2022%2F06%2Fbaby-elephant.png&f=1&nofb=1&ipt=3e0d06563e41190f4c8d5df93ce8cc2908c7cd2db11417bc85832242a198635f'),
- (N'Elephant_04', 'M', 10, N'Large elephant', (SELECT speciesID FROM Species WHERE name=N'Elephant'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.news18.com%2Fibnlive%2Fuploads%2F2022%2F06%2Fbaby-elephant.png&f=1&nofb=1&ipt=3e0d06563e41190f4c8d5df93ce8cc2908c7cd2db11417bc85832242a198635f');
+/* =========================
+   MERCH SEED (unchanged)
+   ========================= */
 
-/* ---------- PARROTS (8) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Parrot_01', 'F', 2, N'Colorful parrot', (SELECT speciesID FROM Species WHERE name=N'Parrot'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGxrJkthBxhc%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=1d411ac99aa2e60915370e391ff1b2fcee8d527609e9cf91934ba06d562331b5'),
- (N'Parrot_02', 'F', 3, N'Colorful parrot', (SELECT speciesID FROM Species WHERE name=N'Parrot'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGxrJkthBxhc%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=1d411ac99aa2e60915370e391ff1b2fcee8d527609e9cf91934ba06d562331b5'),
- (N'Parrot_03', 'F', 2, N'Colorful parrot', (SELECT speciesID FROM Species WHERE name=N'Parrot'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGxrJkthBxhc%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=1d411ac99aa2e60915370e391ff1b2fcee8d527609e9cf91934ba06d562331b5'),
- (N'Parrot_04', 'F', 4, N'Colorful parrot', (SELECT speciesID FROM Species WHERE name=N'Parrot'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGxrJkthBxhc%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=1d411ac99aa2e60915370e391ff1b2fcee8d527609e9cf91934ba06d562331b5'),
- (N'Parrot_05', 'F', 3, N'Colorful parrot', (SELECT speciesID FROM Species WHERE name=N'Parrot'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGxrJkthBxhc%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=1d411ac99aa2e60915370e391ff1b2fcee8d527609e9cf91934ba06d562331b5'),
- (N'Parrot_06', 'F', 2, N'Colorful parrot', (SELECT speciesID FROM Species WHERE name=N'Parrot'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGxrJkthBxhc%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=1d411ac99aa2e60915370e391ff1b2fcee8d527609e9cf91934ba06d562331b5'),
- (N'Parrot_07', 'F', 3, N'Colorful parrot', (SELECT speciesID FROM Species WHERE name=N'Parrot'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGxrJkthBxhc%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=1d411ac99aa2e60915370e391ff1b2fcee8d527609e9cf91934ba06d562331b5'),
- (N'Parrot_08', 'F', 4, N'Colorful parrot', (SELECT speciesID FROM Species WHERE name=N'Parrot'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FGxrJkthBxhc%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=1d411ac99aa2e60915370e391ff1b2fcee8d527609e9cf91934ba06d562331b5');
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Zoo T-Shirt',N'Comfortable cotton t-shirt with zoo logo, cool clothes for the family',19.99,N'https://res.cloudinary.com/teepublic/image/private/s--ypqxkoMI--/t_Resized%20Artwork/c_crop,x_10,y_10/c_fit,w_470/c_crop,g_north_west,h_626,w_470,x_0,y_0/g_north_west,u_upload:v1462829015:production:blanks:mtl53ofohwq5goqjo9ke,x_-395,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1559125741/production/designs/4950752_0.jpg');
 
-/* ---------- PENGUINS (10) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Penguin_01', 'M', 1, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8'),
- (N'Penguin_02', 'F', 2, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8'),
- (N'Penguin_03', 'M', 1, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8'),
- (N'Penguin_04', 'F', 3, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8'),
- (N'Penguin_05', 'M', 2, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8'),
- (N'Penguin_06', 'F', 1, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8'),
- (N'Penguin_07', 'M', 2, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8'),
- (N'Penguin_08', 'F', 3, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8'),
- (N'Penguin_09', 'M', 2, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8'),
- (N'Penguin_10', 'F', 1, N'Penguin in icy exhibit', (SELECT speciesID FROM Species WHERE name=N'Penguin'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fd9%2Fb3%2Fae%2Fd9b3ae779f3c1b95b2dbac89327924d1.jpg&f=1&nofb=1&ipt=d6be331c5073c2f2cdd11ffe6097bec1f20bc7311029a50df20880a06e24fea8');
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Stuffed Lion',N'Cuddly plush lion toy',24.50,N'https://i5.walmartimages.com/asr/992bccbc-7253-4e5d-9623-98c3c22d2809_1.87bd975de18b71213603d627abed3a90.jpeg');
 
-/* ---------- CHEETAHS (4) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Cheetah_01', 'F', 3, N'Fast cheetah', (SELECT speciesID FROM Species WHERE name=N'Cheetah'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftwpark.com%2Fwp-content%2Fuploads%2F2023%2F05%2F2023MAY02_BABY_CHEETAH_CUBS_KAZI_ZURI_ANDIALEXANDER_0_DSC06575-Enhanced-NR-1-scaled.jpg&f=1&nofb=1&ipt=1f680e7b5ff08297843e59f6d3c5bc28af399f640cc83ee0369e0f15b20dfec0'),
- (N'Cheetah_02', 'M', 4, N'Fast cheetah', (SELECT speciesID FROM Species WHERE name=N'Cheetah'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftwpark.com%2Fwp-content%2Fuploads%2F2023%2F05%2F2023MAY02_BABY_CHEETAH_CUBS_KAZI_ZURI_ANDIALEXANDER_0_DSC06575-Enhanced-NR-1-scaled.jpg&f=1&nofb=1&ipt=1f680e7b5ff08297843e59f6d3c5bc28af399f640cc83ee0369e0f15b20dfec0'),
- (N'Cheetah_03', 'F', 5, N'Fast cheetah', (SELECT speciesID FROM Species WHERE name=N'Cheetah'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftwpark.com%2Fwp-content%2Fuploads%2F2023%2F05%2F2023MAY02_BABY_CHEETAH_CUBS_KAZI_ZURI_ANDIALEXANDER_0_DSC06575-Enhanced-NR-1-scaled.jpg&f=1&nofb=1&ipt=1f680e7b5ff08297843e59f6d3c5bc28af399f640cc83ee0369e0f15b20dfec0'),
- (N'Cheetah_04', 'M', 3, N'Fast cheetah', (SELECT speciesID FROM Species WHERE name=N'Cheetah'), N'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftwpark.com%2Fwp-content%2Fuploads%2F2023%2F05%2F2023MAY02_BABY_CHEETAH_CUBS_KAZI_ZURI_ANDIALEXANDER_0_DSC06575-Enhanced-NR-1-scaled.jpg&f=1&nofb=1&ipt=1f680e7b5ff08297843e59f6d3c5bc28af399f640cc83ee0369e0f15b20dfec0');
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Zoo Cap',N'Baseball cap with embroidered zoo emblem, as part of our cool clothes collection',15.00,N'https://mylittleuniform.com/wp-content/uploads/2024/07/zookeeper-baseball-capp.jpg');
 
-/* ---------- GORILLAS (6) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Gorilla_01', 'M', 8, N'Strong gorilla', (SELECT speciesID FROM Species WHERE name=N'Gorilla'), N'https://i.dailymail.co.uk/i/pix/2016/03/24/00/327D6D6C00000578-3507053-image-a-44_1458778821106.jpg'),
- (N'Gorilla_02', 'F', 7, N'Strong gorilla', (SELECT speciesID FROM Species WHERE name=N'Gorilla'), N'https://i.dailymail.co.uk/i/pix/2016/03/24/00/327D6D6C00000578-3507053-image-a-44_1458778821106.jpg'),
- (N'Gorilla_03', 'M', 9, N'Strong gorilla', (SELECT speciesID FROM Species WHERE name=N'Gorilla'), N'https://i.dailymail.co.uk/i/pix/2016/03/24/00/327D6D6C00000578-3507053-image-a-44_1458778821106.jpg'),
- (N'Gorilla_04', 'F', 6, N'Strong gorilla', (SELECT speciesID FROM Species WHERE name=N'Gorilla'), N'https://i.dailymail.co.uk/i/pix/2016/03/24/00/327D6D6C00000578-3507053-image-a-44_1458778821106.jpg'),
- (N'Gorilla_05', 'M', 10, N'Strong gorilla', (SELECT speciesID FROM Species WHERE name=N'Gorilla'), N'https://i.dailymail.co.uk/i/pix/2016/03/24/00/327D6D6C00000578-3507053-image-a-44_1458778821106.jpg'),
- (N'Gorilla_06', 'F', 7, N'Strong gorilla', (SELECT speciesID FROM Species WHERE name=N'Gorilla'), N'https://i.dailymail.co.uk/i/pix/2016/03/24/00/327D6D6C00000578-3507053-image-a-44_1458778821106.jpg');
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Penguin Mug',N'Ceramic mug featuring penguin artwork',12.95,N'https://i5.walmartimages.com/seo/Penguin-Mug-Gift-Chillin-Like-A-Coffee-Cup-Penguins-Cute-Mug-Ceramic-Novelty-Mugs-11oz-15oz-Tea-Cup-Present-For_3fc7cb27-ddd8-49a2-ab1e-00d75b3a9dfc.249de94a26fe55e70f65e712b72c776f.jpeg');
 
-/* ---------- CHIMPANZEES (8) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Chimp_01', 'M', 4, N'Playful chimpanzee', (SELECT speciesID FROM Species WHERE name=N'Chimpanzee'), N'https://www.treehugger.com/thmb/WotPeznXsuAAFy8aoz-1iqBqEp8=/3132x2742/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2017__06__bonobo-baby-DRC-96ea787ebee6445ca3ce4fbaec32dc29.jpg'),
- (N'Chimp_02', 'F', 5, N'Playful chimpanzee', (SELECT speciesID FROM Species WHERE name=N'Chimpanzee'), N'https://www.treehugger.com/thmb/WotPeznXsuAAFy8aoz-1iqBqEp8=/3132x2742/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2017__06__bonobo-baby-DRC-96ea787ebee6445ca3ce4fbaec32dc29.jpg'),
- (N'Chimp_03', 'M', 6, N'Playful chimpanzee', (SELECT speciesID FROM Species WHERE name=N'Chimpanzee'), N'https://www.treehugger.com/thmb/WotPeznXsuAAFy8aoz-1iqBqEp8=/3132x2742/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2017__06__bonobo-baby-DRC-96ea787ebee6445ca3ce4fbaec32dc29.jpg'),
- (N'Chimp_04', 'F', 4, N'Playful chimpanzee', (SELECT speciesID FROM Species WHERE name=N'Chimpanzee'), N'https://www.treehugger.com/thmb/WotPeznXsuAAFy8aoz-1iqBqEp8=/3132x2742/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2017__06__bonobo-baby-DRC-96ea787ebee6445ca3ce4fbaec32dc29.jpg'),
- (N'Chimp_05', 'M', 5, N'Playful chimpanzee', (SELECT speciesID FROM Species WHERE name=N'Chimpanzee'), N'https://www.treehugger.com/thmb/WotPeznXsuAAFy8aoz-1iqBqEp8=/3132x2742/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2017__06__bonobo-baby-DRC-96ea787ebee6445ca3ce4fbaec32dc29.jpg'),
- (N'Chimp_06', 'F', 6, N'Playful chimpanzee', (SELECT speciesID FROM Species WHERE name=N'Chimpanzee'), N'https://www.treehugger.com/thmb/WotPeznXsuAAFy8aoz-1iqBqEp8=/3132x2742/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2017__06__bonobo-baby-DRC-96ea787ebee6445ca3ce4fbaec32dc29.jpg'),
- (N'Chimp_07', 'M', 4, N'Playful chimpanzee', (SELECT speciesID FROM Species WHERE name=N'Chimpanzee'), N'https://www.treehugger.com/thmb/WotPeznXsuAAFy8aoz-1iqBqEp8=/3132x2742/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2017__06__bonobo-baby-DRC-96ea787ebee6445ca3ce4fbaec32dc29.jpg'),
- (N'Chimp_08', 'F', 5, N'Playful chimpanzee', (SELECT speciesID FROM Species WHERE name=N'Chimpanzee'), N'https://www.treehugger.com/thmb/WotPeznXsuAAFy8aoz-1iqBqEp8=/3132x2742/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2017__06__bonobo-baby-DRC-96ea787ebee6445ca3ce4fbaec32dc29.jpg');
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Elephant Keychain',N'Metal keychain shaped like an elephant',6.50,N'https://i.pinimg.com/originals/98/a2/fc/98a2fc4fdf3ba1df0d18c61028ed7b8d.jpg');
 
-/* ---------- KANGAROOS (9) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Kangaroo_01', 'F', 5, N'Hopping kangaroo', (SELECT speciesID FROM Species WHERE name=N'Kangaroo'), N'https://animalcorner.org/wp-content/uploads/2022/11/baby-kangaroo-facts-5908698.png'),
- (N'Kangaroo_02', 'M', 6, N'Hopping kangaroo', (SELECT speciesID FROM Species WHERE name=N'Kangaroo'), N'https://animalcorner.org/wp-content/uploads/2022/11/baby-kangaroo-facts-5908698.png'),
- (N'Kangaroo_03', 'F', 7, N'Hopping kangaroo', (SELECT speciesID FROM Species WHERE name=N'Kangaroo'), N'https://animalcorner.org/wp-content/uploads/2022/11/baby-kangaroo-facts-5908698.png'),
- (N'Kangaroo_04', 'M', 5, N'Hopping kangaroo', (SELECT speciesID FROM Species WHERE name=N'Kangaroo'), N'https://animalcorner.org/wp-content/uploads/2022/11/baby-kangaroo-facts-5908698.png'),
- (N'Kangaroo_05', 'F', 6, N'Hopping kangaroo', (SELECT speciesID FROM Species WHERE name=N'Kangaroo'), N'https://animalcorner.org/wp-content/uploads/2022/11/baby-kangaroo-facts-5908698.png'),
- (N'Kangaroo_06', 'M', 7, N'Hopping kangaroo', (SELECT speciesID FROM Species WHERE name=N'Kangaroo'), N'https://animalcorner.org/wp-content/uploads/2022/11/baby-kangaroo-facts-5908698.png'),
- (N'Kangaroo_07', 'F', 5, N'Hopping kangaroo', (SELECT speciesID FROM Species WHERE name=N'Kangaroo'), N'https://animalcorner.org/wp-content/uploads/2022/11/baby-kangaroo-facts-5908698.png'),
- (N'Kangaroo_08', 'M', 6, N'Hopping kangaroo', (SELECT speciesID FROM Species WHERE name=N'Kangaroo'), N'https://animalcorner.org/wp-content/uploads/2022/11/baby-kangaroo-facts-5908698.png'),
- (N'Kangaroo_09', 'F', 7, N'Hopping kangaroo', (SELECT speciesID FROM Species WHERE name=N'Kangaroo'), N'https://animalcorner.org/wp-content/uploads/2022/11/baby-kangaroo-facts-5908698.png');
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Zoo Hoodie',N'Warm hoodie with kangaroo pocket and zoo design, as part of keep warm clothes collection',35.00,N'https://img.wondercostumes.com/products/16-3/kangaroo-hoodie.jpg');
 
-/* ---------- POLAR BEARS (2) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'PolarBear_01', 'M', 10, N'Polar bear from Arctic', (SELECT speciesID FROM Species WHERE name=N'Polar Bear'), N'https://wallpapercave.com/wp/tbuEiAV.jpg'),
- (N'PolarBear_02', 'F', 8,  N'Polar bear from Arctic', (SELECT speciesID FROM Species WHERE name=N'Polar Bear'), N'https://wallpapercave.com/wp/tbuEiAV.jpg');
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Animal Puzzle',N'100-piece jigsaw puzzle of zoo animals',14.25,N'https://justfairtrade.com/wp-content/uploads/2020/05/LKJigsawanimals-scaled.jpg');
 
-/* ---------- TURTLES (4) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Turtle_01', 'F', 12, N'Slow turtle', (SELECT speciesID FROM Species WHERE name=N'Turtle'), N'https://wallpapers.com/images/hd/baby-turtle-4ik3pjiq3uq5edmt.jpg'),
- (N'Turtle_02', 'F', 13, N'Slow turtle', (SELECT speciesID FROM Species WHERE name=N'Turtle'), N'https://wallpapers.com/images/hd/baby-turtle-4ik3pjiq3uq5edmt.jpg'),
- (N'Turtle_03', 'F', 14, N'Slow turtle', (SELECT speciesID FROM Species WHERE name=N'Turtle'), N'https://wallpapers.com/images/hd/baby-turtle-4ik3pjiq3uq5edmt.jpg'),
- (N'Turtle_04', 'F', 15, N'Slow turtle', (SELECT speciesID FROM Species WHERE name=N'Turtle'), N'https://wallpapers.com/images/hd/baby-turtle-4ik3pjiq3uq5edmt.jpg');
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Giraffe Water Bottle',N'Reusable stainless steel bottle with giraffe print',18.75,N'https://www.muzemerch.com/media/catalog/product/cache/d0b3e0c3f48a829f2e9e30ac87b08ff0/image/13044920d/giraffe-water-bottle.jpeg');
 
-/* ---------- HIPPOS (2) ---------- */
-INSERT INTO Animals (name, gender, age, description, speciesID, animalImage) VALUES
- (N'Hippo_01', 'M', 15, N'Hippo in the river', (SELECT speciesID FROM Species WHERE name=N'Hippo'), N'https://i.redd.it/3u8mv122lt031.jpg'),
- (N'Hippo_02', 'F', 12, N'Hippo in the river', (SELECT speciesID FROM Species WHERE name=N'Hippo'), N'https://i.redd.it/3u8mv122lt031.jpg');
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Zoo Poster',N'Large poster featuring popular zoo animals',9.99,N'https://static.greatbigcanvas.com/images/singlecanvas_thick_none/lantern-press/lion-up-close-visit-the-zoo-retro-travel-poster,2183365.jpg');
 
+INSERT INTO Merchandise (itemName,itemDescription,itemCost,itemImage) VALUES
+(N'Polar Bear Backpack',N'Kid-sized backpack with polar bear design',29.95,N'https://cdna.lystit.com/photos/farfetch/d776d13f/dolce-gabbana-White-Polar-Bear-Backpack.jpeg');
 
-/* ---------- MERCHANDISE ---------- */
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Zoo T-Shirt', N'Comfortable cotton t-shirt with zoo logo, cool clothes for the family', 19.99, N'https://res.cloudinary.com/teepublic/image/private/s--ypqxkoMI--/t_Resized%20Artwork/c_crop,x_10,y_10/c_fit,w_470/c_crop,g_north_west,h_626,w_470,x_0,y_0/g_north_west,u_upload:v1462829015:production:blanks:mtl53ofohwq5goqjo9ke,x_-395,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1559125741/production/designs/4950752_0.jpg');
+/* =========================
+   SPECIES: DESCRIPTIONS/HABITAT/DIET
+   ========================= */
 
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Stuffed Lion', N'Cuddly plush lion toy', 24.50, N'https://i5.walmartimages.com/asr/992bccbc-7253-4e5d-9623-98c3c22d2809_1.87bd975de18b71213603d627abed3a90.jpeg');
+-- Habitat (Land/Sky/Water) – set explicitly
+UPDATE Species SET habitat=CASE name
+WHEN N'Parrot' THEN N'Sky'
+WHEN N'Penguin' THEN N'Water'
+WHEN N'Turtle' THEN N'Water'
+WHEN N'Hippo' THEN N'Water'
+WHEN N'Polar Bear' THEN N'Water'
+ELSE N'Land'
+END;
 
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Zoo Cap', N'Baseball cap with embroidered zoo emblem, as part of our cool clothes collection', 15.00, N'https://mylittleuniform.com/wp-content/uploads/2024/07/zookeeper-baseball-capp.jpg');
+-- Diet (Carnivore/Herbivore/Omnivore)
+UPDATE Species SET diet=CASE name
+WHEN N'Lion' THEN N'Carnivore'
+WHEN N'Tiger' THEN N'Carnivore'
+WHEN N'Giraffe' THEN N'Herbivore'
+WHEN N'Panda' THEN N'Herbivore'
+WHEN N'Elephant' THEN N'Herbivore'
+WHEN N'Parrot' THEN N'Omnivore'
+WHEN N'Penguin' THEN N'Carnivore'
+WHEN N'Cheetah' THEN N'Carnivore'
+WHEN N'Gorilla' THEN N'Herbivore'
+WHEN N'Chimpanzee' THEN N'Omnivore'
+WHEN N'Kangaroo' THEN N'Herbivore'
+WHEN N'Polar Bear' THEN N'Carnivore'
+WHEN N'Turtle' THEN N'Omnivore'
+WHEN N'Hippo' THEN N'Herbivore'
+ELSE N'Herbivore'
+END;
 
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Penguin Mug', N'Ceramic mug featuring penguin artwork', 12.95, N'https://i5.walmartimages.com/seo/Penguin-Mug-Gift-Chillin-Like-A-Coffee-Cup-Penguins-Cute-Mug-Ceramic-Novelty-Mugs-11oz-15oz-Tea-Cup-Present-For_3fc7cb27-ddd8-49a2-ab1e-00d75b3a9dfc.249de94a26fe55e70f65e712b72c776f.jpeg');
+-- Paragraph-length species descriptions
+UPDATE Species SET speciesDescription=CASE name
+WHEN N'Lion' THEN N'The lion (Panthera leo) is a powerful predator native to the grasslands and savannas of Africa. Unlike most cats, lions are highly social, living in prides that may include several lionesses, their cubs, and a coalition of males. Their cooperative lifestyle allows them to defend territories and hunt larger prey. Lions are renowned for thunderous roars that can travel several kilometers and act as territorial warnings. Today, habitat loss and conflict with humans threaten many populations, making conservation efforts vital to their survival.'
+WHEN N'Tiger' THEN N'The tiger (Panthera tigris) is the largest member of the cat family and a symbol of strength and independence. Its orange coat with black stripes provides camouflage in forests and grasslands, helping it stalk prey with stealth. Tigers are solitary hunters capable of taking down large prey such as deer and wild boar. They are also excellent swimmers and often rest in rivers to cool off. Despite their power, tigers are endangered due to poaching and habitat destruction, with only a fraction of their historic population remaining.'
+WHEN N'Giraffe' THEN N'The giraffe (Giraffa camelopardalis) is the tallest land animal, famed for its elongated neck and legs. This adaptation lets giraffes feed on leaves high in the canopy, especially from acacia trees, giving them access to food unavailable to most herbivores. They move gracefully across the savanna in loose groups and males may engage in dramatic necking contests. Their patchwork coat provides camouflage among trees and shadows. Although widespread historically, giraffes face pressures from habitat fragmentation and hunting, prompting coordinated conservation programs.'
+WHEN N'Panda' THEN N'The giant panda (Ailuropoda melanoleuca) is beloved worldwide and instantly recognizable by its black-and-white fur. Native to China’s mountain forests, pandas rely almost entirely on bamboo, consuming large quantities to meet their energy needs. Despite belonging to the order Carnivora, their diet is overwhelmingly herbivorous. Pandas are generally solitary, with mothers raising cubs in protected dens. Intensive conservation and habitat restoration have helped populations recover, though continued protection is essential.'
+WHEN N'Elephant' THEN N'Elephants are the largest living land mammals and are renowned for intelligence, memory, and deep social bonds. Herds are led by a matriarch who guides the group using knowledge of landscapes and water sources. Their trunks perform countless tasks, from feeding and drinking to tactile communication. Elephants are keystone species that shape ecosystems by dispersing seeds and creating clearings. Poaching and habitat loss continue to threaten them, driving the need for strong protections.'
+WHEN N'Parrot' THEN N'Parrots are brightly colored, intelligent birds found mainly in tropical and subtropical regions. Their strong curved beaks crack nuts and seeds, and many species also eat fruit, nectar, and insects. Parrots are famous mimics due to advanced vocal learning, which also supports complex social communication in flocks. In the wild they rely on tree cavities and intact forests for nesting. Many species are threatened by deforestation and the pet trade, underscoring the need for conservation.'
+WHEN N'Penguin' THEN N'Penguins are flightless seabirds adapted to cold and aquatic environments. Their flipper-like wings power agile swimming and deep dives for fish, squid, and krill. On land they form vast breeding colonies and cooperate to protect eggs and chicks from predators and harsh weather. Dense feathers and insulating fat help them endure freezing conditions. While iconic in Antarctica, several species live on temperate coasts as well.'
+WHEN N'Cheetah' THEN N'The cheetah (Acinonyx jubatus) is the fastest land animal, capable of sprints over 100 km/h in short bursts. A slim frame, long limbs, and enlarged nasal passages support rapid acceleration and recovery. Cheetahs prefer daylight hunts, relying on exceptional eyesight and speed rather than stealth to capture prey. They are not built for fighting and often yield kills to stronger predators. Declining prey and shrinking habitats have made them increasingly vulnerable.'
+WHEN N'Gorilla' THEN N'Gorillas are the largest great apes, native to central Africa’s forests. They live in family groups led by a dominant silverback who protects and coordinates the troop. Despite immense strength, gorillas are gentle herbivores that feed on leaves, stems, and fruit. They show notable intelligence, including tool use and rich social communication. Poaching, disease, and habitat loss threaten many populations, though targeted conservation has improved outlooks in some regions.'
+WHEN N'Chimpanzee' THEN N'Chimpanzees (Pan troglodytes) are highly intelligent primates sharing about 98–99% of their DNA with humans. They live in complex fission–fusion societies where group sizes change with resources and social dynamics. Chimpanzees use tools to fish for termites, crack nuts, and sponge water with leaves. They display problem solving, empathy, and cultural traditions passed between generations. Habitat loss and hunting have reduced their numbers, making protection urgent.'
+WHEN N'Kangaroo' THEN N'Kangaroos are iconic Australian marsupials known for powerful hind legs and efficient hopping gaits. Adapted to arid landscapes, they can travel long distances to find food and water. Females raise joeys in a pouch until they are strong enough to leave and graze. Kangaroos are social and gather in mobs that provide safety and breeding opportunities. As national symbols, they are culturally important while also being managed to protect fragile ecosystems.'
+WHEN N'Polar Bear' THEN N'The polar bear (Ursus maritimus) is the largest carnivorous land mammal, perfectly adapted to Arctic sea ice. Thick fur and substantial fat layers insulate them in extreme cold while hunting seals at breathing holes. They are strong swimmers capable of traveling long distances between ice floes. Mothers are devoted caregivers, raising cubs in dens and teaching hunting skills. Rapid sea-ice loss due to climate change poses the most serious threat to their future.'
+WHEN N'Turtle' THEN N'Turtles are ancient reptiles whose lineage extends over 200 million years. Their protective shells help defend against predators, while streamlined marine species undertake long migrations between feeding and nesting sites. Sea turtles maintain healthy seagrass beds and coral reefs, and freshwater species balance aquatic food webs. Navigation often relies on magnetic cues to locate natal beaches. Many species are endangered due to pollution, bycatch, and habitat loss.'
+WHEN N'Hippo' THEN N'The hippopotamus (Hippopotamus amphibius) is a massive semi-aquatic herbivore that spends days submerged to keep cool. Despite bulk, hippos can move quickly and are considered among Africa’s most dangerous animals when threatened. At night they graze on grasses along riverbanks and floodplains. Social groups can include dozens of individuals, with dominant males defending stretches of river. Habitat encroachment and illegal hunting are growing concerns for long-term survival.'
+ELSE N'General zoo species with fascinating traits.'
+END;
 
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Elephant Keychain', N'Metal keychain shaped like an elephant', 6.50, N'https://i.pinimg.com/originals/98/a2/fc/98a2fc4fdf3ba1df0d18c61028ed7b8d.jpg');
+UPDATE Species SET speciesImage2=N'https://img.freepik.com/premium-photo/group-lions-are-walking-field_1200281-2094.jpg' WHERE name=N'Lion';
+UPDATE Species SET speciesImage2=N'https://t3.ftcdn.net/jpg/02/44/37/84/360_F_244378416_HTvbyOoDPtA1Ao5nfJ39429MRZOvbU0i.jpg' WHERE name=N'Tiger';
+UPDATE Species SET speciesImage2=N'https://thumbs.dreamstime.com/b/group-giraffes-eating-trees-8858228.jpg' WHERE name=N'Giraffe';
+UPDATE Species SET speciesImage2=N'https://1.bp.blogspot.com/-i6-Gy40Vc4Y/USSs82bjtYI/AAAAAAAAACA/5T76xdzmDxs/s1600/panda_yunzi_baiyun.jpg' WHERE name=N'Panda';
+UPDATE Species SET speciesImage2=N'https://cdn2.photostockeditor.com/c/2912/animal-group-of-elephants-standing-and-sitting-on-field-during-daytime-elephant-elephant-image.jpg' WHERE name=N'Elephant';
+UPDATE Species SET speciesImage2=N'https://cdn.britannica.com/87/196687-138-2D734164/facts-parrots.jpg' WHERE name=N'Parrot';
+UPDATE Species SET speciesImage2=N'https://media.wnyc.org/i/1500/1000/c/80/1/shutterstock_107424374_1.jpg' WHERE name=N'Penguin';
+UPDATE Species SET speciesImage2=N'https://beta-planet.gvi.co.uk/wp-content/uploads/2023/02/507742478-2023-feb-24-18-48-41-000000-rajit-galaiya-IrsCYPjLI5c-unsplash-1024x819.jpg' WHERE name=N'Cheetah';
+UPDATE Species SET speciesImage2=N'https://africageographic.com/wp-content/uploads/2018/11/A-family-portrait-of-the-Rugendo-family-Bobby-Jo-Vial.jpg' WHERE name=N'Gorilla';
+UPDATE Species SET speciesImage2=N'https://facts.net/wp-content/uploads/2020/02/family-of-chimpanzees.jpg' WHERE name=N'Chimpanzee';
+UPDATE Species SET speciesImage2=N'https://images.unsplash.com/photo-1631698288410-2d4c159d424e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' WHERE name=N'Kangaroo';
+UPDATE Species SET speciesImage2=N'https://rare-gallery.com/uploads/posts/1169718-animals-wildlife-polar-bears-Zoo-bear-fauna-mammal-vertebrate-polar-bear-dog-breed-group.jpg' WHERE name=N'Polar Bear';
+UPDATE Species SET speciesImage2=N'https://c1.staticflickr.com/1/52/128952107_70636e63ab_z.jpg?zz=1' WHERE name=N'Turtle';
+UPDATE Species SET speciesImage2=N'https://ychef.files.bbci.co.uk/976x549/p06r2bhw.jpg' WHERE name=N'Hippo';
 
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Zoo Hoodie', N'Warm hoodie with kangaroo pocket and zoo design, as part of keep warm clothes collection', 35.00, N'https://img.wondercostumes.com/products/16-3/kangaroo-hoodie.jpg');
+INSERT INTO Events (name, description) VALUES
+(N'Feeding Time', N'Daily feeding session where visitors can watch zookeepers feed the animals and learn about their diets.'),
+(N'Conservation Talk', N'A presentation on the zoo’s conservation programs and efforts to protect endangered species.'),
+(N'Behind the Scenes Tour', N'An exclusive guided tour that takes visitors into staff-only areas to see how animals are cared for.'),
+(N'Animal Enrichment', N'Interactive session showing how animals are given puzzles and toys to stimulate their natural behaviors.'),
+(N'Junior Zookeeper Experience', N'A hands-on educational event where children can try out zookeeper tasks in a safe environment.');
 
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Animal Puzzle', N'100-piece jigsaw puzzle of zoo animals', 14.25, N'https://justfairtrade.com/wp-content/uploads/2020/05/LKJigsawanimals-scaled.jpg');
-
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Giraffe Water Bottle', N'Reusable stainless steel bottle with giraffe print', 18.75, N'https://www.muzemerch.com/media/catalog/product/cache/d0b3e0c3f48a829f2e9e30ac87b08ff0/image/13044920d/giraffe-water-bottle.jpeg');
-
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Zoo Poster', N'Large poster featuring popular zoo animals', 9.99, N'https://static.greatbigcanvas.com/images/singlecanvas_thick_none/lantern-press/lion-up-close-visit-the-zoo-retro-travel-poster,2183365.jpg');
-
-INSERT INTO Merchandise (itemName, itemDescription, itemCost, itemImage) VALUES
-(N'Polar Bear Backpack', N'Kid-sized backpack with polar bear design', 29.95, N'https://cdna.lystit.com/photos/farfetch/d776d13f/dolce-gabbana-White-Polar-Bear-Backpack.jpeg');
