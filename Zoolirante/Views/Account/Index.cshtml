@@ -19,6 +19,11 @@
                             @ViewBag.Error
                         </div>
                     }
+                    @if (TempData["Created"] != null) {
+                        <div class="alert alert-info py-1">
+                            @TempData["Created"]
+                        </div>
+                    }
                     <form asp-controller="Account" asp-action="Index" method="post">
                         <h5 class="h6 mb-1 fw-light">Username</h5>
                         <input type="text" name="username" class="form-control" style="height: 30px"/>

@@ -4,68 +4,72 @@
     ViewData["Title"] = "Home Page";
 }
 
+@*Welcome On Login*@
+@if (!string.IsNullOrEmpty(Model.username)) {
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between" style="margin-top: -2px">
+        @if (Model.admin == true) {
+            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
+        }
+        <p class="mb-1 fw-light mx-3">Welcome, @Model.username</p>
+    </div>
+}
 
-<div style="width: 100%; text-align: center; margin-top:40px; margin-bottom: 40px;">
+@*Banner*@
+<div class="mx-0" style="width: 100vw; text-align: center; margin-bottom: 40px; margin-top: -2px;">
     <img src="/Images/./panda-banner.jpg"
-         alt="Zoo Image"
-         style="width: 100%; max-width: 1500px; height: auto; max-height: 600px; object-fit: contain;">
+         alt="Banner Image"
+         style="width: 100%; height: auto; max-height: 600px; object-fit: contain;">
 </div>
-
 
 <div class="container-fluid">
-<div class="row">
+    <div class="row">
 
-    <div class="col-sm-4">
-        <div class="card card-tickets">
-            <img class="card-img-top" src="/Images/zoo-ticket.png">
-            <div class="card-body">
-                <h5 class="card-title"> Be a part of something amazing</h5>
-                <p class="card-text"> Get your tickets now!</p>
-                <a class="btn btn-primary custom-btn-ticket" href=""> Buy Now</a>
+        <div class="col-sm-4">
+            <div class="card card-tickets radius-2">
+                <img class="card-img-top radius-2" style="height: 450px" src="/Images/zoo-ticket.png">
+                <div class="card-body">
+                    <h5 class="card-title"> Be a part of something amazing</h5>
+                    <p class="card-text"> Get your tickets now!</p> <br />
+                    <a class="btn btn-primary custom-btn-ticket" href="">Buy Now</a>
+                </div>
+            </div>
+         </div>
 
+        <div class="col-sm-4">
+            <div class="card card-merchandise radius-2">
+                    <img class="card-img-top radius-2" style="height: 450px; object-fit: cover;" src="https://azwp-az-prod-1-ap-southeast-2.s3.amazonaws.com/uploads/2024/03/9249-Where-to-Shop-Web-Assets_updated_TH-elephantasia.jpg" />
+                    <div class="card-body">
+                    <h5 class="card-title">Gear up in style</h5>
+                    <p class="card-text">Get your hands on our limited-edition merchandise before its gone</p>
+                    <a class="btn btn-primary custom-btn" href="/Merchandise/Index"> Learn more</a>
+                     </div>
             </div>
         </div>
-     </div>
 
-    <div class="col-sm-4">
-    <div class="card card-merchandise">
-            <img class="card-img-top" src="https://azwp-az-prod-1-ap-southeast-2.s3.amazonaws.com/uploads/2024/03/9249-Where-to-Shop-Web-Assets_updated_TH-elephantasia.jpg" />
-            <div class="card-body">
-            <h5 class="card-title">Gear up in style</h5>
-            <p class="card-text">Get your hands on our limited-edition merchandise before its gone</p>
-            <a class="btn btn-primary custom-btn" href="/Merchandise/Index"> Learn more</a>
-             </div>
-    </div>
-    </div>
- 
-
-
-
-    <div class="col-sm-4">
-    <div class="card card-events">
-        <img class="card-img-top" src="https://www.mandai.com/content/dam/mandai/singapore-zoo/things-to-do/zebra-feeding-900x600.jpg" />
-        <div class="card-body">
-            <h5 class="card-title">Events </h5>
-            <p class="card-text">Want more than just a visit to the zoo, discover our interesting events and encounters with animals</p>
-             <a class="btn btn-primary custom-btn-event" href=""> Learn more</a>
-
+        <div class="col-sm-4">
+            <div class="card card-events radius-2">
+                <img class="card-img-top radius-2" style="height: 450px; object-fit: cover;" src="https://www.mandai.com/content/dam/mandai/singapore-zoo/things-to-do/zebra-feeding-900x600.jpg" />
+                <div class="card-body">
+                    <h5 class="card-title">Events </h5>
+                    <p class="card-text">Want more than just a visit to the zoo, discover our interesting events and encounters with animals</p>
+                     <a class="btn btn-primary custom-btn-event" href=""> Learn more</a>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
 
-</div>
+    </div>
 </div>
 
 
 
-<section class="animal-page-section">
+<section class="animal-page-section" style="margin-top: 40px">
 
 
     <div class="description-half">
 
         <img class="zoosection-image" src="../Images/zoo-banner.png" />
 
-        <p>
+        <p style="margin-top: -20px">
             Zoolirante will be home to a spectacular range of animals from across the globe, including awe-inspiring and endangered species. Stroll through the African Savannah to witness <strong>lions, giraffes, and cheetahs,</strong> wander the lively Primate Boulevard with <strong>gorillas and chimpanzees, </strong>and be captivated by the wildlife of South-East Asia, from <strong>tigers to elephants.</strong> Get closer than ever to Australia’s favourites in our open-range habitat, where kangaroos and wallabies hop freely along the pathways.
 
         </p>
@@ -77,7 +81,7 @@
             Come discover why Zoolirante is set to become Australia’s favourite new zoo!
         </p>
 
-        <a class="btn btn-primary animalpage-btn"> Tickets &  Memberships</a>
+        <a class="btn btn-primary radius-2 animalpage-btn"> Tickets &  Memberships</a>
 
     </div>
 
@@ -90,7 +94,7 @@
 
                 <div class="col-sm-5">
 
-                    <div class="card lion-card" onclick="window.location.href='/AnimalList/Details/1'" style="cursor: pointer;">
+                    <div class="card radius-2 lion-card" onclick="window.location.href='/AnimalList/Details/1'" style="cursor: pointer;">
 
                         <div class="card-body">
 
@@ -108,7 +112,7 @@
 
                 <div class="col-sm-5">
 
-                    <div class="card giraffe-card" onclick="window.location.href='/AnimalList/Details/3'" style="cursor: pointer;">
+                    <div class="card radius-2 giraffe-card" onclick="window.location.href='/AnimalList/Details/3'" style="cursor: pointer;">
 
                         <div class="card-body">
                             <div class="card-title custom-title"> Our Animal</div>
@@ -126,7 +130,7 @@
             </div>
         </div>
 
-        <div> <a class="btn btn-primary discovermore-btn" href="/AnimalList/Index">Discover More</a></div>
+        <div> <a class="btn btn-primary radius-2 discovermore-btn" href="/AnimalList/Index">Discover More</a></div>
      
     </div>
  
@@ -148,10 +152,6 @@
         </div>
 
     </div>
-
-@if (!string.IsNullOrEmpty(Model.username)) {
-    <h5 class="text-danger">@Model.username</h5>
-}
 
     <div class="section-map">
 

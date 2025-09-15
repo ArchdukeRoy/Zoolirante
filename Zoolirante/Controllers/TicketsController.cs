@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Zoolirante.Data;
 using Zoolirante.Models;
+using Zoolirante.ViewModels;
+using System.Text.Json;
 
 namespace Zoolirante.Controllers
 {
@@ -20,10 +22,13 @@ namespace Zoolirante.Controllers
         }
 
         // GET: Tickets
-        public async Task<IActionResult> Index()
+        public IActionResult Index(DefaultViewModel vm)
         {
-            var zooliranteContext = _context.Tickets.Include(t => t.Visitor);
-            return View(await zooliranteContext.ToListAsync());
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (!string.IsNullOrEmpty(vmJson)) {
+                vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+            }
+            return View(vm);
         }
 
         // GET: Tickets/Details/5
