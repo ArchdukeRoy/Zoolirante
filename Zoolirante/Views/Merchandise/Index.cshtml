@@ -11,28 +11,14 @@
 </div>
 <div class="w-100 bg-zoolirante-light py-1 shadow"></div>
 
-<!-- create new if you need it
-<p>
-    <a asp-action="Create">Create New</a>
-</p
--->
-
-<hr class="mt-4">
-
-<div class="container mb-4">
-    <div class="row g-4 align-items-end">
+<div class="container my-4">
+    <div class="row g-4">
         <!-- Search -->
         <div class="col-12 col-md-6">
             <form asp-action="Index" method="get" class="row gx-2">
-                <div class="col">
-                    <input type="text"
-                           name="searchMerchandise"
-                           class="form-control"
-                           placeholder="Search Merchandise"
-                           value='@ViewData["PresentFilter"]'>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                <div class="input-group">
+                    <input type="text" name="searchMerchandise" class="form-control" placeholder="Search Merchandise" value='@ViewData["PresentFilter"]'>
+                    <button type="submit" class="btn btn-dark">Search</button>
                 </div>
             </form>
         </div>
@@ -40,48 +26,43 @@
         <!-- Filter -->
         <div class="col-12 col-md-6">
             <form asp-action="Index" method="get" class="row gx-2">
-                <div class="col">
+                <div class="input-group">
                     <select name="priceFilter" class="form-select">
                         <option value="" @(ViewData["PresentPriceFilter"] == null ? "selected" : "")>All Prices</option>
                         <option value="low price" @(ViewData["PresentPriceFilter"]?.ToString() == "low price" ? "selected" : "")>Below $20</option>
                         <option value="medium price" @(ViewData["PresentPriceFilter"]?.ToString() == "medium price" ? "selected" : "")>$20–$50</option>
                         <option value="high price" @(ViewData["PresentPriceFilter"]?.ToString() == "high price" ? "selected" : "")>Above $50</option>
                     </select>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-outline-secondary">Filter</button>
+                    <button type="submit" class="btn btn-dark">Filter</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<hr class="mt-4">
-
 <div class="container" >
     <div class="row g-4">
         @foreach (var item in Model)
         {
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0 position-relative product-card text-center">
+                <div class="card h-100 shadow-sm hover-merch border-0 position-relative product-card text-center radius-2">
                     <!-- Merch image -->
-                    <img src="@item.ItemImage"
-                         alt="@item.ItemName"
-                         class="card-img-top"
-                         style="height:220px; object-fit:cover;">
+                    <div class="">
+                        <img src="@item.ItemImage" alt="@item.ItemName" class="card-img-top radius-2" style="height:220px; object-fit:cover;">
+                    </div>
 
                     <!-- Orange info section -->
-                    <div class="card-body bg-zoolirante text-center text-white d-flex flex-column justify-content-end p-3">
+                    <div class="card-body text-dark text-center d-flex flex-column justify-content-end p-3 radius-bottom-2">
 
                         <h6 class="fw-bold text-uppercase mb-1">@item.ItemName</h6>
 
-                        <p class="mb-3">@item.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))</p>
+                        <p class="mb-2">@item.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))</p>
 
                         <!-- Add to cart button -->
                         <form asp-action="AddToCart" method="post" class="d-inline-block position-relative" style="z-index:2;">
                             <input type="hidden" name="id" value="@item.ItemId" />
                             @Html.AntiForgeryToken()
-                            <button type="submit" class="btn btn-outline-light w-100">
+                            <button type="submit" class="btn btn-outline-light bg-zoolirante radius-2 w-100">
                                 Add to cart
                             </button>
                         </form>
