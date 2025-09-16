@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|c:\\users\\nebula pc\\documents\\uni\\2025\\web tech\\w1\\yes\\zoolirante\\zoolirante\\views\\animallist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|solutionrelative:views\\animallist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|c:\\users\\nebula pc\\documents\\uni\\2025\\web tech\\w1\\yes\\zoolirante\\zoolirante\\views\\animallist\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|solutionrelative:views\\animallist\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|c:\\users\\nebula pc\\documents\\uni\\2025\\web tech\\w1\\yes\\zoolirante\\zoolirante\\wwwroot\\css\\stylesheet.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|solutionrelative:wwwroot\\css\\stylesheet.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|c:\\users\\nebula pc\\documents\\uni\\2025\\web tech\\w1\\yes\\zoolirante\\zoolirante\\views\\animallist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|solutionrelative:views\\animallist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|c:\\users\\nebula pc\\documents\\uni\\2025\\web tech\\w1\\yes\\zoolirante\\zoolirante\\controllers\\animallistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|c:\\users\\nebula pc\\documents\\uni\\2025\\web tech\\w1\\yes\\zoolirante\\zoolirante\\views\\animallist\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|solutionrelative:views\\animallist\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|c:\\users\\nebula pc\\documents\\uni\\2025\\web tech\\w1\\yes\\zoolirante\\zoolirante\\views\\animallist\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|solutionrelative:views\\animallist\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8A803A5E-4BAE-46CF-A72D-D0AB6C45702A}|Zoolirante.csproj|c:\\users\\nebula pc\\documents\\uni\\2025\\web tech\\w1\\yes\\zoolirante\\zoolirante\\views\\animallist\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -63,7 +63,7 @@
               "RelativeDocumentMoniker": "wwwroot\\css\\StyleSheet.css",
               "ToolTip": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\wwwroot\\css\\StyleSheet.css",
               "RelativeToolTip": "wwwroot\\css\\StyleSheet.css",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAADYAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAKkAAAAAAAAAAAAiwMQAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-09-16T00:51:46.933Z",
               "IsPinned": true,
@@ -72,12 +72,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Views\\AnimalList\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\AnimalList\\Details.cshtml",
+              "ToolTip": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Views\\AnimalList\\Details.cshtml",
+              "RelativeToolTip": "Views\\AnimalList\\Details.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-14T05:25:47.004Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Views\\AnimalList\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\AnimalList\\Index.cshtml",
               "ToolTip": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Views\\AnimalList\\Index.cshtml",
               "RelativeToolTip": "Views\\AnimalList\\Index.cshtml",
-              "ViewState": "AgIAADQAAAAAAAAAAAAiwFgAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAAAGgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-09-16T00:49:10.546Z",
               "IsPinned": true,
@@ -85,20 +99,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AnimalListController.cs",
               "DocumentMoniker": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Controllers\\AnimalListController.cs",
               "RelativeDocumentMoniker": "Controllers\\AnimalListController.cs",
               "ToolTip": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Controllers\\AnimalListController.cs",
               "RelativeToolTip": "Controllers\\AnimalListController.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAowBkAAABfAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowCcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-16T01:23:18.467Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Views\\AnimalList\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\AnimalList\\Create.cshtml",
@@ -106,8 +120,7 @@
               "RelativeToolTip": "Views\\AnimalList\\Create.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-15T15:15:56.489Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-15T15:15:56.489Z"
             },
             {
               "$type": "Document",
@@ -119,8 +132,7 @@
               "RelativeToolTip": "Views\\AnimalList\\Delete.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-15T15:15:54.578Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-15T15:15:54.578Z"
             },
             {
               "$type": "Document",
@@ -133,19 +145,6 @@
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-09-15T13:10:39.243Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Views\\AnimalList\\Details.cshtml",
-              "RelativeDocumentMoniker": "Views\\AnimalList\\Details.cshtml",
-              "ToolTip": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Views\\AnimalList\\Details.cshtml",
-              "RelativeToolTip": "Views\\AnimalList\\Details.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAADsAAABXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-14T05:25:47.004Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",

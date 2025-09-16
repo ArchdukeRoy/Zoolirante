@@ -88,6 +88,121 @@
     min-height: 300px;
 }
 
+/*animations for animalList*/
+@keyframes slideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-400px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(400px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/*set animations to animate element*/
+.animal-showcase .special-card {
+    opacity: 0;
+    animation-duration: 1.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+
+/* left then right animations */
+.animal-showcase .row > [class*="col-"]:nth-child(odd) .special-card {
+    animation-name: slideLeft;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(even) .special-card {
+    animation-name: slideRight;
+}
+
+/*row by row animation*/
+.animal-showcase .row > [class*="col-"]:nth-child(-n+2) .special-card {
+    animation-delay: 0.3s;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(n+3):nth-child(-n+4) .special-card {
+    animation-delay: 0.6s;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(n+5):nth-child(-n+6) .special-card {
+    animation-delay: 0.9s;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(n+7):nth-child(-n+8) .special-card {
+    animation-delay: 1.2s;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(n+9):nth-child(-n+10) .special-card {
+    animation-delay: 1.5s;
+}
+.animal-showcase .row > [class*="col-"]:nth-child(n+10):nth-child(-n+11) .special-card {
+    animation-delay: 1.8s;
+}
+
+/*AnimalList details page*/
+
+@keyframes ALfade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+.ALBannerImage {
+    opacity: 0;
+    animation-name: slideLeft;
+    animation-duration: 1.0s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+
+.AlImage1 {
+    opacity: 0;
+    animation-delay: 0.6s;
+    animation-name: slideRight;
+    animation-duration: 1.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.ALFadeIn {
+    opacity: 0;
+    animation-delay: 1.8s;
+    animation-name: ALfade;
+    animation-duration: 1.0s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+}
+
+.ALFadeIn2 {
+    opacity: 0;
+    animation-delay: 2.8s;
+    animation-name: ALfade;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+}
+
 .bg-zoolirante {
     /*    background-color: rgb(255, 132, 56);*/
     background-color: #FF8C42;
