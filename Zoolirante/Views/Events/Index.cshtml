@@ -2,40 +2,105 @@
 
 @{
     ViewData["Title"] = "Index";
+    var eventsList = Model?.ToList() ?? new List<Zoolirante.Models.Event>();
 }
 
-<h1>Index</h1>
+<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
+    <h1>Our Events</h1>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+<section class="container-fluid px-0 mb-4">
+    <div class="row g-0 align-items-center hero-row">
+        
+        <div class="col-12 col-lg-7">
+            <img src="@Url.Content("~/images/EventsIndex.jpg")"
+                 alt="Events hero"
+                 class="w-100 event-img">
+        </div>
+
+        <!-- text -->
+        <div class="col-12 col-lg-5 d-flex align-items-center">
+            <div class="p-4 p-md-5 text-center text-lg-start w-100">
+                <h1 class="fw-bold display-5 text-success-emphasis mb-3">
+                    Events at Zoolirante
+                </h1>
+                <p id="eventTagline" class="lead text-muted mb-0">
+                    Feeding Time, Conservation Talks, and more — there’s always something happening at the zoo!
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const taglines = [
+            " Watch our tigers roar at Feeding Time!",
+            " Learn about wildlife at our Conservation Talks.",
+            " Go behind the scenes and discover animal care.",
+            " See how animals play during Enrichment sessions.",
+            " Become a Junior Zookeeper for a day!"
+        ];
+
+        let index = 0;
+        const taglineElement = document.getElementById("eventTagline");
+        if (!taglineElement) return;
+
+        setInterval(() => {
+            taglineElement.style.opacity = 0;
+            setTimeout(() => {
+                taglineElement.textContent = taglines[index];
+                taglineElement.style.opacity = 1;
+                index = (index + 1) % taglines.length;
+            }, 800);
+        }, 4000);
+});
+</script>
+
+
+<div class="container">
+    <div class="row g-4">
+        @foreach (var item in eventsList)
+            {
+                string imageUrl;
+
+                switch (item.Name)
+                {
+                    case "Feeding Time":
+                        imageUrl = "https://d1dxs113ar9ebd.cloudfront.net/225batonrouge/2021/05/Tigerfeeding.jpg";
+                        break;
+                    case "Conservation Talk":
+                        imageUrl = Url.Content("~/Images/Zookeeper-talk.jpg");
+                        break;
+                    case "Behind the Scenes Tour":
+                        imageUrl = Url.Content("~/Images/Behindthescene.jpg");
+                        break;
+                    case "Animal Enrichment":
+                        imageUrl = Url.Content("~/Images/AnimalEnrichment.jpg");
+                        break;
+                    case "Junior Zookeeper Experience":
+                        imageUrl = Url.Content("~/Images/JuniorZookeeper.jpg");
+                        break;
+                    default:
+                        imageUrl = Url.Content("~/Images/AnimalEnrichment.jpg");
+                        break;
+                }
+
+            <div class="col-12 col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="@imageUrl" alt="@item.Name" class="card-img-top" style="object-fit:cover; height:200px;" />
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold text-dark text-uppercase" style="font-size:1.1rem;">
+                            @item.Name
+                        </h5>
+                        <p class="card-text text-muted small">
+                            @item.Description
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
