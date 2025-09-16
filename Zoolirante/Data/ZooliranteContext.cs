@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Zoolirante.Models;
-using Zoolirante.ViewModels;
 
 namespace Zoolirante.Data;
 
@@ -59,7 +58,7 @@ public partial class ZooliranteContext : DbContext
     {
         modelBuilder.Entity<Admin>(entity =>
         {
-            entity.HasKey(e => e.AdminId).HasName("PK__Admin__AD05008679C2C24F");
+            entity.HasKey(e => e.AdminId).HasName("PK__Admin__AD05008636A9998A");
 
             entity.ToTable("Admin");
 
@@ -75,7 +74,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<Animal>(entity =>
         {
-            entity.HasKey(e => e.AnimalId).HasName("PK__Animals__68745631C80680D0");
+            entity.HasKey(e => e.AnimalId).HasName("PK__Animals__687456314279A343");
 
             entity.HasIndex(e => e.SpeciesId, "IX_Animals_speciesID");
 
@@ -84,6 +83,9 @@ public partial class ZooliranteContext : DbContext
             entity.Property(e => e.AnimalImage)
                 .HasMaxLength(500)
                 .HasColumnName("animalImage");
+            entity.Property(e => e.AnimalImage2)
+                .HasMaxLength(500)
+                .HasColumnName("animalImage2");
             entity.Property(e => e.Description)
                 .HasMaxLength(1000)
                 .HasColumnName("description");
@@ -105,7 +107,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.EventId).HasName("PK__Events__2DC7BD69930FA981");
+            entity.HasKey(e => e.EventId).HasName("PK__Events__2DC7BD6925B6D0D3");
 
             entity.Property(e => e.EventId).HasColumnName("eventID");
             entity.Property(e => e.Description).HasColumnName("description");
@@ -116,7 +118,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<EventRollCall>(entity =>
         {
-            entity.HasKey(e => e.EventRollCallId).HasName("PK__EventRol__CB1E5E29377C26EC");
+            entity.HasKey(e => e.EventRollCallId).HasName("PK__EventRol__CB1E5E291012C1BA");
 
             entity.ToTable("EventRollCall");
 
@@ -142,7 +144,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<FavouriteAnimal>(entity =>
         {
-            entity.HasKey(e => e.FavAnimalsId).HasName("PK__Favourit__283318836AFB5B3A");
+            entity.HasKey(e => e.FavAnimalsId).HasName("PK__Favourit__283318838C5BB4DA");
 
             entity.HasIndex(e => e.AnimalId, "IX_Fav_Animal");
 
@@ -165,7 +167,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<MerchInOrder>(entity =>
         {
-            entity.HasKey(e => new { e.OrderNumber, e.ItemId }).HasName("PK__MerchInO__D7FC001A3E8F610F");
+            entity.HasKey(e => new { e.OrderNumber, e.ItemId }).HasName("PK__MerchInO__D7FC001A087E2800");
 
             entity.ToTable("MerchInOrder");
 
@@ -188,7 +190,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<Merchandise>(entity =>
         {
-            entity.HasKey(e => e.ItemId).HasName("PK__Merchand__56A1284A78AB4964");
+            entity.HasKey(e => e.ItemId).HasName("PK__Merchand__56A1284A08530D64");
 
             entity.ToTable("Merchandise");
 
@@ -209,9 +211,9 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<Person>(entity =>
         {
-            entity.HasKey(e => e.PersonId).HasName("PK__People__EC7D7D6DC771A9E0");
+            entity.HasKey(e => e.PersonId).HasName("PK__People__EC7D7D6D0264286D");
 
-            entity.HasIndex(e => e.Email, "UQ__People__AB6E6164B6D68B49").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__People__AB6E616469B802D5").IsUnique();
 
             entity.Property(e => e.PersonId).HasColumnName("personID");
             entity.Property(e => e.Email)
@@ -227,7 +229,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<PurchaseHistory>(entity =>
         {
-            entity.HasKey(e => e.PurchaseHistoryId).HasName("PK__Purchase__D3C755D9A5DFDEC0");
+            entity.HasKey(e => e.PurchaseHistoryId).HasName("PK__Purchase__D3C755D98994D2BE");
 
             entity.ToTable("PurchaseHistory");
 
@@ -242,7 +244,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<Receipt>(entity =>
         {
-            entity.HasKey(e => e.ReceiptId).HasName("PK__Receipts__CAA7E89870A32382");
+            entity.HasKey(e => e.ReceiptId).HasName("PK__Receipts__CAA7E8989D38BF87");
 
             entity.HasIndex(e => e.PurchaseHistoryId, "IX_Receipts_ph");
 
@@ -260,9 +262,9 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Roles__CD98460A0B23B498");
+            entity.HasKey(e => e.RoleId).HasName("PK__Roles__CD98460AE3F81D56");
 
-            entity.HasIndex(e => e.RoleName, "UQ__Roles__B19478616E350041").IsUnique();
+            entity.HasIndex(e => e.RoleName, "UQ__Roles__B19478614C088BA0").IsUnique();
 
             entity.Property(e => e.RoleId).HasColumnName("roleID");
             entity.Property(e => e.RoleName)
@@ -272,22 +274,37 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<Species>(entity =>
         {
-            entity.HasKey(e => e.SpeciesId).HasName("PK__Species__FB702AB806DBF5F3");
+            entity.HasKey(e => e.SpeciesId).HasName("PK__Species__FB702AB80952D5F8");
 
-            entity.HasIndex(e => e.Name, "UQ__Species__72E12F1BA62EBE41").IsUnique();
+            entity.HasIndex(e => e.Name, "UQ__Species__72E12F1BD30ACA30").IsUnique();
 
             entity.Property(e => e.SpeciesId).HasColumnName("speciesID");
+            entity.Property(e => e.Diet)
+                .HasMaxLength(50)
+                .HasColumnName("diet");
+            entity.Property(e => e.EventId).HasColumnName("eventID");
+            entity.Property(e => e.Habitat)
+                .HasMaxLength(50)
+                .HasColumnName("habitat");
             entity.Property(e => e.Name)
                 .HasMaxLength(200)
                 .HasColumnName("name");
+            entity.Property(e => e.SpeciesDescription).HasColumnName("speciesDescription");
             entity.Property(e => e.SpeciesImage)
                 .HasMaxLength(500)
                 .HasColumnName("speciesImage");
+            entity.Property(e => e.SpeciesImage2)
+                .HasMaxLength(500)
+                .HasColumnName("speciesImage2");
+
+            entity.HasOne(d => d.Event).WithMany(p => p.Species)
+                .HasForeignKey(d => d.EventId)
+                .HasConstraintName("FK_Species_Events");
         });
 
         modelBuilder.Entity<Staff>(entity =>
         {
-            entity.HasKey(e => e.StaffId).HasName("PK__Staff__6465E19E9856C213");
+            entity.HasKey(e => e.StaffId).HasName("PK__Staff__6465E19EBB4D74CA");
 
             entity.HasIndex(e => e.RoleId, "IX_Staff_roleID");
 
@@ -318,7 +335,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.TicketId).HasName("PK__Tickets__3333C670CBCCC000");
+            entity.HasKey(e => e.TicketId).HasName("PK__Tickets__3333C670B7EB469B");
 
             entity.HasIndex(e => e.VisitorId, "IX_Tickets_visitorID");
 
@@ -336,9 +353,9 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<Visitor>(entity =>
         {
-            entity.HasKey(e => e.VisitorId).HasName("PK__Visitors__7D47DFA2A8452676");
+            entity.HasKey(e => e.VisitorId).HasName("PK__Visitors__7D47DFA2426F9DA6");
 
-            entity.HasIndex(e => e.Username, "UQ__Visitors__F3DBC572BC6BD2B0").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Visitors__F3DBC57208A2EA98").IsUnique();
 
             entity.Property(e => e.VisitorId)
                 .ValueGeneratedNever()
@@ -364,7 +381,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<VisitorMerchOrder>(entity =>
         {
-            entity.HasKey(e => e.OrderNumber).HasName("PK__VisitorM__6296129EB4CD18DF");
+            entity.HasKey(e => e.OrderNumber).HasName("PK__VisitorM__6296129EF6A40771");
 
             entity.ToTable("VisitorMerchOrder");
 
@@ -387,7 +404,7 @@ public partial class ZooliranteContext : DbContext
 
         modelBuilder.Entity<ZooKeeper>(entity =>
         {
-            entity.HasKey(e => e.ZookeeperId).HasName("PK__ZooKeepe__33C5B953E6E020E6");
+            entity.HasKey(e => e.ZookeeperId).HasName("PK__ZooKeepe__33C5B9536DD2ADBE");
 
             entity.ToTable("ZooKeeper");
 
@@ -406,6 +423,5 @@ public partial class ZooliranteContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-public DbSet<Zoolirante.ViewModels.DefaultViewModel> DefaultViewModel { get; set; } = default!;
+    public DbSet<Zoolirante.ViewModels.DefaultViewModel> DefaultViewModel { get; set; } = default!;
 }

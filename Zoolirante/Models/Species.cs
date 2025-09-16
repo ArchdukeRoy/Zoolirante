@@ -11,5 +11,17 @@ public partial class Species
 
     public string? SpeciesImage { get; set; }
 
+    public string? SpeciesDescription { get; set; }
+
+    public string? Habitat { get; set; }
+
+    public string? Diet { get; set; }
+
+    public string? SpeciesImage2 { get; set; }
+
+    public int? EventId { get; set; }
+
     public virtual ICollection<Animal> Animals { get; set; } = new List<Animal>();
+
+    public virtual Event? Event { get; set; }
 }

@@ -23,6 +23,7 @@ public partial class Visitor
     [Phone(ErrorMessage = "Invalid phone number")]
     public string? Contact { get; set; }
 
+
     public string? PaymentMethod { get; set; }
 
     public virtual ICollection<FavouriteAnimal> FavouriteAnimals { get; set; } = new List<FavouriteAnimal>();

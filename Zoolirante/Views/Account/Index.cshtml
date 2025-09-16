@@ -5,9 +5,9 @@
 }
 
 
-<body class="container pt-5 bg-zoolirante-light">
-    <div class="d-flex justify-content-center align-items-center">
-        <div class="card shadow" style="width: 35%;">
+<body class="pt-5">
+    <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 380px">
+        <div class="card shadow" style="width: 27%;">
             <div class="card-header radius-top-2 bg-zoolirante text-white" style="">
                 <h5 class="card-title mt-3 mb-0">Welcome</h5>
                 <h5 class=" fw-lighter mb-3" style="font-size: 0.8rem;">Please enter your details</h5>
@@ -17,6 +17,11 @@
                     @if (!string.IsNullOrEmpty(ViewBag.Error)) {
                         <div class="alert alert-danger py-1">
                             @ViewBag.Error
+                        </div>
+                    }
+                    @if (TempData["Created"] != null) {
+                        <div class="alert alert-info py-1">
+                            @TempData["Created"]
                         </div>
                     }
                     <form asp-controller="Account" asp-action="Index" method="post">

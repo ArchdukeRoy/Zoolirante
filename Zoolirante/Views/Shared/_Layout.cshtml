@@ -8,46 +8,46 @@
     <link rel="stylesheet" href="~/css/StyleSheet.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Zoolirante.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
 </head>
 <body>
     <header class="mt-5">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-zoolirante box-shadow fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img class="navbar-logo" src="/Images/logo.png" alt="Zoolirante">
+                    <img src="/Images/logo.png" alt="Zoolirante">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                       ria-expanded="false" aria-label="Toggle navigation">
+                        ria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item me-4">
-                            <a class="nav-link"  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item me-4">
-                            <a class="nav-link"  asp-area="" asp-controller="AnimalList" asp-action="Index">Animals</a>
+                            <a class="nav-link" asp-area="" asp-controller="AnimalList" asp-action="Index">Animals</a>
                         </li>
                         <li class="nav-item me-4">
-                            <a class="nav-link"  asp-area="" asp-controller="" asp-action="">Events</a>
-                          
+                            <a class="nav-link" asp-area="" asp-controller="Events" asp-action="Index">Events</a>
                         </li>
-                        <li class="nav-item me-4">
+                        <li class="nav-item me-3">
                             <a class="nav-link" asp-area="" asp-controller="Merchandise" asp-action="Index">Merch</a>
                         </li>
-
-                        <li class="nav-item me-4">
-                            <a class="btn text-dark bg-zoolirante-secondary radius-2 mx-2 fw-bold" asp-area="" asp-controller="Login" asp-action="Create">Become Member</a>
+                        <li class="nav-item me-3">
+                            <a class="btn text-dark bg-zoolirante-secondary radius-2 mx-2 shadow" asp-area="" asp-controller="Login" asp-action="Create">Become Member</a>
                         </li>
-                        <li class="nav-item me-4">
-                            <a class="btn text-dark bg-zoolirante-secondary radius-2 fw-bold" asp-area="" asp-controller="Account" asp-action="Index">Login</a>
-                        </li>
-                        <li class="nav-item me-4 dropdown-hover">
-                            <a class="btn text-dark bg-zoolirante-secondary radius-2 fw-bold dropdown-toggle" href="#">Book Now</a>
-                            <div class="dropdown-menu-custom">
-                                <a class="dropdown-item-custom" asp-area="" asp-controller="" asp-action="">Buy Tickets</a>
-                                <a class="dropdown-item-custom" asp-area="" asp-controller="" asp-action="">My Account</a>
+                        @if (!Context.Session.GetInt32("id").HasValue || Context.Session.GetInt32("id") == 0) {
+                            <li class="nav-item me-3">
+                                <a class="btn text-dark bg-zoolirante-secondary radius-2 shadow" asp-area="" asp-controller="Account" asp-action="Index">Login</a>
+                            </li>
+                        }
+                        <li class="nav-item dropdown-hover">
+                            <a class="btn text-light btn-dark dropdown-toggle" style="padding-block: 22.5px; border-radius: 0rem; margin-right: -12px; box-shadow: -5px 0 10px -2px rgba(0,0,0,0.1);" href="#">Book Now</a>
+                            <div class="dropdown-menu-custom" style="width: 113%;">
+                                <a class="dropdown-item-custom py-2 shadow" asp-area="" asp-controller="Tickets" asp-action="Index">Buy Tickets</a>
+                                <a class="dropdown-item-custom py-2 shadow" style="border-bottom-left-radius: 1rem;" asp-area="" asp-controller="" asp-action="">My Account</a>
                             </div>
                         </li>
                     </ul>
@@ -55,14 +55,53 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid px-0">
+    <div class="container-fluid px-0 mx-0" style="overflow-x: hidden;">
         <main role="main" class="pb-3 pt-4">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <section class="bottom-section">
         <div class="container">
+            <div class="row custom-row">
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">Location</h1>
+
+                    <p class="text"> Somewhere in the middle of Australia</p>
+
+                    <h1 class="header-bottom">Hours</h1>
+
+                    <p class="text"> 9AM - 5PM (Weekday)</p>
+
+                    <p class="text"> 10AM - 5PM (Weekend</p>
+
+                </div>
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">Ticket & Membership</h1>
+
+                </div>
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">Visit</h1>
+
+                    <a href="/AnimalList/Index" class="bottomsection-link"> Find Animals</a>
+                    <br />
+                    <a href="/Merchandise/Index" class="bottomsection-link"> Visit Merch Shop</a>
+
+                </div>
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">Events & Experience</h1>
+
+                </div>
+                <div class="col-sm-2">
+                    <h1 class="header-bottom">About Us</h1>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer text-muted" style="background-color: #6B5B47;">
+        <div class="ms-5">
             &copy; 2025 - Zoolirante - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
