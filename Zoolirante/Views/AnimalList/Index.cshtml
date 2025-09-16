@@ -35,42 +35,70 @@
         </div>
     }
 
-    <div class="row">
-        @foreach (var a in Model.SpeciesList)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm text-white bg-light radius-2 position-relative">
-                    @if (Context.Session.GetInt32("id").HasValue && Context.Session.GetInt32("id") != 0) {
-                        <form asp-action="Like" asp-route-id="@a.SpeciesId" method="post">
-                            <button type="submit" class="btn btn-dark btn-sm position-absolute top-0 end-0 m-3 d-flex align-items-center justify-content-center" 
-                                    style="border-radius: 0.8rem; width: 32px; height: 32px; z-index: 3;"
-                                    title="Add to liked list">
+    <hr>
 
-                                @if (Model.DefaultVM.favouriteAnimals.Where(i => i.AnimalId == a.SpeciesId).FirstOrDefault() != null) {
-                                    <i class="bi-heart-fill text-danger" style="margin-right: 1px; margin-top: 2px"></i>
-                                } else {
-                                    <i class="bi-heart-fill text-light" style="margin-right: 1px; margin-top: 2px"></i>
-                                }
+    <div class="container-fluid p-0 bg-light animal-showcase">
+        <div class="row g-0">
+            @foreach (var a in Model.SpeciesList)
+            {
+                <div class="col-md-6 p-0">
+                    <div class="card h-100 text-white bg-light position-relative rounded-0 special-card">
+                        @if (Context.Session.GetInt32("id").HasValue && Context.Session.GetInt32("id") != 0) {
+                            <form asp-action="Like" asp-route-id="@a.SpeciesId" method="post">
+                                <button type="submit" class="btn btn-dark btn-sm position-absolute top-0 end-0 m-3 d-flex align-items-center justify-content-center" 
+                                        style="border-radius: 0.8rem; width: 32px; height: 32px; z-index: 3;"
+                                        title="Add to liked list">
 
-                            </button>
-                        </form>
-                    }
-                    <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
-                        <div class="card-body bg-opacity-100 p-0 hover-tint">
-                            <img src="@a.SpeciesImage" alt="@a.Name" class="card-img img-fluid w-100 radius-2" style="max-height:200px; object-fit:cover;" />
-                            <div class="card-img-overlay d-flex justify-content-center align-items-center" style="z-index: 2;">
-                                <h5 class="card-title mb-0 mt-2 fw-bold fs-2">@a.Name</h5>
-                            </div>
-                        </div>
-                        @if (Model.DefaultVM.admin == true) {
-                            <div class="card-footer text-end">
-                                <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark radius-2">Edit</a>
-                                <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger radius-2">Delete</a> 
-                            </div>
+                                    @if (Model.DefaultVM.favouriteAnimals.Where(i => i.AnimalId == a.SpeciesId).FirstOrDefault() != null) {
+                                        <i class="bi-heart-fill text-danger" style="margin-right: 1px; margin-top: 2px"></i>
+                                    } else {
+                                        <i class="bi-heart-fill text-light" style="margin-right: 1px; margin-top: 2px"></i>
+                                    }
+
+                                </button>
+                            </form>
                         }
-                    </a>
+                        <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
+                            @if (a.Habitat == "Land")
+                            {
+                                <div class="card-body p-0 hover-tint land rounded-0">
+                                    <img src="@a.SpeciesImage" alt="@a.Name" class="card-img img-fluid w-100" style="max-height:300px; object-fit:cover;" />
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end align-items-center p-3 outlined-text" style="z-index: 2;">
+                                        <h5 class="card-title mb-0 mt-2 fw-bold fs-2 ">@a.Name</h5>
+                                        <a asp-action="Details" asp-route-id="@a.SpeciesId" class="btn btn-link p-0 text-white" style="text-decoration: none">Read more</a>
+                                    </div>
+                                </div>
+                            }
+                            else if (a.Habitat == "Sky") 
+                            {
+                                <div class="card-body p-0 hover-tint sky rounded-0">
+                                    <img src="@a.SpeciesImage" alt="@a.Name" class="card-img img-fluid w-100" style="max-height:300px; object-fit:cover;" />
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end align-items-center p-3 outlined-text" style="z-index: 2;">
+                                        <h5 class="card-title mb-0 mt-2 fw-bold fs-2 ">@a.Name</h5>
+                                        <a asp-action="Details" asp-route-id="@a.SpeciesId" class="btn btn-link p-0 text-white" style="text-decoration: none">Read more</a>
+                                    </div>
+                                </div>
+                            }
+                            else if (a.Habitat == "Water")
+                            {
+                                <div class="card-body p-0 hover-tint water rounded-0">
+                                    <img src="@a.SpeciesImage" alt="@a.Name" class="card-img img-fluid w-100" style="max-height:300px; object-fit:cover;" />
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end align-items-center p-3 outlined-text" style="z-index: 2;">
+                                        <h5 class="card-title mb-0 mt-2 fw-bold fs-2 ">@a.Name</h5>
+                                        <a asp-action="Details" asp-route-id="@a.SpeciesId" class="btn btn-link p-0 text-white" style="text-decoration: none">Read more</a>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.DefaultVM.admin == true) {
+                                <div class="card-footer text-end">
+                                    <a asp-action="Edit" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-dark radius-2">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@a.SpeciesId" class="btn btn-sm btn-danger radius-2">Delete</a> 
+                                </div>
+                            }
+                        </a>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
