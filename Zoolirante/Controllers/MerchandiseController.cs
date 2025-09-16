@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Zoolirante.Data;
 using Zoolirante.Models;
+using Zoolirante.ViewModels;
+using System.Text.Json;
 
 namespace Zoolirante.Controllers
 {
@@ -20,7 +22,7 @@ namespace Zoolirante.Controllers
         }
 
         /* search and filter feature*/
-        public async Task<IActionResult> Index(string searchMerchandise, string priceFilter)
+        public async Task<IActionResult> Index(string searchMerchandise, string priceFilter, MerchViewModel vm)
         {
             var merch = from i in _context.Merchandises
                         select i;
@@ -59,11 +61,70 @@ namespace Zoolirante.Controllers
             ViewData["PresentFilter"] = searchMerchandise;
             ViewData["PresentPriceFilter"] = priceFilter;
 
-            return View(await merch.ToListAsync());
+            vm.MerchList = await merch.ToListAsync();
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (!string.IsNullOrEmpty(vmJson)) {
+                vm.DefaultVM = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+            }
+            return View(vm);
         }
 
-        // GET: Merchandise/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpPost]
+        public async Task<IActionResult> Index(int id, int quantity, MerchViewModel vm) {
+
+            vm.MerchList = await _context.Merchandises.ToListAsync();
+
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (!string.IsNullOrEmpty(vmJson)) {
+                vm.DefaultVM = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+            }
+
+            if (vm.DefaultVM.username == null) {
+                ViewBag.NotLoggedIn = "Please log in to add to cart.";
+                return View(vm);
+            }
+
+            var MerchItem = vm.MerchList.Where(i => i.ItemId == id).ToList();
+            var CartItem = vm.DefaultVM.temporaryCart.FirstOrDefault(i => i.ItemId == id);
+
+            // If item in cart already. 
+            if (CartItem != null) {
+                CartItem.Quantity += quantity;
+            } else {
+                var newMerchItem = new MerchInOrder {
+                    ItemId = id,
+                    Quantity = quantity,
+                    UnitPrice = MerchItem.Select(i => i.ItemCost).FirstOrDefault(),
+                    Item = vm.MerchList.FirstOrDefault(i => i.ItemId == id)!
+                };
+                vm.DefaultVM.temporaryCart.Add(newMerchItem);
+            }
+            
+            HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(vm.DefaultVM));
+
+            ViewBag.ItemAdded = quantity + " " + MerchItem.Select(i => i.ItemName).FirstOrDefault() + " added to cart.";
+            return View(vm);
+        }
+
+        public async Task<IActionResult> Cart(DefaultViewModel vm) {
+
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (!string.IsNullOrEmpty(vmJson)) {
+                vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+            }
+
+            decimal totalCost = 0;
+            foreach (var item in vm.temporaryCart) {
+                totalCost += item.UnitPrice * item.Quantity;
+            }
+
+            ViewBag.TotalCost = totalCost;
+
+            return View(vm);
+        }
+
+            // GET: Merchandise/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {

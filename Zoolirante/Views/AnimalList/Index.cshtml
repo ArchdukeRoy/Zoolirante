@@ -4,6 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
+@*Welcome On Login*@
+@if (!string.IsNullOrEmpty(Model.DefaultVM.username)) {
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px">
+        @if (Model.DefaultVM.admin == true) {
+            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
+        }
+        <p class="mb-1 fw-light mx-3">Welcome, @Model.DefaultVM.username</p>
+    </div>
+}
+
 <div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
     <h1>Our Animal Showcase</h1>
 </div>

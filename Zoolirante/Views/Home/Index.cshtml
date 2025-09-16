@@ -6,7 +6,7 @@
 
 @*Welcome On Login*@
 @if (!string.IsNullOrEmpty(Model.username)) {
-    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between" style="margin-top: -2px">
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px">
         @if (Model.admin == true) {
             <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
         }
