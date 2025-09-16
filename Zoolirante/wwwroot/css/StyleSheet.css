@@ -1,3 +1,4 @@
+/*Overlay form AnimalDetails Cards*/
 .hover-grow {
     transition: transform 0.3s ease;
 }
@@ -10,15 +11,518 @@
     position: relative;
     transition: 0.3s ease;
 }
-
-.hover-tint::after {
-    content: "";
-    position: absolute;
-    inset: 0; 
-    background: rgba(255, 132, 56, 0.5); 
-    border-radius: 2rem;
-    z-index: 1;
+.hover-grow {
+    transition: transform 0.3s ease;
 }
+
+    .hover-grow:hover {
+        transform: scale(1.02);
+    }
+
+.hover-tint {
+    position: relative;
+    transition: 0.3s ease;
+}
+
+    .hover-tint::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 132, 56, 0.5);
+        z-index: 1;
+        border-radius: 0;
+    }
+
+    .hover-tint::after {opacity: 40%;}
+
+    .hover-tint:hover::after {opacity: 1;}
+
+
+    .hover-tint.land::after {
+        background: rgba(255, 132, 56, 0.5) !important;
+    }
+
+    .hover-tint.sky::after {
+        background: rgba(57, 253, 255, 0.29) !important;
+    }
+
+    .hover-tint.water::after {
+        background: rgba(116, 166, 255, 0.8) !important;
+    }
+
+/*Text Outline*/
+.outlined-text {
+    z-index: 2;
+    background: linear-gradient( to top, rgba(0,0,0,0.45) 30%, rgba(0,0,0,0) 60% );
+}
+/* Kills rounded edges */
+.animal-showcase .card {
+    --bs-card-border-width: 0;
+    --bs-card-border-radius: 0;
+    --bs-card-inner-border-radius: 0;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+    .animal-showcase .card-body,
+    .animal-showcase .card-footer,
+    .animal-showcase .card-img,
+    .animal-showcase .card-img-top,
+    .animal-showcase .card-img-bottom,
+    .animal-showcase .card-img-overlay,
+    .animal-showcase .card img {
+        border-radius: 0 !important;
+    }
+
+    .animal-showcase .card img {
+        display: block;
+    }
+
+.animal-showcase .hover-tint::after {
+    border-radius: 0 !important;
+}
+
+/*Make cards taller*/
+.animal-showcase .hover-tint {
+    min-height: 300px;
+}
+
+/*animations for animalList*/
+@keyframes slideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-400px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(400px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/*set animations to animate element*/
+.animal-showcase .special-card {
+    opacity: 0;
+    animation-duration: 1.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+
+/* left then right animations */
+.animal-showcase .row > [class*="col-"]:nth-child(odd) .special-card {
+    animation-name: slideLeft;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(even) .special-card {
+    animation-name: slideRight;
+}
+
+/*row by row animation*/
+.animal-showcase .row > [class*="col-"]:nth-child(-n+2) .special-card {
+    animation-delay: 0.3s;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(n+3):nth-child(-n+4) .special-card {
+    animation-delay: 0.6s;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(n+5):nth-child(-n+6) .special-card {
+    animation-delay: 0.9s;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(n+7):nth-child(-n+8) .special-card {
+    animation-delay: 1.2s;
+}
+
+.animal-showcase .row > [class*="col-"]:nth-child(n+9):nth-child(-n+10) .special-card {
+    animation-delay: 1.5s;
+}
+.animal-showcase .row > [class*="col-"]:nth-child(n+10):nth-child(-n+11) .special-card {
+    animation-delay: 1.8s;
+}
+
+/*AnimalList details page*/
+
+@keyframes ALfade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+.ALBannerImage {
+    opacity: 0;
+    animation-name: slideLeft;
+    animation-duration: 1.0s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+
+.AlImage1 {
+    opacity: 0;
+    animation-delay: 0.6s;
+    animation-name: slideRight;
+    animation-duration: 1.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.ALFadeIn {
+    opacity: 0;
+    animation-delay: 1.8s;
+    animation-name: ALfade;
+    animation-duration: 1.0s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+}
+
+.ALFadeIn2 {
+    opacity: 0;
+    animation-delay: 2.8s;
+    animation-name: ALfade;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+}
+
+.bg-zoolirante {
+    /*    background-color: rgb(255, 132, 56);*/
+    background-color: #FF8C42;
+}
+
+.bg-zoolirante-light {
+    background-color: #F2F2F2
+}
+
+.bg-zoolirante-secondary {
+    background-color: rgb(250, 236, 209);
+}
+
+.text-zoolirante {
+    color: rgb(255, 132, 56);
+}
+
+.text-zoolirante-secondary {
+    color: rgb(250, 236, 209);
+}
+
+.radius-2 {
+    border-radius: 2rem;
+}
+
+
+.radius-top-2 {
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+
+.radius-bottom-2 {
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.navbar.fixed-top {
+    height: 70px;
+}
+
+.navbar-brand {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 1rem !important;
+}
+
+    .navbar-brand img {
+        margin-left: -20px;
+        max-height: 70px;
+        width: 100%;
+        object-fit: cover;
+        object-position: bottom;
+        border-radius: 0.2rem;
+    }
+
+.dropdown-menu-custom {
+    display: none;
+    position: absolute;
+}
+
+.dropdown-hover {
+    position: relative;
+}
+
+    .dropdown-hover:hover .dropdown-menu-custom {
+        display: block;
+    }
+
+.dropdown-item-custom {
+    display: block;
+    padding: 10px 15px;
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+    background-color: white;
+    font-family: Arial, sans-serif;
+}
+
+    .dropdown-item-custom:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown-item-custom:hover {
+        background-color: #f8f9fa;
+        color: #FF8C42;
+    }
+
+.card.card-tickets {
+    background-color: #6b8e23 !important;
+    outline-color: none;
+    border: none !important;
+    height: 650px;
+}
+
+.card-body {
+    color: white;
+}
+
+.card.card-merchandise {
+    background-color: #FF8C42 !important;
+    outline-color: none;
+    border: none !important;
+    height: 650px;
+}
+
+.card.card-events {
+    background-color: #a0522d !important;
+    outline-color: none;
+    border: none !important;
+    height: 650px;
+}
+
+.card-title {
+    margin-bottom: 30px;
+}
+
+.card-text {
+    margin-bottom: 30px;
+    font-weight: 300;
+    font-family: Arial;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 460px;
+}
+
+.custom-btn-ticket {
+    background-color: indianred !important;
+    border: none !important;
+    border-radius: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.custom-btn-event {
+    background-color: darkslategrey !important;
+    border: none !important;
+    border-radius: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.custom-btn {
+    background-color: indianred !important;
+    border: none !important;
+    border-radius: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.animalpage-btn {
+    background-color: darkslategrey;
+    border: none !important;
+    margin-top: 70px;
+    font-family: Arial;
+}
+
+.animal-page-section {
+    background-image: url('../Images/background.jpg');
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* MAP SECTION STYLES */
+.section-map {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+.section-description {
+    margin-top: 80px;
+    margin-left: 200px;
+    text-align: left;
+    font-size: 30px;
+}
+
+.title {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.map-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    aspect-ratio: 16/9;
+    margin: 40px auto;
+    background: url('/Images/ZOOMAP.png') center/contain no-repeat;
+}
+
+.pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 8px 12px;
+    background: rgba(255, 128, 0, .9);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+/* ANIMAL SHOWCASE & PAGE STYLES */
+.description-half {
+    padding-inline: 100px;
+    text-align: center;
+}
+
+.zoosection-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 80px;
+}
+
+.animal-showcase-half {
+}
+
+.lion-card {
+    background-color: indianred;
+    width: 100%;
+    height: 550px;
+    margin-top: 50px;
+}
+
+.giraffe-card {
+    background-color: orange;
+    width: 100%;
+    height: 550px;
+    margin-top: 50px;
+}
+
+.btn.btn-primary.discovermore-btn {
+    margin-top: 25px;
+    margin-left: 255px;
+    background-color: darkslategrey;
+    border: none;
+}
+
+.custom-title {
+    font-weight: 300;
+    text-align: center;
+    margin-top: 18px;
+    font-family: Arial;
+}
+
+.custom-header {
+    font-weight: bold;
+    text-align: center;
+    font-size: 28px;
+}
+
+.custom-bodytext {
+    text-align: center;
+    font-weight: 300;
+}
+
+.lioncard-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.giraffecard-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 2rem;
+    margin-bottom: 0px;
+}
+
+.bottom-section {
+    background-color: #6B5B47;
+}
+
+    .bottom-section p {
+        color: white;
+        font-weight: 200;
+    }
+
+
+.custom-row {
+    margin-left: 150px;
+}
+
+
+.header-bottom {
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    margin-top: 20px;
+}
+
+.bottomsection-link {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+
+    .bottomsection-link:hover {
+        color: grey;
+    }
+
 
 .hover-tint:hover {
     opacity: 90%;

@@ -40,6 +40,8 @@ namespace Zoolirante.Controllers
 
             ViewData["PresentFilter"] = searchAnimal;
 
+            species = species.OrderBy(s => s.Habitat);
+
             vm.SpeciesList = await species.ToListAsync();
             var vmJson = HttpContext.Session.GetString("DefaultVM");
             if (!string.IsNullOrEmpty(vmJson)) {
