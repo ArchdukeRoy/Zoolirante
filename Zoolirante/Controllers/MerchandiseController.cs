@@ -123,20 +123,25 @@ namespace Zoolirante.Controllers
             return View(vm);
         }
 
-            // GET: Merchandise/Details/5
-            public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
+        [HttpPost]
+        public async Task<IActionResult> Cart(int itemToDel, DefaultViewModel vm) {
+
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (!string.IsNullOrEmpty(vmJson)) {
+                vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
             }
 
+            var item = vm.temporaryCart.RemoveAll(i => i.ItemId == itemToDel);
+
+            HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(vm));
+
+            return RedirectToAction(nameof(Cart));
+        }
+
+        // GET: Merchandise/Details/5
+        public async Task<IActionResult> Details(int? id) {
             var merchandise = await _context.Merchandises
                 .FirstOrDefaultAsync(m => m.ItemId == id);
-            if (merchandise == null)
-            {
-                return NotFound();
-            }
 
             return View(merchandise);
         }

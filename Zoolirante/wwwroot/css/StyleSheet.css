@@ -1,3 +1,19 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.nav-tabs .nav-link:not(.active) {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #fff;
+    color: #000;
+}
+
 /*Overlay form AnimalDetails Cards*/
 .hover-grow {
     transition: transform 0.3s ease;
