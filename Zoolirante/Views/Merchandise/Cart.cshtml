@@ -1,0 +1,36 @@
+﻿@model Zoolirante.ViewModels.DefaultViewModel
+
+@*Welcome On Login*@
+@if (!string.IsNullOrEmpty(Model.username)) {
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px">
+        @if (Model.admin == true) {
+            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
+        }
+        <p class="mb-1 fw-light">Welcome, @Model.username</p>
+        <a asp-action="Index" class="mb-1 fw-light me-3 text-light">Return to Merch</a>
+    </div>
+}
+
+<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
+    <h1>Your Cart</h1>
+</div>
+<div class="w-100 bg-zoolirante-light py-1 shadow"></div>
+
+<div class="container">
+    @foreach (var item in Model.temporaryCart) {
+        <div class="alert alert-info py-1 my-2 w-25">
+            <p class="form-text m-0 pt-1">Item In Cart: @item.Item.ItemName </p>
+            <p class="form-text m-0">Quantity: @item.Quantity</p>
+            <p class="form-text m-0 pb-1">Total Price: @(item.UnitPrice * item.Quantity) </p>
+            <form asp-action="Cart" method="post">
+                <input type="hidden" name="itemToDel" value="@item.ItemId" />
+                <button type="submit" class="btn-sm btn-danger">Delete</button>
+            </form>
+        </div>
+    }
+    <div class="alert alert-info py-1 my-2 w-25">
+        <p class="form-text">Total Cart Price: @ViewBag.TotalCost</p>
+        <br />
+        <button type="submit" class="btn-sm bg-zoolirante">Proceed to Payment</button>
+    </div>
+</div>
