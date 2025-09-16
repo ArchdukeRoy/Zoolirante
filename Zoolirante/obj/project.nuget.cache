@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XvUwgXGsy0M=",
+  "dgSpecHash": "uVo83TAlF6E=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante\\Zoolirante.csproj",
+  "projectFilePath": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nebula PC\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Nebula PC\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

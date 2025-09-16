@@ -7,7 +7,6 @@ obj/".vs/"
 "bin/"
 "obj/"
 Zoolirante/appsettings.json
-Zoolirante/appsettings.json
 Zoolirante/obj/Debug/net8.0/apphost.exe
 Zoolirante/obj/Debug/net8.0/ref/Zoolirante.dll
 Zoolirante/obj/Debug/net8.0/refint/Zoolirante.dll
@@ -34,4 +33,8 @@ Zoolirante/obj/Debug/net8.0/Zoolirante.sourcelink.json
 Zoolirante/obj/project.assets.json
 Zoolirante/obj/project.nuget.cache
 Zoolirante/obj/Zoolirante.csproj.nuget.dgspec.json
-Zoolirante/obj/Zoolirante.csproj.nuget.g.props
+Zoolirante/obj
+Zoolirante/bin
+Zoolirante/.vs
+
+
