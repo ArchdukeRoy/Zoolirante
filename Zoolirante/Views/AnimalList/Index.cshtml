@@ -58,6 +58,16 @@
                                 </button>
                             </form>
                         }
+                        else
+                        {
+                            <form asp-controller="Account" asp-action="Index">
+                                <button type="submit" class="btn btn-dark btn-sm position-absolute top-0 end-0 m-3 d-flex align-items-center justify-content-center"
+                                        style="border-radius: 0.8rem; width: 32px; height: 32px; z-index: 3;"
+                                        title="Sign up to favourite!">
+                                        <i class="bi-heart-fill text-light" style="margin-right: 1px; margin-top: 2px"></i>
+                                </button>
+                            </form>
+                        }
                         <a asp-action="Details" asp-route-id="@a.SpeciesId" style="text-decoration: none; color: inherit;">
                             @if (a.Habitat == "Land")
                             {
