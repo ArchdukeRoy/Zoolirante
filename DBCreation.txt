@@ -304,3 +304,21 @@ INSERT INTO Events (name, description) VALUES
 (N'Animal Enrichment', N'Interactive session showing how animals are given puzzles and toys to stimulate their natural behaviors.'),
 (N'Junior Zookeeper Experience', N'A hands-on educational event where children can try out zookeeper tasks in a safe environment.');
 
+
+SET IDENTITY_INSERT Roles ON;
+INSERT INTO Roles (roleID, roleName)
+VALUES (1000, 'Regular')
+INSERT INTO Roles (roleID, roleName)
+VALUES (1001, 'Admin')
+SET IDENTITY_INSERT Roles OFF;
+
+SET IDENTITY_INSERT People ON;
+INSERT INTO People (personID, firstName, lastName, email)
+VALUES (99999, 'ad', 'min', 'ad.min@gmail.com');
+SET IDENTITY_INSERT People OFF;
+
+INSERT INTO Visitors(visitorID, username, passwordHash, contact, paymentMethod)
+VALUES (99999, 'xxxAdminxxx', 'password', '0499999999', NULL);
+
+INSERT INTO Staff (staffID, mobile, photo, [password], roleID)
+VALUES (99999, '0499999999', NULL, 'password', 1001);

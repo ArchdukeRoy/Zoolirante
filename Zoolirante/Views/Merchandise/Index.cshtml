@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Zoolirante.Models.Merchandise>
+﻿@model Zoolirante.ViewModels.MerchViewModel
 
 @removeTagHelper "Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers"
 
@@ -6,33 +6,31 @@
     ViewData["Title"] = "Merchandise";
 }
 
+@*Welcome On Login*@
+@if (!string.IsNullOrEmpty(Model.DefaultVM.username)) {
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px">
+        @if (Model.DefaultVM.admin == true) {
+            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
+        }
+        <p class="mb-1 fw-light">Welcome, @Model.DefaultVM.username</p>
+        <a asp-action="Cart" class="mb-1 fw-light me-3 text-light"> <i class=" bi bi-cart4 text-light"></i> View Cart</a>
+    </div>
+}
+
 <div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
     <h1>Merchandise</h1>
 </div>
 <div class="w-100 bg-zoolirante-light py-1 shadow"></div>
 
-<!-- create new if you need it
-<p>
-    <a asp-action="Create">Create New</a>
-</p
--->
-
-<hr class="mt-4">
-
-<div class="container mb-4">
-    <div class="row g-4 align-items-end">
+<div class="container my-4">
+    <hr class="my-4 border-2 border-dark opacity-80">
+    <div class="row g-4">
         <!-- Search -->
         <div class="col-12 col-md-6">
             <form asp-action="Index" method="get" class="row gx-2">
-                <div class="col">
-                    <input type="text"
-                           name="searchMerchandise"
-                           class="form-control"
-                           placeholder="Search Merchandise"
-                           value='@ViewData["PresentFilter"]'>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                <div class="input-group">
+                    <input type="text" name="searchMerchandise" class="form-control" placeholder="Search Merchandise" value='@ViewData["PresentFilter"]'>
+                    <button type="submit" class="btn btn-dark">Search</button>
                 </div>
             </form>
         </div>
@@ -40,57 +38,56 @@
         <!-- Filter -->
         <div class="col-12 col-md-6">
             <form asp-action="Index" method="get" class="row gx-2">
-                <div class="col">
+                <div class="input-group">
                     <select name="priceFilter" class="form-select">
                         <option value="" @(ViewData["PresentPriceFilter"] == null ? "selected" : "")>All Prices</option>
                         <option value="low price" @(ViewData["PresentPriceFilter"]?.ToString() == "low price" ? "selected" : "")>Below $20</option>
                         <option value="medium price" @(ViewData["PresentPriceFilter"]?.ToString() == "medium price" ? "selected" : "")>$20–$30</option>
                         <option value="high price" @(ViewData["PresentPriceFilter"]?.ToString() == "high price" ? "selected" : "")>Above $30</option>
                     </select>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-outline-secondary">Filter</button>
+                    <button type="submit" class="btn btn-dark">Filter</button>
                 </div>
             </form>
         </div>
     </div>
+    <hr class="my-4 border-2 border-dark opacity-80">
+    @if (!string.IsNullOrEmpty(ViewBag.NotLoggedIn)) {
+        <div class="alert alert-danger py-1 my-2">
+            @ViewBag.NotLoggedIn
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.ItemAdded)) {
+        <div class="alert alert-info py-1 my-2">
+            @ViewBag.ItemAdded
+        </div>
+    }
 </div>
 
-<hr class="mt-4">
 
 <div class="container" >
-    <div class="row g-4">
-        @foreach (var item in Model)
-        {
+    <div class="row g-2">
+        @foreach (var item in Model.MerchList) {
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0 position-relative product-card text-center">
+                <div class="card h-100 hover-merch border-0 position-relative product-card text-center radius-2">
                     <!-- Merch image -->
-                    <img src="@item.ItemImage"
-                         alt="@item.ItemName"
-                         class="card-img-top"
-                         style="height:220px; object-fit:cover;">
+                    <img src="@item.ItemImage" alt="@item.ItemName" class="card-img-top radius-2" style="height:250px; object-fit: cover;">
 
                     <!-- Orange info section -->
-                    <div class="card-body bg-zoolirante text-center text-white d-flex flex-column justify-content-end p-3">
+                    <div class="card-body text-dark text-center d-flex flex-column justify-content-end p-3">
 
                         <h6 class="fw-bold text-uppercase mb-1">@item.ItemName</h6>
 
-                        <p class="mb-3">@item.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))</p>
+                        <p class="mb-2">@item.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))</p>
 
                         <!-- Add to cart button -->
-                        <form asp-action="AddToCart" method="post" class="d-inline-block position-relative" style="z-index:2;">
+                        <form asp-action="Index" method="post" class="d-inline-block position-relative" style="z-index:2;">
                             <input type="hidden" name="id" value="@item.ItemId" />
-                            @Html.AntiForgeryToken()
-                            <button type="submit" class="btn btn-outline-light w-100">
-                                Add to cart
-                            </button>
+                            <input type="hidden" name="quantity" value="1" />
+                            <button type="submit" class="btn btn-outline-light bg-zoolirante w-100 radius-2">Add to cart</button>
                         </form>
 
                         <!-- card clickable except button -->
-                        <a asp-action="Details"
-                           asp-route-id="@item.ItemId"
-                           class="stretched-link"
-                           aria-label="View @item.ItemName details"></a>
+                        <a asp-action="Details" asp-route-id="@item.ItemId" class="stretched-link" aria-label="View @item.ItemName details"></a>
                     </div>
                 </div>
             </div>

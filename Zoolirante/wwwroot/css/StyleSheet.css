@@ -1,3 +1,19 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.nav-tabs .nav-link:not(.active) {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #fff;
+    color: #000;
+}
+
 /*Overlay form AnimalDetails Cards*/
 .hover-grow {
     transition: transform 0.3s ease;
@@ -526,6 +542,15 @@
 
 .hover-tint:hover {
     opacity: 90%;
+}
+
+.hover-merch {
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+}
+
+.hover-merch:hover {
+    background-color: #FF8C42;
 }
 
 .bg-zoolirante {
