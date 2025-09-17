@@ -7,7 +7,7 @@ public partial class EventRollCall
 {
     public int EventRollCallId { get; set; }
 
-    public DateOnly RollDate { get; set; }
+    public DateOnly? RollDate { get; set; }
 
     public TimeOnly RollTime { get; set; }
 

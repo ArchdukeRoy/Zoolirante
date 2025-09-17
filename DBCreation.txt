@@ -322,3 +322,49 @@ VALUES (99999, 'xxxAdminxxx', 'password', '0499999999', NULL);
 
 INSERT INTO Staff (staffID, mobile, photo, [password], roleID)
 VALUES (99999, '0499999999', NULL, 'password', 1001);
+
+
+
+INSERT INTO ZooKeeper (zookeeperID, [description])
+VALUES (99999, 'Really cool zookeeper');
+
+ALTER TABLE EventRollCall
+ALTER COLUMN rollDate DATE NULL;
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values (NULL, '12:00:00', 99999, 1);
+
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-09-20', '10:30:00', 99999, 2);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-09-27', '10:30:00', 99999, 2);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-10-4', '10:30:00', 99999, 2);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-10-11', '10:30:00', 99999, 2);
+
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-09-20', '15:00:00', 99999, 3);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-09-27', '15:00:00', 99999, 3);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-10-4', '15:00:00', 99999, 3);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-10-11', '15:00:00', 99999, 3);
+
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-09-22', '09:10:00', 99999, 4);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-09-29', '09:10:00', 99999, 4);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-10-6', '09:10:00', 99999, 4);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-10-13', '09:10:00', 99999, 4);
+
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-09-21', '11:00:00', 99999, 5);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-09-28', '09:15:00', 99999, 5);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-10-5', '11:00:00', 99999, 5);
+INSERT INTO EventRollCall (rollDate, rollTime, zookeeperID, eventID)
+Values ('2025-10-12', '09:15:00', 99999, 5);
