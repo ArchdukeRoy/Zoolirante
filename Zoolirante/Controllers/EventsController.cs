@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Zoolirante.Data;
 using Zoolirante.Models;
+using Zoolirante.ViewModels;
+using System.Text.Json; 
 
 namespace Zoolirante.Controllers
 {
@@ -19,11 +21,29 @@ namespace Zoolirante.Controllers
             _context = context;
         }
 
-        // GET: Events
-        public async Task<IActionResult> Index()
+        //GET
+        public async Task<IActionResult> Index(string? category, EventListViewModel vm)
         {
-            return View(await _context.Events.ToListAsync());
+            ViewBag.category = category;
+
+            var events = _context.Events
+                .AsQueryable();
+
+
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                events = events.Where(e => e.Name.Contains(category));
+            }
+
+            vm.Events = events.ToList();
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (!string.IsNullOrEmpty(vmJson))
+            {
+                vm.DefaultVM = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+            }
+            return View(vm);
         }
+
 
         // GET: Events/Details/5
         public async Task<IActionResult> Details(int? id)

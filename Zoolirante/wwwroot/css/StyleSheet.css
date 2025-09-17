@@ -872,3 +872,14 @@ input[type=number]::-webkit-outer-spin-button {
 .bottomsection-link:hover {
         color: grey;
     }
+
+
+.event-img {
+    object-fit: cover;
+    width: 100%;
+    height: 480px; 
+}
+
+#eventTagline {
+    transition: opacity 0.8s ease-in-out;
+}
