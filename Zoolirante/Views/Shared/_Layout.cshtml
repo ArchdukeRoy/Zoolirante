@@ -36,7 +36,7 @@
                             <a class="nav-link" asp-area="" asp-controller="Merchandise" asp-action="Index">Merch</a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="btn text-dark bg-zoolirante-secondary radius-2 mx-2 shadow" asp-area="" asp-controller="Login" asp-action="Create">Become Member</a>
+                            <a class="btn text-dark bg-zoolirante-secondary radius-2 mx-2 shadow" asp-area="" asp-controller="Member" asp-action="Index">Become Member</a>
                         </li>
                         @if (!Context.Session.GetInt32("id").HasValue || Context.Session.GetInt32("id") == 0) {
                             <li class="nav-item me-3">
