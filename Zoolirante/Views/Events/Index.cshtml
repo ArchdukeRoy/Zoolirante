@@ -13,7 +13,7 @@
 
 <section class="container-fluid px-0 mb-4">
     <div class="row g-0 align-items-center hero-row">
-        
+
         <div class="col-12 col-lg-7">
             <img src="@Url.Content("~/images/EventsIndex.jpg")"
                  alt="Events hero"
@@ -34,8 +34,7 @@
     </div>
 </section>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+<script>document.addEventListener("DOMContentLoaded", function () {
         const taglines = [
             " Watch our tigers roar at Feeding Time!",
             " Learn about wildlife at our Conservation Talks.",
@@ -56,37 +55,69 @@
                 index = (index + 1) % taglines.length;
             }, 800);
         }, 4000);
-});
-</script>
+    });</script>
 
+@{
+    string cat = (ViewBag.Category as string) ?? "";
+}
+
+<div class="container mb-4 d-flex justify-content-end">
+    <div class="filter-bar">
+        <span class="filter-label">FILTER BY</span>
+
+        <!-- SHOW ALL -->
+        <a class="filter-pill pill-gold @(string.IsNullOrEmpty(cat) ? "is-active" : "")"
+           href="@Url.Action("Index", new { category = (string?)null })">
+            Show All
+        </a>
+
+         @*FREE EVENTS*@ 
+        <a class="filter-pill pill-blue @(cat=="Free" ? "is-active" : "")"
+           href="@Url.Action("Index", new { category = "Free" })">
+            Past Events
+        </a>
+
+        <!-- MAJOR EVENTS -->
+        <!--<a class="filter-pill pill-orange @(cat=="Major" ? "is-active" : "")"
+           href="@Url.Action("Index", new { category = "Major" })">
+            Major Events
+        </a>-->
+
+        <!-- MEMBER EVENTS -->
+        <!--<a class="filter-pill pill-green @(cat=="Member" ? "is-active" : "")"
+           href="@Url.Action("Index", new { category = "Member" })">
+            Member Events-->
+        </a>
+    </div>
+</div>
 
 <div class="container">
     <div class="row g-4">
         @foreach (var item in eventsList)
-            {
-                string imageUrl;
+        {
+            string imageUrl;
 
-                switch (item.Name)
-                {
-                    case "Feeding Time":
-                        imageUrl = "https://d1dxs113ar9ebd.cloudfront.net/225batonrouge/2021/05/Tigerfeeding.jpg";
-                        break;
-                    case "Conservation Talk":
-                        imageUrl = Url.Content("~/Images/Zookeeper-talk.jpg");
-                        break;
-                    case "Behind the Scenes Tour":
-                        imageUrl = Url.Content("~/Images/Behindthescene.jpg");
-                        break;
-                    case "Animal Enrichment":
-                        imageUrl = Url.Content("~/Images/AnimalEnrichment.jpg");
-                        break;
-                    case "Junior Zookeeper Experience":
-                        imageUrl = Url.Content("~/Images/JuniorZookeeper.jpg");
-                        break;
-                    default:
-                        imageUrl = Url.Content("~/Images/AnimalEnrichment.jpg");
-                        break;
-                }
+            switch (item.Name)
+            {
+                case "Feeding Time":
+                    imageUrl = "https://d1dxs113ar9ebd.cloudfront.net/225batonrouge/2021/05/Tigerfeeding.jpg";
+                    break;
+                case "Conservation Talk":
+                    imageUrl = Url.Content("~/Images/Zookeeper-talk.jpg");
+                    break;
+                case "Behind the Scenes Tour":
+                    imageUrl = Url.Content("~/Images/Behindthescene.jpg");
+                    break;
+                case "Animal Enrichment":
+                    imageUrl = Url.Content("~/Images/AnimalEnrichment.jpg");
+                    break;
+                case "Junior Zookeeper Experience":
+                    imageUrl = Url.Content("~/Images/JuniorZookeeper.jpg");
+                    break;
+                default:
+                    imageUrl = Url.Content("~/Images/AnimalEnrichment.jpg");
+                    break;
+            }
 
             <div class="col-12 col-md-4">
                 <div class="card h-100 shadow-sm border-0">
