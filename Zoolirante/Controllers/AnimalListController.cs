@@ -40,6 +40,8 @@ namespace Zoolirante.Controllers
 
             ViewData["PresentFilter"] = searchAnimal;
 
+            species = species.OrderBy(s => s.Habitat);
+
             vm.SpeciesList = await species.ToListAsync();
             var vmJson = HttpContext.Session.GetString("DefaultVM");
             if (!string.IsNullOrEmpty(vmJson)) {
@@ -51,16 +53,24 @@ namespace Zoolirante.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Like(int id) {
-
-            var faM = new FavouriteAnimal();
-            faM.AnimalId = id;
-            faM.VisitorId = HttpContext.Session.GetInt32("id")!.Value;
             
+            var visId = HttpContext.Session.GetInt32("id")!.Value;
+            var faM = new FavouriteAnimal { AnimalId = id, VisitorId = visId };
+
             if (ModelState.IsValid) {
+                //Add new fa to context
                 _context.Add(faM);
                 await _context.SaveChangesAsync();
-                TempData["Liked"] = "Added to liked list";
-                return RedirectToAction(nameof(Index));
+                
+                var faDT = new FavouriteAnimalDataTransfer {FavAnimalsId = faM.FavAnimalsId, AnimalId = id, VisitorId = visId };
+
+                //Add to fa list in defaultVM
+                var vmJson = HttpContext.Session.GetString("DefaultVM")!;
+                var defaultVM = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+                defaultVM.favouriteAnimals.Add(faDT);
+                HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(defaultVM));
+
+                TempData["Liked"] = "Added " + _context.Species.Where(i => i.SpeciesId == id).Select(i => i.Name).FirstOrDefault() + " to liked list";
             }
 
             return RedirectToAction(nameof(Index));

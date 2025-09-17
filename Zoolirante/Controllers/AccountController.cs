@@ -46,17 +46,20 @@ namespace Zoolirante.Controllers
                 return View();
             }
 
-            var isAdmin = await _context.Staff
-                .Include(s => s.Admin)
-                .FirstOrDefaultAsync(s => s.Admin != null && s.Admin.AdminId == person.PersonId);
-
             _defaultViewModel.id = person.PersonId;
             _defaultViewModel.username = user.Username;
             _defaultViewModel.firstName = person.FirstName;
             _defaultViewModel.lastName = person.LastName;
 
-            if (isAdmin != null) {
-                _defaultViewModel.admin = true;
+            // Staff object instance is not assigned in dbCreation script. The connection is set here. 
+            if (await _context.Staff.Where(i => i.StaffId == person.PersonId).FirstOrDefaultAsync() != null) {
+                person.Staff = await _context.Staff.Where(i => i.StaffId == person.PersonId).FirstOrDefaultAsync();
+            }
+
+            if (person.Staff != null) {
+                if (person.Staff.RoleId == 1001) {
+                    _defaultViewModel.admin = true;
+                }
             } else {
                 _defaultViewModel.admin = false;
             }

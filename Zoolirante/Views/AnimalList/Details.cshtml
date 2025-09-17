@@ -4,51 +4,90 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="mx-auto position-relative" style="max-width:1600px; height:250px; margin-top:-2px;">
+    <img src="/Images/BGAL.jpg" class="w-100 h-100 ALBannerImage" style="object-fit:cover;" />
 
-<div>
-    <h4>Species</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SpeciesDescription)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SpeciesDescription)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Habitat)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Habitat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SpeciesImage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SpeciesImage)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SpeciesImage2)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SpeciesImage2)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EventId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EventId)
-        </dd>
-    </dl>
+    <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
+        <h1 class="fw-bold display-4 ALFadeIn">Animals</h1>
+    </div>
 </div>
-<div>
+
+<div class="bg-dark text-white mx-auto" style="margin-top:-2px; height:400px; max-width:1600px;">
+    <div class="row h-100 g-0">
+        <div class="col-4 d-flex align-items-center justify-content-center">
+            <h1 class="fw-bold display-1 text-center ALFadeIn" style="line-height:1; padding:0 20px;">
+                @Html.DisplayFor(model => model.Name)
+            </h1>
+        </div>
+        <div class="col-8 h-100">
+            <img src="@Model.SpeciesImage" alt="Right"
+                 class="w-100 h-100 AlImage1" style="object-fit:cover;" />
+        </div>
+    </div>
+</div>
+
+<div class="container-lg">
+    <div class="card shadow p-4">
+        <div class="row g-4 align-items-center">
+            <div class="col-6">
+                <h2 class="fw-bold ALFadeIn2">@Model.Name</h2>
+                <hr class="ALFadeIn2">
+                <p class="ALFadeIn2">@Model.SpeciesDescription</p>
+
+                <div style="height:30px;"></div>
+
+                <div class="row row-cols-2 g-3 align-items-end">
+                    <div class="col d-flex flex-column align-items-center">
+                        @if (Model.Habitat == "Land")
+                        {
+                            <img src="/Images/AnimalList/Land.jpg" class="w-25 mb-2 ALFadeIn2" />
+                        }
+                        else if (Model.Habitat == "Sky")
+                        {
+                            <img src="/Images/AnimalList/Sky.jpg" class="w-25 mb-2 ALFadeIn2" />
+                        }
+                        else if (Model.Habitat == "Water")
+                        {
+                            <img src="/Images/AnimalList/Water.jpg" class="w-25 mb-2 ALFadeIn2" />
+                        }
+
+                        <strong class="ALFadeIn2">Habitat:</strong>
+                        <div class="ALFadeIn2">@Model.Habitat</div>
+                    </div>
+                    <div class="col d-flex flex-column align-items-center">
+                        @if (Model.Diet == "Carnivore")
+                        {
+                            <img src="/Images/AnimalList/Carn.jpg" class="w-25 mb-2 ALFadeIn2" />
+                        }
+                        else if (Model.Diet == "Omnivore")
+                        {
+                            <img src="/Images/AnimalList/Omni.jpg" class="w-25 mb-2 ALFadeIn2" />
+                        }
+                        else if (Model.Diet == "Herbivore")
+                        {
+                            <img src="/Images/AnimalList/Herb.png" class="w-25 mb-2 ALFadeIn2" />
+                        }
+
+                        <strong class="ALFadeIn2">Diet:</strong>
+                        <div class="ALFadeIn2">@Model.Diet</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 text-center">
+                <img src=@Model.SpeciesImage2 class="img-fluid rounded shadow-sm ALFadeIn2" style="max-height:400px; object-fit:cover;" />
+            </div>
+            <div>
+                <p></p>
+                <a asp-action="Index" asp-controller="AnimalList" class="btn btn-secondary" style="margin-left: 0px;">
+                    Go Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <div>
     <a asp-action="Edit" asp-route-id="@Model?.SpeciesId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+ *@
