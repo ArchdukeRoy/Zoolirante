@@ -1,15 +1,26 @@
-﻿@model IEnumerable<Zoolirante.Models.Event>
+﻿@model Zoolirante.ViewModels.EventListViewModel
 
 @{
     ViewData["Title"] = "Index";
-    var eventsList = Model?.ToList() ?? new List<Zoolirante.Models.Event>();
+
 }
+
+
+@if (!string.IsNullOrEmpty(Model.DefaultVM.username))
+{
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px">
+        @if (Model.DefaultVM.admin == true)
+        {
+            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
+        }
+        <p class="mb-1 fw-light mx-3">Welcome, @Model.DefaultVM.username</p>
+    </div>
+}
+
 
 <div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
     <h1>Our Events</h1>
 </div>
-
-
 
 <section class="container-fluid px-0 mb-4">
     <div class="row g-0 align-items-center hero-row">
@@ -71,7 +82,7 @@
             Show All
         </a>
 
-         @*FREE EVENTS*@ 
+        @*FREE EVENTS*@
         <a class="filter-pill pill-blue @(cat=="Free" ? "is-active" : "")"
            href="@Url.Action("Index", new { category = "Free" })">
             Past Events
@@ -82,7 +93,6 @@
            href="@Url.Action("Index", new { category = "Major" })">
             Major Events
         </a>-->
-
         <!-- MEMBER EVENTS -->
         <!--<a class="filter-pill pill-green @(cat=="Member" ? "is-active" : "")"
            href="@Url.Action("Index", new { category = "Member" })">
@@ -93,7 +103,7 @@
 
 <div class="container">
     <div class="row g-4">
-        @foreach (var item in eventsList)
+        @foreach (var item in Model.Events)
         {
             string imageUrl;
 
@@ -130,8 +140,16 @@
                             @item.Description
                         </p>
                     </div>
+                    @if (Model.DefaultVM.admin == true)
+                    {
+                        <div class="card-footer text-end">
+                            <a asp-action="Edit" asp-route-id="@item.EventId" class="btn btn-sm btn-dark radius-2">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.EventId" class="btn btn-sm btn-danger radius-2">Delete</a>
+                        </div>
+                    }
                 </div>
             </div>
+            
         }
     </div>
 </div>

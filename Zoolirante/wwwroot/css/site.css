@@ -37,3 +37,44 @@ body {
 .product-card .stretched-link {
     cursor: pointer;
 }
+
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+.filter-pill {
+  --pill: #999;
+  display: inline-block;
+  padding: .6rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--pill);
+  color: var(--pill);
+  background: transparent;
+  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+.filter-pill:hover {
+  box-shadow: 0 0 0 .15rem rgba(0,0,0,.05);
+}
+
+.filter-pill.is-active {
+  background: var(--pill);
+  color: #fff;
+}
+
+.pill-gold   { --pill: #D39A21; }   
+.pill-blue   { --pill: #6C7FB5; }   
+.pill-orange { --pill: #EA951C; }   
+.pill-green  { --pill: #1C7A69; }  
