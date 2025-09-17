@@ -8,7 +8,7 @@
 
 @*Welcome On Login*@
 @if (!string.IsNullOrEmpty(Model.DefaultVM.username)) {
-    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px">
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px; z-index: 4;">
         @if (Model.DefaultVM.admin == true) {
             <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
         }
@@ -30,7 +30,7 @@
             <form asp-action="Index" method="get" class="row gx-2">
                 <div class="input-group">
                     <input type="text" name="searchMerchandise" class="form-control" placeholder="Search Merchandise" value='@ViewData["PresentFilter"]'>
-                    <button type="submit" class="btn btn-dark">Search</button>
+                    <button type="submit" class="btn btn-dark" style="z-index: 1;">Search</button>
                 </div>
             </form>
         </div>
@@ -45,7 +45,7 @@
                         <option value="medium price" @(ViewData["PresentPriceFilter"]?.ToString() == "medium price" ? "selected" : "")>$20–$30</option>
                         <option value="high price" @(ViewData["PresentPriceFilter"]?.ToString() == "high price" ? "selected" : "")>Above $30</option>
                     </select>
-                    <button type="submit" class="btn btn-dark">Filter</button>
+                    <button type="submit" class="btn btn-dark" style="z-index: 1;">Filter</button>
                 </div>
             </form>
         </div>
@@ -83,12 +83,18 @@
                         <form asp-action="Index" method="post" class="d-inline-block position-relative" style="z-index:2;">
                             <input type="hidden" name="id" value="@item.ItemId" />
                             <input type="hidden" name="quantity" value="1" />
-                            <button type="submit" class="btn btn-outline-light bg-zoolirante w-100 radius-2">Add to cart</button>
+                            <button type="submit" class="btn btn-outline-light bg-zoolirante w-100 radius-2" style="z-index: 0;">Add to cart</button>
                         </form>
 
                         <!-- card clickable except button -->
                         <a asp-action="Details" asp-route-id="@item.ItemId" class="stretched-link" aria-label="View @item.ItemName details"></a>
                     </div>
+                    @if (Model.DefaultVM.admin == true) {
+                        <div class="card-footer text-end" style="z-index: 2;">
+                            <a asp-action="Edit" asp-route-id="@item.ItemId" class="btn btn-sm btn-dark radius-2">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-sm btn-danger radius-2">Delete</a>
+                        </div>
+                    }
                 </div>
             </div>
         }
