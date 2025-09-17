@@ -1,0 +1,79 @@
+﻿@model Zoolirante.ViewModels.AccountViewModel
+
+<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
+    <h1>MyAccount</h1>
+</div>
+<div class="w-100 bg-zoolirante-light py-1 shadow"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="alert alert-info mt-3 py-2 me-0">
+                @*Username*@
+                <h5 class="h6 mb-1 fw-light">Username</h5>
+                <div class="input-group-sm d-flex align-items-center mb-2">
+                    <input type="text" value="@Model.Visitor.Username" class="form-control" style="max-width: 250px" readonly />
+                </div>
+                @*First Name*@
+                <h5 class="h6 mb-1 fw-light">First Name</h5>
+                <div class="input-group-sm d-flex align-items-center mb-2">
+                    <input type="text" value="@Model.Person.FirstName" class="form-control" style="max-width: 250px" readonly />
+                </div>
+                @*Last Name*@
+                <h5 class="h6 mb-1 fw-light">Last Name</h5>
+                <div class="input-group-sm d-flex align-items-center mb-2">
+                    <input type="text" value="@Model.Person.LastName" class="form-control" style="max-width: 250px" readonly />
+                </div>
+                @*Email*@
+                <h5 class="h6 mb-1 fw-light">Email</h5>
+                <div class="input-group-sm d-flex align-items-center mb-2">
+                    <input id="emailField" type="password"
+                           value="@Model.Person.Email"
+                           class="form-control" style="max-width: 250px" readonly />
+                    <button type="button" class="btn btn-dark" onclick="toggleField('emailField')"><i class="bi bi-eye text-white"></i></button>
+                </div>
+                @*Password*@
+                <h5 class="h6 mb-1 fw-light">Password</h5>
+                <div class="input-group-sm d-flex align-items-center mb-2">
+                    <input id="passwordField" type="password"
+                           value="@Model.Visitor.PasswordHash"
+                           class="form-control" style="max-width: 250px" readonly />
+                    <button type="button" class="btn btn-dark" onclick="toggleField('passwordField')"><i class="bi bi-eye text-white"></i></button>
+                </div>
+                @*Phone*@
+                <h5 class="h6 mb-1 fw-light">Phone</h5>
+                <div class="input-group-sm d-flex align-items-center mb-2">
+                    <input id="phoneField" type="password"
+                           value="@Model.Visitor.Contact"
+                           class="form-control" style="max-width: 250px" readonly />
+                    <button type="button" class="btn btn-dark" onclick="toggleField('phoneField')"><i class="bi bi-eye text-white"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info mt-3 py-2 ms-0">
+                Favourite Animals: 
+                @foreach (var item in Model.DefaultVM.favouriteAnimals) {
+                    <li class="form-text">@item.AnimalName</li>
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info mt-3 py-2 me-0">
+                Purchase History:
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info mt-3 py-2 ms-0">
+                Visit History:
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function toggleField(fieldId) {
+        const field = document.getElementById(fieldId);
+        field.type = field.type === "password" ? "text" : "password";
+    }
+</script>

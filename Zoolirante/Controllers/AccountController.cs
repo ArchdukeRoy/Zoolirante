@@ -70,12 +70,20 @@ namespace Zoolirante.Controllers
             _defaultViewModel.favouriteAnimals = faDB.Select(f => new FavouriteAnimalDataTransfer {
                 FavAnimalsId = f.FavAnimalsId,
                 AnimalId = f.AnimalId,
-                VisitorId = f.VisitorId
+                VisitorId = f.VisitorId,
+                AnimalName = _context.Species.FirstOrDefault(i => i.SpeciesId == f.AnimalId)?.Name
             }).ToList();
 
             HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(_defaultViewModel));
             HttpContext.Session.SetInt32("id", _defaultViewModel.id);
             return RedirectToAction("Index", "Home"); 
+        }
+
+        public IActionResult Logout() {
+            HttpContext.Session.Remove("DefaultVM");
+            HttpContext.Session.Remove("id");
+            TempData["LoggedOut"] = "Successfully Logged Out";
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Account/Create
@@ -106,6 +114,21 @@ namespace Zoolirante.Controllers
             }
             ViewBag.Error = string.Join("<br/>", errors);
 
+            return View(vm);
+        }
+
+        public async Task<IActionResult> MyAccount(AccountViewModel vm) {
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (!string.IsNullOrEmpty(vmJson)) {
+                vm.DefaultVM = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+            } else {
+                TempData["SignInFirst"] = "Sign in to access MyAccount features. ";
+                return RedirectToAction(nameof(Index));
+            }
+
+
+            vm.Person = _context.People.FirstOrDefault(i => i.PersonId == vm.DefaultVM.id)!;
+            vm.Visitor = _context.Visitors.FirstOrDefault(i => i.VisitorId == vm.DefaultVM.id)!;
             return View(vm);
         }
 
