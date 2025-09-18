@@ -15,11 +15,43 @@
 }
 
 @*Banner*@
-<div class="mx-0" style="width: 100vw; text-align: center; margin-bottom: 40px; margin-top: -2px;">
-    <img src="/Images/./panda-banner.jpg"
-         alt="Banner Image"
-         style="width: 100%; height: auto; max-height: 600px; object-fit: contain;">
+<div id="hpSlides" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 80vh; object-fit: cover;">
+                <source src="/Images/hpVids/home.mp4" type="video/mp4">
+            </video>
+        </div>
+
+                <div class="carousel-item">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 80vh; object-fit: cover;">
+                <source src="/Images/hpVids/animals.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="carousel-item">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 80vh; object-fit: cover;">
+                <source src="/Images/hpVids/events.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="carousel-item">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 80vh; object-fit: cover;">
+                <source src="/Images/hpVids/merch.mp4" type="video/mp4">
+            </video>
+        </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#hpSlides" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hpSlides" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
 </div>
+
 
 <div class="container-fluid">
     <div class="row">
