@@ -63,57 +63,71 @@
     </button>
 </div>
 
-@*Welcome On Login*@
-@if (!string.IsNullOrEmpty(Model.username)) {
-    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px; z-index: 1;">
-        @if (Model.admin == true) {
-            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
-        }
-        <p class="mb-1 fw-light mx-3">Welcome, @Model.username</p>
-    </div>
-}
 
 <br>
 
+
 <div class="container-fluid">
-    <div class="row">
+    <div class="row g-0">
 
         <div class="col-sm-4">
-            <div class="card card-tickets radius-2">
-                <img class="card-img-top radius-2" style="height: 450px" src="/Images/zoo-ticket.png">
-                <div class="card-body">
-                    <h5 class="card-title"> Be a part of something amazing</h5>
-                    <p class="card-text"> Get your tickets now!</p> <br />
-                    <a class="btn btn-primary custom-btn-ticket" href="">Buy Now</a>
+            <div class="card card-tickets h-100">
+                <div class="img-dark-sides">
+                    <img src="/Images/zoo-ticket.png" alt="Tickets" class="card-img-top" style="height: 450px;">
                 </div>
-            </div>
-         </div>
-
-        <div class="col-sm-4">
-            <div class="card card-merchandise radius-2">
-                    <img class="card-img-top radius-2" style="height: 450px; object-fit: cover;" src="https://azwp-az-prod-1-ap-southeast-2.s3.amazonaws.com/uploads/2024/03/9249-Where-to-Shop-Web-Assets_updated_TH-elephantasia.jpg" />
-                    <div class="card-body">
-                    <h5 class="card-title">Gear up in style</h5>
-                    <p class="card-text">Get your hands on our limited-edition merchandise before its gone</p>
-                    <a class="btn btn-primary custom-btn" href="/Merchandise/Index"> Learn more</a>
-                     </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">Be a part of something amazing</h5>
+                    <p class="card-text">Get your tickets now!</p>
+                    <div class="row">
+                        <div class="col-4">
+                            <a class="btn btn-primary custom-btn-ticket mt-auto" href="">Buy Now</a>
+                        </div>
+                        <div class="col-8"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="col-sm-4">
-            <div class="card card-events radius-2">
-                <img class="card-img-top radius-2" style="height: 450px; object-fit: cover;" src="https://www.mandai.com/content/dam/mandai/singapore-zoo/things-to-do/zebra-feeding-900x600.jpg" />
-                <div class="card-body">
-                    <h5 class="card-title">Events </h5>
-                    <p class="card-text">Want more than just a visit to the zoo, discover our interesting events and encounters with animals</p>
-                     <a class="btn btn-primary custom-btn-event" href=""> Learn more</a>
+            <div class="card card-merchandise h-100">
+                <div class="img-dark-sides">
+                    <img src="https://azwp-az-prod-1-ap-southeast-2.s3.amazonaws.com/uploads/2024/03/9249-Where-to-Shop-Web-Assets_updated_TH-elephantasia.jpg"
+                         alt="Merchandise" class="card-img-top" style="height: 450px; object-fit: cover;">
+                </div>
+                <div class="card-body d-flex flex-column" style="color: black;">
+                    <h5 class="card-title fw-bold">Gear up in style</h5>
+                    <p class="card-text">Get your hands on our limited-edition merchandise before it’s gone</p>
+                    <div class="row">
+                        <div class="col-4">
+                            <a class="btn btn-primary custom-btn mt-auto" href="/Merchandise/Index">Learn more</a>
+                        </div>
+                        <div class="col-8"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card card-events h-100">
+                <div class="img-dark-sides">
+                    <img src="https://www.mandai.com/content/dam/mandai/singapore-zoo/things-to-do/zebra-feeding-900x600.jpg"
+                         alt="Events" class="card-img-top" style="height: 450px; object-fit: cover;">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">Events</h5>
+                    <p class="card-text">Discover our interesting events and encounters with animals</p>
+                    <div class="row">
+                        <div class="col-4">
+                            <a class="btn btn-primary custom-btn-event mt-auto" href="">Learn more</a>
+                        </div>
+                        <div class="col-8"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
-
 
 
 <section class="animal-page-section" style="margin-top: 40px">

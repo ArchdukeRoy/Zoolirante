@@ -19,8 +19,20 @@ input[type=number]::-webkit-outer-spin-button {
     margin-top: -2px;
 }
 
+@keyframes carFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 #hpSlides {
     position: relative;
+    opacity: 0;
+    animation: carFadeIn 1.5s ease forwards;
 }
 
 #hpSlides::after {
@@ -42,7 +54,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 #hpSlides .carousel-caption {
-    /*Make text bigger*/
+/*Make text bigger*/
     position: absolute;
     bottom: 20px;
     z-index: 3;
@@ -53,17 +65,16 @@ input[type=number]::-webkit-outer-spin-button {
     transition: opacity 1s ease, transform 1s ease;
 }
 
-/*Unhide text when its active*/
+/*Unhide text when active*/
 #hpSlides .carousel-item.active .carousel-caption {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Base style for icons */
 #hpSlides .carousel-control-prev-icon,
 #hpSlides .carousel-control-next-icon {
-  filter: brightness(0) invert(1);       /* force arrow white */
-  background-color: rgba(0,0,0,0.5);     /* dark circle */
+  filter: brightness(0) invert(1);
+  background-color: rgba(0,0,0,0.5);
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -73,19 +84,19 @@ input[type=number]::-webkit-outer-spin-button {
   transition: transform 0.3s ease;
 }
 
-/* Grow only on hover */
+/* Grow on hover */
 #hpSlides .carousel-control-prev:hover .carousel-control-prev-icon,
 #hpSlides .carousel-control-next:hover .carousel-control-next-icon {
   transform: scale(1.2);
   box-shadow: 0 0 10px rgba(255,255,255,0.9);
 }
 
-/* Active (click) — keep same colors, just snap back */
+/* go back to colour after click */
 #hpSlides .carousel-control-prev:active .carousel-control-prev-icon,
 #hpSlides .carousel-control-next:active .carousel-control-next-icon {
   transform: scale(1);
-  background-color: rgba(0,0,0,0.5);   /* keep it dark */
-  filter: brightness(0) invert(1);     /* keep arrow white */
+  background-color: rgba(0,0,0,0.5); 
+  filter: brightness(0) invert(1);
 }
 
 /*Overlay form AnimalDetails Cards*/
@@ -386,30 +397,30 @@ input[type=number]::-webkit-outer-spin-button {
         color: #FF8C42;
     }
 
-.card.card-tickets {
-    background-color: #6b8e23 !important;
-    outline-color: none;
-    border: none !important;
-    height: 650px;
-}
-
-.card-body {
-    color: white;
-}
-
-.card.card-merchandise {
+/* Homepage: cards*/
+/* Ticket Card */
+/*.card.card-tickets {
     background-color: #FF8C42 !important;
-    outline-color: none;
     border: none !important;
     height: 650px;
-}
+    color: white;*/ /* text inside will be white */
+/*}*/
 
-.card.card-events {
-    background-color: #a0522d !important;
-    outline-color: none;
-    border: none !important;
+/* Merchandise Card */
+/*.card.card-merchandise {
+    background-color: #4CAF50 !important;*/ /* example green */
+    /*border: none !important;
     height: 650px;
-}
+    color: white;
+}*/
+
+/* Events Card */
+/*.card.card-events {
+    background-color: #1E90FF !important;*/ /* example blue */
+    /*border: none !important;
+    height: 650px;
+    color: white;
+}*/
 
 .card-title {
     margin-bottom: 30px;
@@ -721,7 +732,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .card.card-tickets {
-    background-color: #6b8e23 !important;
+    background-color: rgba(0, 146, 70, 0.8) !important;
     outline-color: none;
     border: none !important;
     height: 650px;
@@ -731,15 +742,16 @@ input[type=number]::-webkit-outer-spin-button {
     color: white;
 }
 
+/*Home page cards*/
 .card.card-merchandise {
-    background-color: #FF8C42 !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
     outline-color: none;
     border: none !important;
     height: 650px;
 }
 
 .card.card-events {
-    background-color: #a0522d !important;
+    background-color: rgba(206, 43, 55, 0.8) !important;
     outline-color: none;
     border: none !important;
     height: 650px;
@@ -760,28 +772,47 @@ input[type=number]::-webkit-outer-spin-button {
     height: 460px;
 }
 
-.custom-btn-ticket {
-    background-color: indianred !important;
-    border: none !important;
-    border-radius: 16px;
-    font-weight: bold;
-    font-family: Arial;
+/* Keyframes for fade */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.custom-btn-event {
-    background-color: darkslategrey !important;
-    border: none !important;
-    border-radius: 16px;
-    font-weight: bold;
-    font-family: Arial;
+/*fade animation call*/
+.card-tickets,
+.card-merchandise,
+.card-events {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 2s ease forwards;
 }
 
+/*Home page buttons*/
+.custom-btn-ticket,
+.custom-btn-event,
 .custom-btn {
-    background-color: indianred !important;
+    background-color: rgba(128, 128, 128, 0.8) !important; 
     border: none !important;
     border-radius: 16px;
     font-weight: bold;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
+    color: white !important;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-btn-ticket:hover,
+.custom-btn-event:hover,
+.custom-btn:hover {
+    background-color: #555 !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255,255,255,0.9);
 }
 
 .animalpage-btn {
@@ -797,6 +828,38 @@ input[type=number]::-webkit-outer-spin-button {
     grid-template-columns: 1fr 1fr;
     min-height: 100vh;
     width: 100%;
+}
+
+/*Image dark sides*/
+.img-dark-sides {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.img-dark-sides img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-dark-sides::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.6) 0%,
+        transparent 10%,
+        transparent 90%,
+        rgba(0,0,0,0.6) 100%
+    );
+    pointer-events: none;
 }
 
 /* MAP SECTION STYLES */
