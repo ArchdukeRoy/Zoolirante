@@ -4,44 +4,55 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*Welcome On Login*@
-@if (!string.IsNullOrEmpty(Model.username)) {
-    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px; z-index: 1;">
-        @if (Model.admin == true) {
-            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
-        }
-        <p class="mb-1 fw-light mx-3">Welcome, @Model.username</p>
-    </div>
-}
-
 @*Banner*@
-<div id="hpSlides" class="carousel slide" data-bs-ride="carousel">
+<div id="hpSlides" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4500">
     <div class="carousel-inner">
 
         <div class="carousel-item active">
-            <video autoplay muted loop playsinline style="width: 100vw; height: 80vh; object-fit: cover;">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 50vh; object-fit: cover;">
                 <source src="/Images/hpVids/home.mp4" type="video/mp4">
             </video>
+            <div class="carousel-caption d-none d-md-block z-5">
+                <h1 class="fw-bold">Welcome to Zoolirante!</h1>
+                <p class="fs-4">Discover animals, events, and more!</p>
+            </div>
         </div>
-
-                <div class="carousel-item">
-            <video autoplay muted loop playsinline style="width: 100vw; height: 80vh; object-fit: cover;">
-                <source src="/Images/hpVids/animals.mp4" type="video/mp4">
-            </video>
+            <div class="carousel-item">
+            <a asp-area="" asp-controller="AnimalList" asp-action="Index">
+                <video autoplay muted loop playsinline style="width: 100vw; height: 50vh; object-fit: cover;">
+                    <source src="/Images/hpVids/animals.mp4" type="video/mp4">
+                </video>
+                <div class="carousel-caption d-none d-md-block z-5">
+                    <h1 class="fw-bold">Animal Showcase</h1>
+                    <p class="fs-4"> Roar into adventure!! explore learn and play!</p>
+                </div>
+            </a>
         </div>
 
         <div class="carousel-item">
-            <video autoplay muted loop playsinline style="width: 100vw; height: 80vh; object-fit: cover;">
-                <source src="/Images/hpVids/events.mp4" type="video/mp4">
-            </video>
+            <a asp-area="" asp-controller="Events" asp-action="Index">
+                <video autoplay muted loop playsinline style="width: 100vw; height: 50vh; object-fit: cover;">
+                    <source src="/Images/hpVids/events.mp4" type="video/mp4">
+                </video>
+                <div class="carousel-caption d-none d-md-block z-5">
+                    <h1 class="fw-bold">Events</h1>
+                    <p class="fs-4"> Watch our tigers roar at Feeding Time!</p>
+                </div>
+            </a>
         </div>
 
         <div class="carousel-item">
-            <video autoplay muted loop playsinline style="width: 100vw; height: 80vh; object-fit: cover;">
+            <a asp-area="" asp-controller="Events" asp-action="Index">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 50vh; object-fit: cover;">
                 <source src="/Images/hpVids/merch.mp4" type="video/mp4">
             </video>
-        </div>
+            <div class="carousel-caption d-none d-md-block z-5">
+                <h1 class="fw-bold">Shop</h1>
+                <p class="fs-4">Come pick up a memory and never forget your time </p>
+            </div>
+            </a>
 
+        </div>
     </div>
 
     <button class="carousel-control-prev" type="button" data-bs-target="#hpSlides" data-bs-slide="prev">
@@ -52,6 +63,17 @@
     </button>
 </div>
 
+@*Welcome On Login*@
+@if (!string.IsNullOrEmpty(Model.username)) {
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px; z-index: 1;">
+        @if (Model.admin == true) {
+            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
+        }
+        <p class="mb-1 fw-light mx-3">Welcome, @Model.username</p>
+    </div>
+}
+
+<br>
 
 <div class="container-fluid">
     <div class="row">
