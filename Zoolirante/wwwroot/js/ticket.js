@@ -158,3 +158,33 @@ function setupButtons() {
     if (cartBtn) cartBtn.onclick = function () { showCart(); };
 }
 
+// Select time
+function selectTime(element) {
+    var selected = document.querySelector('.time-slot.selected');
+    if (selected) {
+        selected.classList.remove('selected');
+    }
+
+    element.classList.add('selected');
+    selectedTime = element.textContent;
+    console.log('Selected time:', selectedTime);
+}
+
+// Change guest counts
+function changeAdults(change) {
+    adults = Math.max(0, adults + change);
+    document.getElementById('adult-count').textContent = adults;
+    updatePrices();
+}
+
+function changeChildren(change) {
+    children = Math.max(0, children + change);
+    document.getElementById('child-count').textContent = children;
+    updatePrices();
+}
+
+function changeConcessions(change) {
+    concessions = Math.max(0, concessions + change);
+    document.getElementById('concession-count').textContent = concessions;
+    updatePrices();
+}
