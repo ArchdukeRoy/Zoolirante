@@ -733,13 +733,19 @@ input[type=number]::-webkit-outer-spin-button {
 
 .card.card-tickets {
     background-color: rgba(0, 146, 70, 0.8) !important;
+    color: white;
     outline-color: none;
     border: none !important;
     height: 650px;
 }
 
-.card-body{
+/*.card-body{
     color: white;
+}
+*/
+
+.card-merchandise .card-body {
+    color: black;
 }
 
 /*Home page cards*/
@@ -752,6 +758,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .card.card-events {
     background-color: rgba(206, 43, 55, 0.8) !important;
+    color: white;
     outline-color: none;
     border: none !important;
     height: 650px;
