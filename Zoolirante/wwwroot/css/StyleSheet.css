@@ -1027,3 +1027,20 @@ input[type=number]::-webkit-outer-spin-button {
 #eventTagline {
     transition: opacity 0.8s ease-in-out;
 }
+
+@keyframes titleFade {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.title-fade {
+    opacity: 0;
+    animation: titleFade 1s ease-out forwards;
+}
