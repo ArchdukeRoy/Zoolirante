@@ -206,3 +206,65 @@ function updatePrices() {
     }
 }
 
+// Buy day ticket
+function buyDay() {
+    if (!selectedDate) {
+        alert('Please select a date');
+        return;
+    }
+    if (!selectedTime) {
+        alert('Please select a time');
+        return;
+    }
+    if (adults + children + concessions === 0) {
+        alert('Please select guests');
+        return;
+    }
+
+    var price = (adults * dayAdult) + (children * dayChild) + (concessions * dayConcession);
+
+    cart.push({
+        type: 'Day Ticket',
+        date: selectedDate,
+        time: selectedTime,
+        adults: adults,
+        children: children,
+        concessions: concessions,
+        price: price
+    });
+
+    updateCart();
+    alert('Day Ticket added! $' + price.toFixed(2));
+}
+
+// Buy unlimited pass
+function buyUnlimited() {
+    if (!selectedDate) {
+        alert('Please select a date');
+        return;
+    }
+    if (!selectedTime) {
+        alert('Please select a time');
+        return;
+    }
+    if (adults + children + concessions === 0) {
+        alert('Please select guests');
+        return;
+    }
+
+    var price = (adults * unlimitedAdult) + (children * unlimitedChild) + (concessions * unlimitedConcession);
+
+    cart.push({
+        type: 'Unlimited Pass',
+        date: selectedDate,
+        time: selectedTime,
+        adults: adults,
+        children: children,
+        concessions: concessions,
+        price: price
+    });
+
+    updateCart();
+    alert('Unlimited Pass added! $' + price.toFixed(2));
+}
+
