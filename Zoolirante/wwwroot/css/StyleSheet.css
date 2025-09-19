@@ -1200,12 +1200,12 @@ input[type=number]::-webkit-outer-spin-button {
 /* Cart */
 .cart-container {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 100px;
+    right: 10px;
 }
 
 .cart-btn {
-    background-color: #d2691e;
+    background-color: darkorange;
     color: white;
     border: 3px solid #8b4513;
     padding: 15px;

@@ -30,7 +30,7 @@ function createCalendar() {
     if (!grid) return;
 
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
+    
     // Update month display
     if (monthDisplay) {
         monthDisplay.textContent = months[currentMonth] + ' ' + currentYear;
@@ -45,7 +45,7 @@ function createCalendar() {
     // Get today's date
     var today = new Date();
     today.setHours(0, 0, 0, 0); // Reset time to midnight for accurate comparison
-
+    
     // Get days in current month
     var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
@@ -59,7 +59,7 @@ function createCalendar() {
         // Create date object for this day
         var dayDate = new Date(currentYear, currentMonth, day);
         dayDate.setHours(0, 0, 0, 0);
-
+        
         // Check if this day is in the past
         var isPast = dayDate < today;
 
@@ -71,9 +71,9 @@ function createCalendar() {
 
         grid.appendChild(dayDiv);
     }
-
+    
     // Add click event to whole grid
-    grid.onclick = function (e) {
+    grid.onclick = function(e) {
         if (e.target.classList.contains('available')) {
             selectDate(e.target);
         }
@@ -98,9 +98,9 @@ function setupButtons() {
     // Calendar navigation buttons
     var prevBtn = document.querySelector('.prev-btn');
     var nextBtn = document.querySelector('.next-btn');
-
+    
     if (prevBtn) {
-        prevBtn.onclick = function () {
+        prevBtn.onclick = function() {
             if (currentMonth === 0) {
                 currentMonth = 11;
                 currentYear--;
@@ -110,9 +110,9 @@ function setupButtons() {
             createCalendar();
         };
     }
-
+    
     if (nextBtn) {
-        nextBtn.onclick = function () {
+        nextBtn.onclick = function() {
             if (currentMonth === 11) {
                 currentMonth = 0;
                 currentYear++;
