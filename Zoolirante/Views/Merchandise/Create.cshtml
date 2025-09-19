@@ -4,45 +4,50 @@
     ViewData["Title"] = "Create";
     
 }
-@await Html.PartialAsync("Search")
 
-<h1>Create</h1>
-
-<h4>Merchandise</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ItemName" class="control-label"></label>
-                <input asp-for="ItemName" class="form-control" />
-                <span asp-validation-for="ItemName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ItemDescription" class="control-label"></label>
-                <input asp-for="ItemDescription" class="form-control" />
-                <span asp-validation-for="ItemDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ItemCost" class="control-label"></label>
-                <input asp-for="ItemCost" class="form-control" />
-                <span asp-validation-for="ItemCost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ItemImage" class="control-label"></label>
-                <input asp-for="ItemImage" class="form-control" />
-                <span asp-validation-for="ItemImage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
+    <h1>Create Merchandise</h1>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container py-4">
+
+    <form asp-action="Create" method="post" class="card shadow-sm border-0 p-4">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Merchandise Section -->
+        <h4 class="mb-3">Merchandise Details</h4>
+
+        <div class="form-group mb-3">
+            <span>Item Name</span>
+            <input asp-for="ItemName" class="form-control" placeholder="e.g., Zoo T-shirt" />
+            <span asp-validation-for="ItemName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <span>Item Description</span>
+            <input asp-for="ItemDescription" class="form-control" placeholder="Short description..." />
+            <span asp-validation-for="ItemDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <span>Item Cost</span>
+            <input asp-for="ItemCost" class="form-control" placeholder="Enter price in $" />
+            <span asp-validation-for="ItemCost" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <span>Item Image</span>
+            <input asp-for="ItemImage" class="form-control" placeholder="Image URL or path" />
+            <span asp-validation-for="ItemImage" class="text-danger"></span>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4">Create</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
