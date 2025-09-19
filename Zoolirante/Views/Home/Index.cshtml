@@ -4,63 +4,130 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*Welcome On Login*@
-@if (!string.IsNullOrEmpty(Model.username)) {
-    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px; z-index: 1;">
-        @if (Model.admin == true) {
-            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
-        }
-        <p class="mb-1 fw-light mx-3">Welcome, @Model.username</p>
-    </div>
-}
-
 @*Banner*@
-<div class="mx-0" style="width: 100vw; text-align: center; margin-bottom: 40px; margin-top: -2px;">
-    <img src="/Images/./panda-banner.jpg"
-         alt="Banner Image"
-         style="width: 100%; height: auto; max-height: 600px; object-fit: contain;">
+<div id="hpSlides" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4500">
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 45vh; object-fit: cover;">
+                <source src="/Images/hpVids/home.mp4" type="video/mp4">
+            </video>
+            <div class="carousel-caption d-none d-md-block z-5">
+                <h1 class="fw-bold">Welcome to Zoolirante!</h1>
+                <p class="fs-4">Discover animals, events, and more!</p>
+            </div>
+        </div>
+            <div class="carousel-item">
+            <a asp-area="" asp-controller="AnimalList" asp-action="Index">
+                <video autoplay muted loop playsinline style="width: 100vw; height: 45vh; object-fit: cover;">
+                    <source src="/Images/hpVids/animals.mp4" type="video/mp4">
+                </video>
+                <div class="carousel-caption d-none d-md-block z-5">
+                    <h1 class="fw-bold">Animal Showcase</h1>
+                    <p class="fs-4"> Roar into adventure!! explore learn and play!</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="carousel-item">
+            <a asp-area="" asp-controller="Events" asp-action="Index">
+                <video autoplay muted loop playsinline style="width: 100vw; height: 45vh; object-fit: cover;">
+                    <source src="/Images/hpVids/events.mp4" type="video/mp4">
+                </video>
+                <div class="carousel-caption d-none d-md-block z-5">
+                    <h1 class="fw-bold">Events</h1>
+                    <p class="fs-4"> Watch our tigers roar at Feeding Time!</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="carousel-item">
+            <a asp-area="" asp-controller="Events" asp-action="Index">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 45vh; object-fit: cover;">
+                <source src="/Images/hpVids/merch.mp4" type="video/mp4">
+            </video>
+            <div class="carousel-caption d-none d-md-block z-5">
+                <h1 class="fw-bold">Shop</h1>
+                <p class="fs-4">Come pick up a memory and never forget your time </p>
+            </div>
+            </a>
+
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#hpSlides" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hpSlides" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
 </div>
+
+
+
+
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row g-0">
 
         <div class="col-sm-4">
-            <div class="card card-tickets radius-2">
-                <img class="card-img-top radius-2" style="height: 450px" src="/Images/zoo-ticket.png">
-                <div class="card-body">
-                    <h5 class="card-title"> Be a part of something amazing</h5>
-                    <p class="card-text"> Get your tickets now!</p> <br />
-                    <a class="btn btn-primary custom-btn-ticket" href="">Buy Now</a>
+            <div class="card card-tickets h-100">
+                <div class="img-dark-sides">
+                    <img src="/Images/zoo-ticket.png" alt="Tickets" class="card-img-top" style="height: 450px;">
                 </div>
-            </div>
-         </div>
-
-        <div class="col-sm-4">
-            <div class="card card-merchandise radius-2">
-                    <img class="card-img-top radius-2" style="height: 450px; object-fit: cover;" src="https://azwp-az-prod-1-ap-southeast-2.s3.amazonaws.com/uploads/2024/03/9249-Where-to-Shop-Web-Assets_updated_TH-elephantasia.jpg" />
-                    <div class="card-body">
-                    <h5 class="card-title">Gear up in style</h5>
-                    <p class="card-text">Get your hands on our limited-edition merchandise before its gone</p>
-                    <a class="btn btn-primary custom-btn" href="/Merchandise/Index"> Learn more</a>
-                     </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">Be a part of something amazing</h5>
+                    <p class="card-text">Get your tickets now!</p>
+                    <div class="row">
+                        <div class="col-4">
+                            <a class="btn btn-primary custom-btn-ticket mt-auto" href="">Buy Now</a>
+                        </div>
+                        <div class="col-8"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="col-sm-4">
-            <div class="card card-events radius-2">
-                <img class="card-img-top radius-2" style="height: 450px; object-fit: cover;" src="https://www.mandai.com/content/dam/mandai/singapore-zoo/things-to-do/zebra-feeding-900x600.jpg" />
-                <div class="card-body">
-                    <h5 class="card-title">Events </h5>
-                    <p class="card-text">Want more than just a visit to the zoo, discover our interesting events and encounters with animals</p>
-                     <a class="btn btn-primary custom-btn-event" href=""> Learn more</a>
+            <div class="card card-merchandise h-100">
+                <div class="img-dark-sides">
+                    <img src="https://azwp-az-prod-1-ap-southeast-2.s3.amazonaws.com/uploads/2024/03/9249-Where-to-Shop-Web-Assets_updated_TH-elephantasia.jpg"
+                         alt="Merchandise" class="card-img-top" style="height: 450px; object-fit: cover;">
+                </div>
+                <div class="card-body d-flex flex-column" style="color: black;">
+                    <h5 class="card-title fw-bold">Gear up in style</h5>
+                    <p class="card-text">Get your hands on our limited-edition merchandise before it’s gone</p>
+                    <div class="row">
+                        <div class="col-4">
+                            <a class="btn btn-primary custom-btn mt-auto" href="/Merchandise/Index">Learn more</a>
+                        </div>
+                        <div class="col-8"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card card-events h-100">
+                <div class="img-dark-sides">
+                    <img src="https://www.mandai.com/content/dam/mandai/singapore-zoo/things-to-do/zebra-feeding-900x600.jpg"
+                         alt="Events" class="card-img-top" style="height: 450px; object-fit: cover;">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">Events</h5>
+                    <p class="card-text">Discover our interesting events and encounters with animals</p>
+                    <div class="row">
+                        <div class="col-4">
+                            <a class="btn btn-primary custom-btn-event mt-auto" href="">Learn more</a>
+                        </div>
+                        <div class="col-8"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
-
-
 
 <section class="animal-page-section" style="margin-top: 40px">
 

@@ -14,6 +14,91 @@ input[type=number]::-webkit-outer-spin-button {
     color: #000;
 }
 
+/*Homepage: Black overlay on videos*/
+#hpSlides {
+    margin-top: -2px;
+}
+
+@keyframes carFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#hpSlides {
+    position: relative;
+    opacity: 0;
+    animation: carFadeIn 1.5s ease forwards;
+}
+
+#hpSlides::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/*Homepage: Text Overlay*/
+#hpSlides .carousel-caption h1 {
+    font-size: 4rem; /* very large heading */
+}
+
+
+#hpSlides .carousel-caption {
+/*Make text bigger*/
+    position: absolute;
+    bottom: 20px;
+    z-index: 3;
+
+    /*hide text when its not its turn*/
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/*Unhide text when active*/
+#hpSlides .carousel-item.active .carousel-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#hpSlides .carousel-control-prev-icon,
+#hpSlides .carousel-control-next-icon {
+  filter: brightness(0) invert(1);
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+/* Grow on hover */
+#hpSlides .carousel-control-prev:hover .carousel-control-prev-icon,
+#hpSlides .carousel-control-next:hover .carousel-control-next-icon {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(255,255,255,0.9);
+}
+
+/* go back to colour after click */
+#hpSlides .carousel-control-prev:active .carousel-control-prev-icon,
+#hpSlides .carousel-control-next:active .carousel-control-next-icon {
+  transform: scale(1);
+  background-color: rgba(0,0,0,0.5); 
+  filter: brightness(0) invert(1);
+}
+
 /*Overlay form AnimalDetails Cards*/
 .hover-grow {
     transition: transform 0.3s ease;
@@ -312,30 +397,30 @@ input[type=number]::-webkit-outer-spin-button {
         color: #FF8C42;
     }
 
-.card.card-tickets {
-    background-color: #6b8e23 !important;
-    outline-color: none;
-    border: none !important;
-    height: 650px;
-}
-
-.card-body {
-    color: white;
-}
-
-.card.card-merchandise {
+/* Homepage: cards*/
+/* Ticket Card */
+/*.card.card-tickets {
     background-color: #FF8C42 !important;
-    outline-color: none;
     border: none !important;
     height: 650px;
-}
+    color: white;*/ /* text inside will be white */
+/*}*/
 
-.card.card-events {
-    background-color: #a0522d !important;
-    outline-color: none;
-    border: none !important;
+/* Merchandise Card */
+/*.card.card-merchandise {
+    background-color: #4CAF50 !important;*/ /* example green */
+    /*border: none !important;
     height: 650px;
-}
+    color: white;
+}*/
+
+/* Events Card */
+/*.card.card-events {
+    background-color: #1E90FF !important;*/ /* example blue */
+    /*border: none !important;
+    height: 650px;
+    color: white;
+}*/
 
 .card-title {
     margin-bottom: 30px;
@@ -647,25 +732,33 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .card.card-tickets {
-    background-color: #6b8e23 !important;
+    background-color: rgba(0, 146, 70, 0.8) !important;
+    color: white;
     outline-color: none;
     border: none !important;
     height: 650px;
 }
 
-.card-body{
+/*.card-body{
     color: white;
 }
+*/
 
+.card-merchandise .card-body {
+    color: black;
+}
+
+/*Home page cards*/
 .card.card-merchandise {
-    background-color: #FF8C42 !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
     outline-color: none;
     border: none !important;
     height: 650px;
 }
 
 .card.card-events {
-    background-color: #a0522d !important;
+    background-color: rgba(206, 43, 55, 0.8) !important;
+    color: white;
     outline-color: none;
     border: none !important;
     height: 650px;
@@ -686,28 +779,47 @@ input[type=number]::-webkit-outer-spin-button {
     height: 460px;
 }
 
-.custom-btn-ticket {
-    background-color: indianred !important;
-    border: none !important;
-    border-radius: 16px;
-    font-weight: bold;
-    font-family: Arial;
+/* Keyframes for fade */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.custom-btn-event {
-    background-color: darkslategrey !important;
-    border: none !important;
-    border-radius: 16px;
-    font-weight: bold;
-    font-family: Arial;
+/*fade animation call*/
+.card-tickets,
+.card-merchandise,
+.card-events {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 2s ease forwards;
 }
 
+/*Home page buttons*/
+.custom-btn-ticket,
+.custom-btn-event,
 .custom-btn {
-    background-color: indianred !important;
+    background-color: rgba(128, 128, 128, 0.8) !important; 
     border: none !important;
     border-radius: 16px;
     font-weight: bold;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
+    color: white !important;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.custom-btn-ticket:hover,
+.custom-btn-event:hover,
+.custom-btn:hover {
+    background-color: #555 !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255,255,255,0.9);
 }
 
 .animalpage-btn {
@@ -723,6 +835,38 @@ input[type=number]::-webkit-outer-spin-button {
     grid-template-columns: 1fr 1fr;
     min-height: 100vh;
     width: 100%;
+}
+
+/*Image dark sides*/
+.img-dark-sides {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.img-dark-sides img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-dark-sides::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.6) 0%,
+        transparent 10%,
+        transparent 90%,
+        rgba(0,0,0,0.6) 100%
+    );
+    pointer-events: none;
 }
 
 /* MAP SECTION STYLES */
@@ -973,20 +1117,20 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1px solid #e5ddd5;
 }
 
-    .calendar-day.available:hover {
-        background-color: #fed7aa;
-    }
+.calendar-day.available:hover {
+    background-color: #fed7aa;
+}
 
-    .calendar-day.selected {
-        background-color: #d2691e;
-        color: white;
-    }
+.calendar-day.selected {
+    background-color: #d2691e;
+    color: white;
+}
 
-    .calendar-day.unavailable {
-        background-color: #f0f0f0;
-        color: #ccc;
-        cursor: not-allowed;
-    }
+.calendar-day.unavailable {
+    background-color: #f0f0f0;
+    color: #ccc;
+    cursor: not-allowed;
+}
 
 /* Time slots */
 .time-slots {
@@ -1003,6 +1147,22 @@ input[type=number]::-webkit-outer-spin-button {
     color: #8b4513;
     cursor: pointer;
     font-weight: bold;
+
+@keyframes titleFade {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.title-fade {
+    opacity: 0;
+    animation: titleFade 1s ease-out forwards;
 }
 
     .time-slot:hover {
@@ -1057,10 +1217,10 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 18px;
 }
 
-    .counter-btn:hover {
-        background-color: #d2691e;
-        color: white;
-    }
+.counter-btn:hover {
+    background-color: #d2691e;
+    color: white;
+}
 
 .count-display {
     font-size: 1.3rem;
@@ -1151,9 +1311,9 @@ input[type=number]::-webkit-outer-spin-button {
     cursor: pointer;
 }
 
-    .buy-btn:hover {
-        background-color: #b8541a;
-    }
+.buy-btn:hover {
+    background-color: #b8541a;
+}
 
 /* Price table */
 .price-table {
@@ -1213,9 +1373,9 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 1.5rem;
 }
 
-    .cart-btn:hover {
-        background-color: #b8541a;
-    }
+.cart-btn:hover {
+    background-color: #b8541a;
+}
 
 .cart-count {
     position: absolute;
