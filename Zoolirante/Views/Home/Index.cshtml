@@ -4,12 +4,14 @@
     ViewData["Title"] = "Home Page";
 }
 
+<body class="bg-dark"></body>
+
 @*Banner*@
 <div id="hpSlides" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4500">
     <div class="carousel-inner">
 
         <div class="carousel-item active">
-            <video autoplay muted loop playsinline style="width: 100vw; height: 45vh; object-fit: cover;">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 65vh; object-fit: cover;">
                 <source src="/Images/hpVids/home.mp4" type="video/mp4">
             </video>
             <div class="carousel-caption d-none d-md-block z-5">
@@ -19,7 +21,7 @@
         </div>
             <div class="carousel-item">
             <a asp-area="" asp-controller="AnimalList" asp-action="Index">
-                <video autoplay muted loop playsinline style="width: 100vw; height: 45vh; object-fit: cover;">
+                <video autoplay muted loop playsinline style="width: 100vw; height: 65vh; object-fit: cover;">
                     <source src="/Images/hpVids/animals.mp4" type="video/mp4">
                 </video>
                 <div class="carousel-caption d-none d-md-block z-5">
@@ -31,7 +33,7 @@
 
         <div class="carousel-item">
             <a asp-area="" asp-controller="Events" asp-action="Index">
-                <video autoplay muted loop playsinline style="width: 100vw; height: 45vh; object-fit: cover;">
+                <video autoplay muted loop playsinline style="width: 100vw; height: 65vh; object-fit: cover;">
                     <source src="/Images/hpVids/events.mp4" type="video/mp4">
                 </video>
                 <div class="carousel-caption d-none d-md-block z-5">
@@ -43,7 +45,7 @@
 
         <div class="carousel-item">
             <a asp-area="" asp-controller="Events" asp-action="Index">
-            <video autoplay muted loop playsinline style="width: 100vw; height: 45vh; object-fit: cover;">
+            <video autoplay muted loop playsinline style="width: 100vw; height: 65vh; object-fit: cover;">
                 <source src="/Images/hpVids/merch.mp4" type="video/mp4">
             </video>
             <div class="carousel-caption d-none d-md-block z-5">
@@ -63,15 +65,12 @@
     </button>
 </div>
 
-
-
-
-
-<div class="container-fluid">
+@*Cards*@
+<div class="container-fluid px-0">
     <div class="row g-0">
 
         <div class="col-sm-4">
-            <div class="card card-tickets h-100">
+            <div class="card card-tickets h-100 radius-bottom-2">
                 <div class="img-dark-sides">
                     <img src="/Images/zoo-ticket.png" alt="Tickets" class="card-img-top" style="height: 450px;">
                 </div>
@@ -89,7 +88,7 @@
         </div>
 
         <div class="col-sm-4">
-            <div class="card card-merchandise h-100">
+            <div class="card card-merchandise h-100 radius-bottom-2">
                 <div class="img-dark-sides">
                     <img src="https://azwp-az-prod-1-ap-southeast-2.s3.amazonaws.com/uploads/2024/03/9249-Where-to-Shop-Web-Assets_updated_TH-elephantasia.jpg"
                          alt="Merchandise" class="card-img-top" style="height: 450px; object-fit: cover;">
@@ -99,7 +98,7 @@
                     <p class="card-text">Get your hands on our limited-edition merchandise before it’s gone</p>
                     <div class="row">
                         <div class="col-4">
-                            <a class="btn btn-primary custom-btn mt-auto" href="/Merchandise/Index">Learn more</a>
+                            <a class="btn btn-primary custom-btn mt-auto" href="/Merchandise/Index">Shop Merch</a>
                         </div>
                         <div class="col-8"></div>
                     </div>
@@ -108,7 +107,7 @@
         </div>
 
         <div class="col-sm-4">
-            <div class="card card-events h-100">
+            <div class="card card-events h-100 radius-bottom-2">
                 <div class="img-dark-sides">
                     <img src="https://www.mandai.com/content/dam/mandai/singapore-zoo/things-to-do/zebra-feeding-900x600.jpg"
                          alt="Events" class="card-img-top" style="height: 450px; object-fit: cover;">
@@ -130,8 +129,6 @@
 </div>
 
 <section class="animal-page-section" style="margin-top: 40px">
-
-
     <div class="description-half">
 
         <img class="zoosection-image" src="../Images/zoo-banner.png" />
