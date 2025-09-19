@@ -8,5 +8,7 @@ namespace Zoolirante.ViewModels {
         public int VisitorId { get; set; }
         [Required]
         public int AnimalId { get; set; }
+        [Required]
+        public string AnimalName { get; set;}
     }
 }
