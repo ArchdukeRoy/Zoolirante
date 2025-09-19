@@ -1017,7 +1017,6 @@ input[type=number]::-webkit-outer-spin-button {
         color: grey;
     }
 
-
 .event-img {
     object-fit: cover;
     width: 100%;
@@ -1027,6 +1026,127 @@ input[type=number]::-webkit-outer-spin-button {
 #eventTagline {
     transition: opacity 0.8s ease-in-out;
 }
+
+/* ====== from TicketUIPage_David ====== */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.main-title {
+    text-align: center;
+    color: #d2691e;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.section {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #e5ddd5;
+    border-radius: 10px;
+}
+
+.section-title {
+    color: #8b4513;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Calendar */
+.calendar-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.nav-btn {
+    background-color: #d2691e;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+    .nav-btn:hover {
+        background-color: #b8541a;
+    }
+
+.current-month {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    border: 2px solid #d2691e;
+    padding: 10px;
+    background-color: #fef9f3;
+}
+
+.day-header {
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+    color: #a0471a;
+    background-color: #fed7aa;
+}
+
+.calendar-day {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid #e5ddd5;
+}
+
+.calendar-day.available:hover {
+    background-color: #fed7aa;
+}
+
+.calendar-day.selected {
+    background-color: #d2691e;
+    color: white;
+}
+
+.calendar-day.unavailable {
+    background-color: #f0f0f0;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Time slots */
+.time-slots {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.time-slot {
+    padding: 10px 20px;
+    border: 2px solid #d2691e;
+    background-color: white;
+    color: #8b4513;
+    cursor: pointer;
+    font-weight: bold;
 
 @keyframes titleFade {
     from {
@@ -1045,6 +1165,265 @@ input[type=number]::-webkit-outer-spin-button {
     animation: titleFade 1s ease-out forwards;
 }
 
+    .time-slot:hover {
+        background-color: #fed7aa;
+    }
+
+    .time-slot.selected {
+        background-color: #d2691e;
+        color: white;
+    }
+
+/* Guest selection */
+.guest-rows {
+    display: block;
+}
+
+.guest-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fef9f3;
+    border: 1px solid #e5ddd5;
+}
+
+.guest-info .guest-type {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+.guest-info .guest-age {
+    color: #a0471a;
+    font-size: 0.9rem;
+}
+
+.guest-counter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.counter-btn {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #d2691e;
+    background-color: white;
+    color: #d2691e;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.counter-btn:hover {
+    background-color: #d2691e;
+    color: white;
+}
+
+.count-display {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #8b4513;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* Ticket cards */
+.ticket-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.ticket-card {
+    background-color: white;
+    border: 3px solid #e5ddd5;
+    padding: 20px;
+    position: relative;
+}
+
+    .ticket-card.best-value {
+        border-color: #d2691e;
+        background-color: #fffbf7;
+    }
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: 15px;
+    background-color: #d2691e;
+    color: white;
+    padding: 5px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.ticket-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #8b4513;
+    margin-bottom: 10px;
+}
+
+.ticket-subtitle {
+    color: #a0471a;
+    margin-bottom: 15px;
+}
+
+.price-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #d2691e;
+    margin-bottom: 10px;
+}
+
+.note-text {
+    color: #a0471a;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.ticket-features {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.feature-item {
+    margin-bottom: 8px;
+    color: #6b5b47;
+}
+
+.feature-icon {
+    margin-right: 8px;
+}
+
+.buy-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #d2691e;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.buy-btn:hover {
+    background-color: #b8541a;
+}
+
+/* Price table */
+.price-table {
+    background-color: white;
+    border: 2px solid #d2691e;
+}
+
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-cell {
+    padding: 12px;
+    border: 1px solid #e5ddd5;
+}
+
+.header-cell {
+    background-color: #fed7aa;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+.category-cell {
+    background-color: #fef9f3;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+.price-cell {
+    text-align: center;
+}
+
+.price-primary {
+    font-weight: bold;
+    color: #d2691e;
+}
+
+.price-secondary {
+    font-size: 0.9rem;
+    color: #a0471a;
+}
+
+/* Cart */
+.cart-container {
+    position: fixed;
+    top: 100px;
+    right: 10px;
+}
+
+.cart-btn {
+    background-color: darkorange;
+    color: white;
+    border: 3px solid #8b4513;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.cart-btn:hover {
+    background-color: #b8541a;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #8b4513;
+    color: white;
+    width: 25px;
+    height: 25px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 2px solid white;
+}
+
+/* Footer */
+.footer-note {
+    text-align: center;
+    margin-top: 30px;
+    color: #a0471a;
+    font-size: 0.9rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .ticket-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .guest-row {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .cart-container {
+        bottom: 20px;
+        top: auto;
+    }
+}
+
+/* ====== from main ====== */
 .btn-zoolirante {
     background-color: #FF8C42 !important; /* your Zoolirante orange */
     color: #fff !important; /* white text */
