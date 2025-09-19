@@ -3,9 +3,11 @@
     ViewData["Title"] = "Create Event";
 }
 
-<div class="container py-4">
-    <h1 class="mb-4">Create Event</h1>
+<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
+    <h1>Create Events</h1>
+</div>
 
+<div class="container py-4">
     <form asp-action="Create" method="post" class="card shadow-sm border-0 p-4">
         @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
