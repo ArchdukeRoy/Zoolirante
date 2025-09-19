@@ -93,3 +93,33 @@ function selectDate(element) {
     console.log('Selected date:', selectedDate);
 }
 
+// Setup all buttons
+function setupButtons() {
+    // Calendar navigation buttons
+    var prevBtn = document.querySelector('.prev-btn');
+    var nextBtn = document.querySelector('.next-btn');
+
+    if (prevBtn) {
+        prevBtn.onclick = function () {
+            if (currentMonth === 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else {
+                currentMonth--;
+            }
+            createCalendar();
+        };
+    }
+
+    if (nextBtn) {
+        nextBtn.onclick = function () {
+            if (currentMonth === 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else {
+                currentMonth++;
+            }
+            createCalendar();
+        };
+    }
+
