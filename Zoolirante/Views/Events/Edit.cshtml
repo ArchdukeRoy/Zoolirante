@@ -5,36 +5,64 @@
     
 }
 
-<h1>Edit</h1>
+<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top:-2px;">
+    <h1 class="title-fade">Edit @Model.Name</h1>
+</div>
 
-<h4>Event</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EventId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="container mt-4">
+    <div class="row g-1">
+        <!-- Left card: Edit form -->
+        <div class="col-md-5">
+            <div class="card h-100 rounded-0 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h4 mb-3 text-dark">Edit</h2>
+
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="EventId" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="form-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Description" class="form-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group d-flex gap-2">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <!-- Middle: arrow button -->
+        <div class="col-md-2 d-flex justify-content-center">
+            <button type="button"
+                    class="btn btn-light rounded-circle d-flex align-items-center justify-content-center border"
+                    style="width: 50px; height: 50px; margin-top: 120px;"
+                    disabled>
+                <i class="bi bi-arrow-right text-dark"></i>
+            </button>
+        </div>
+
+        <!-- Right card: Preview -->
+        <div class="col-md-5">
+            <div class="card h-100 rounded-0 shadow-sm">
+                <div class="card-body">
+                    <h2 class="h4 mb-2 text-dark">@Model.Name</h2>
+                    <p class="text-muted mb-0">@Model.Description</p>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

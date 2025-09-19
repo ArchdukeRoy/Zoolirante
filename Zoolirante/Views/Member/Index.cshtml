@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Zoo Membership";
 }
+<head>
+    <link rel="stylesheet" href="~/css/MembersPage.css" />
+</head>
 
 <div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
 
@@ -14,69 +17,165 @@
     <img src="https://azwp-az-prod-1-ap-southeast-2.s3.amazonaws.com/uploads/2025/06/10160_AZ_Website_ZK4D_Image_Updates_2240-x-700.jpg"
          alt="Banner Image"
          style="width: 100%; height: auto; max-height: 500px; object-fit: contain;">
+
+
+<div class="membership-banner">
+      <h2 style="margin-top: -20px">
+            Become a Zoolirantee!!
+      </h2>
+       <p style="font-size:20px;">
+            Become A Zoolirante regular and enjoy a yearly wildlife experience and adventure with our furry friends!!.
+            By purchasing the Zoolirante membership and get multiple benefits. This membership pays for itself after your fifth visit to Zoolirante.
+            50% of the membership of our revenue goes into donating to wildlife relief.
+        </p>
+</div>
 </div>
 
 <div>
-
-    <h2 style="font-size:27px;">
-        Become a Zoolirantee!!
+    <h2>
+         Zoolirante offers various memberships:
     </h2>
-
-    <p style="font-size:20px;">
-        Become A Zoolirante regular and enjoy a yearly wildlife experience and adventure with our furry friends!!.
-    </p>
-    <p style="font-size:20px;">
-        By purchasing the Zoolirante membership and get multiple benefits. This membership pays for itself after your fifth visit to Zoolirante.
-        50% of the membership of our revenue goes into donating to wildlife relief.
-    </p>
-
-</div>
-<div>
-    <p>
-        Zoolirante offers various memberships:
-    </p>
-    <table>
-        <tr>
-            <th> Zoolirante membership type </th>
-            <th> Price</th>
-        </tr>
-        <tr>
-            <th>Family pack</th>
-            <th>$200.99 </th>
-        </tr>
-        <tr>
-            <th>Couples</th>
-            <th>$140.99</th>
-        </tr>
-        <tr>
-            <th>Concession</th>
-            <th>$100.99</th>
-        </tr>
-        <tr>
-            <th>Children pass (Ages 3- 15)</th>
-            <th>$60.99</th>
-        </tr>
-        <tr>
-            <th>Infants</th>
-            <th>Free!!</th>
-        </tr>
-    </table>
-
-
-</div>
-<div class="member-price-list">
-    <div class="row">
-        <div class="card">
-            <div class="container">
-                <h4><b>Family pack</b></h4>
-                <p>$200.99/year</p>
-                <p>A yearly plan for your Family </p>
-
-            </div>
-        </div>
     </div>
 
+<div class="Membership-List">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                
+                <div class="card radius-2 Family-Pack-card"style="cursor: pointer;">
+                    <img class="FamilyPackCard-img" src="https://media.istockphoto.com/id/485775428/photo/family-feeding-giraffe-in-a-zoo.jpg?s=612x612&w=0&k=20&c=dsFeFVCNjsrzdsvzosSpCyXMsM3vvj4JaONQHw0mZ_8=" />
+                    <div class="card-body">
+                        <div class="card-title custom-title">Family Pack</div>
+                        <div class="card-price">Priced at just $200.99</div>
+                        <div class="card-text custom-bodytext">
+                            A 12 month unlimited zoo fun family at Zoolirante. Members can have free access to some events and get upto 20% or more discount at Zoolirante merchandise shop.
+                        </div>
+                        <div>
+                            <a class="card-btn btn-primary radius-2 GetMembership" href="/Tickets/Index">Get membership</a>
+                        </div>
+                        </div>
+                    </div>
+               
+
+            </div>
+
+            <div class="col-sm-4">
+                
+                <div class="card radius-2 Couples" style="cursor: pointer;">
+                    <img class="FamilyPackCard-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6bREYb96GzqnmBCX8tya98uIkyd157dgkhA&s"/>
+                    <div class="card-body">
+
+
+                        <div class="card-title custom-title">Couples</div>
+                        <div class="card-price">
+                                Priced at just $140.99
+                        </div>
+                        <div class="card-text custom-bodytext">
+                            A 12 month unlimited zoo fun time with a plus one of any age. Members get free access to events at the zoo and 10% discount at the Zoolirante mechandize shop.
+                        </div>
+                        <div>
+                            <a class="card-btn btn-primary radius-2 GetMembership" href="/Tickets/Index">Get membership</a></div>
+                        </div>
+
+                    </div>
+                </div>
+
+            <div class="col-sm-4">
+                
+                <div class="card radius-2 Couples" style="cursor: pointer;">
+                    <img class="FamilyPackCard-img" src="https://thumbs.dreamstime.com/b/seniors-together-feed-sheep-farm-zoo-seniors-feed-sheep-together-zoo-197560610.jpg"/>
+                    <div class="card-body">
+                        <div class="card-title custom-title">Concession</div>
+                        <div class="card-price">
+                            Priced at just $100.99
+                        </div>
+                        <div class="card-text custom-bodytext">
+                            A 12 month Zoolinrante membership for students,seniors and concession holders. Members get access to some events and 5% discount at Zoolirante Merchandise shop. 
+                        </div>
+                        <div>
+                            <a class="card-btn btn-primary radius-2 GetMembership" href="/Tickets/Index">Get membership</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+    </div>
 </div>
+
+
+
+<div>
+    <h1>Membership comparsions table</h1>
+    <table class="table table-bordered" style="border: 1px grey;">
+    <thead>
+        <tr class="table-row">
+                <th class="table-coloum" scope="col" style="background-color: whitesmoke;">Benefits</th>
+                <th class="table-family" scope="col" style="background-color:  lightblue;">Family Pack</th>
+                <th class="table-Couples" scope="col" style="background-color: lightpink;">Couples</th>
+                <th class="table-Concession" scope="col" style="background-color:  lightgreen;">Concession</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-body-row">
+            <th class="table-body-col">Unlimited access to Zoolirante Zoo anytime of the year</th>
+                <td class="table-family">✔</td>
+                <td class="table-Couples">✔</td>
+                <td class="table-Concession">✔</td>
+        </tr>
+        <tr class="table-body-row">
+                <th class="table-body-col">Half price parking at Zoolirante Zoo</th>
+                <td class="table-family">✔</td>
+                <td class="table-Couples">✔</td>
+                <td class="table-Concession">✔</td>
+         </tr>
+            <tr class="table-body-row">
+                <th class="table-body-col">20% discount on Zoolirante merchandise store</th>
+                <td class="table-family">✔</td>
+                <td class="table-Couples">✖</td>
+                <td class="table-Concession">✖</td>
+            </tr>
+            <tr class="table-body-row">
+                <th class="table-body-col">15% discount on Zoolirante merchandise store</th>
+                <td class="table-family">✖</td>
+                <td class="table-Couples">✔</td>
+                <td class="table-Concession">✖</td>
+            </tr>
+            <tr class="table-body-row">
+                <th class="table-body-col">10% discount on Zoolirante merchandise store</th>
+                <td class="table-family">✖</td>
+                <td class="table-Couples">✖</td>
+                <td class="table-Concession">✔</td>
+            </tr>
+            <tr class="table-body-row">
+                <th class="table-body-col">10% discount on Zoolirante merchandise store</th>
+                <td class="table-family">✖</td>
+                <td class="table-Couples">✖</td>
+                <td class="table-Concession">✔</td>
+            </tr>
+            <tr class="table-body-row">
+                <th class="table-body-col">Free Zoolirante events </th>
+                <td class="table-family">✔</td>
+                <td class="table-Couples">✔</td>
+                <td class="table-Concession">✖</td>
+            </tr>
+            <tr class="table-body-row">
+                <th class="table-body-col">Free entry for children below 5 years of age </th>
+                <td class="table-family">✔</td>
+                <td class="table-Couples">✔</td>
+                <td class="table-Concession">✔</td>
+            </tr>
+
+    </tbody>
+</table>
+
+
+</div>
+<i class="fa-solid fa-check"></i>
+
+
+
 
 
 
