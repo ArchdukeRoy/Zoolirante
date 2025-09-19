@@ -188,3 +188,21 @@ function changeConcessions(change) {
     document.getElementById('concession-count').textContent = concessions;
     updatePrices();
 }
+
+// Update prices
+function updatePrices() {
+    var dayTotal = (adults * dayAdult) + (children * dayChild) + (concessions * dayConcession);
+    var unlimitedTotal = (adults * unlimitedAdult) + (children * unlimitedChild) + (concessions * unlimitedConcession);
+
+    var dayPrice = document.getElementById('day-price');
+    var unlimitedPrice = document.getElementById('unlimited-price');
+
+    if (adults + children + concessions > 0) {
+        if (dayPrice) dayPrice.textContent = '$' + dayTotal.toFixed(2);
+        if (unlimitedPrice) unlimitedPrice.textContent = '$' + unlimitedTotal.toFixed(2);
+    } else {
+        if (dayPrice) dayPrice.textContent = '$-';
+        if (unlimitedPrice) unlimitedPrice.textContent = '$-';
+    }
+}
+
