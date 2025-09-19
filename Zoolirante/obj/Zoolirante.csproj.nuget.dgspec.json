@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante.csproj": {}
+    "C:\\Users\\Valued Customer\\OneDrive\\Documents\\GitHub\\Zoolirante\\Zoolirante\\Zoolirante.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante.csproj": {
+    "C:\\Users\\Valued Customer\\OneDrive\\Documents\\GitHub\\Zoolirante\\Zoolirante\\Zoolirante.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante.csproj",
+        "projectUniqueName": "C:\\Users\\Valued Customer\\OneDrive\\Documents\\GitHub\\Zoolirante\\Zoolirante\\Zoolirante.csproj",
         "projectName": "Zoolirante",
-        "projectPath": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\Zoolirante.csproj",
-        "packagesPath": "C:\\Users\\Nebula PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nebula PC\\Documents\\UNI\\2025\\WEB TECH\\W1\\YES\\Zoolirante\\obj\\",
+        "projectPath": "C:\\Users\\Valued Customer\\OneDrive\\Documents\\GitHub\\Zoolirante\\Zoolirante\\Zoolirante.csproj",
+        "packagesPath": "C:\\Users\\Valued Customer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Valued Customer\\OneDrive\\Documents\\GitHub\\Zoolirante\\Zoolirante\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nebula PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Valued Customer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -86,6 +86,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.20, 8.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.20, 8.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.20, 8.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.20, 8.0.20]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -94,7 +112,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

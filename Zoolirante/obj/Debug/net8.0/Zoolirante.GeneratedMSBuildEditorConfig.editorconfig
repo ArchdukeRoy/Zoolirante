@@ -17,161 +17,137 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Zoolirante
 build_property.RootNamespace = Zoolirante
-build_property.ProjectDir = C:\Users\Nebula PC\Documents\UNI\2025\WEB TECH\W1\YES\Zoolirante\
+build_property.ProjectDir = C:\Users\Valued Customer\OneDrive\Documents\GitHub\Zoolirante\Zoolirante\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Nebula PC\Documents\UNI\2025\WEB TECH\W1\YES\Zoolirante
+build_property.MSBuildProjectDirectory = C:\Users\Valued Customer\OneDrive\Documents\GitHub\Zoolirante\Zoolirante
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Account/Create.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Account/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Account/Index.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Account/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/AnimalList/Create.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/AnimalList/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFsTGlzdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/AnimalList/Delete.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/AnimalList/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFsTGlzdFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/AnimalList/Details.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/AnimalList/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFsTGlzdFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/AnimalList/Edit.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/AnimalList/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFsTGlzdFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/AnimalList/Index.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/AnimalList/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFsTGlzdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Events/Create.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Events/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Events/Delete.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Events/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Events/Details.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Events/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Events/Edit.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Events/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Events/Index.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Events/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Home/Index.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Home/Privacy.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Login/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cQ3JlYXRlLmNzaHRtbA==
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Member/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Login/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cRGVsZXRlLmNzaHRtbA==
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Merchandise/Cart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVyY2hhbmRpc2VcQ2FydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Login/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Login/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Login/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Merchandise/AddToCart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVyY2hhbmRpc2VcQWRkVG9DYXJ0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Merchandise/Create.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Merchandise/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVyY2hhbmRpc2VcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Merchandise/Delete.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Merchandise/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVyY2hhbmRpc2VcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Merchandise/Details.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Merchandise/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVyY2hhbmRpc2VcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Merchandise/Edit.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Merchandise/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVyY2hhbmRpc2VcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Merchandise/Filter.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVyY2hhbmRpc2VcRmlsdGVyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Merchandise/Index.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Merchandise/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVyY2hhbmRpc2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Merchandise/Search.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVyY2hhbmRpc2VcU2VhcmNoLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Shared/Error.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Tickets/Create.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Tickets/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Tickets/Delete.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Tickets/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Tickets/Details.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Tickets/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Tickets/Edit.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Tickets/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Tickets/Index.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Tickets/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlja2V0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/_ViewImports.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/_ViewStart.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Nebula PC/Documents/UNI/2025/WEB TECH/W1/YES/Zoolirante/Views/Shared/_Layout.cshtml]
+[C:/Users/Valued Customer/OneDrive/Documents/GitHub/Zoolirante/Zoolirante/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-700ql9wu0b

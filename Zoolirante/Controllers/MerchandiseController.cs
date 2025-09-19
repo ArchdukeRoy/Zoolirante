@@ -202,6 +202,9 @@ namespace Zoolirante.Controllers
                 {
                     _context.Update(merchandise);
                     await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = $"{merchandise.ItemName} was updated successfully.";
+                    return RedirectToAction(nameof(Edit), new { id = merchandise.ItemId });
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -1,19 +1,22 @@
 ﻿@model Zoolirante.ViewModels.MerchViewModel
-
 @removeTagHelper "Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers"
 
 @{
     ViewData["Title"] = "Merchandise";
 }
 
-@*Welcome On Login*@
-@if (!string.IsNullOrEmpty(Model.DefaultVM.username)) {
+@* Welcome On Login *@
+@if (!string.IsNullOrEmpty(Model.DefaultVM.username))
+{
     <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px; z-index: 4;">
-        @if (Model.DefaultVM.admin == true) {
+        @if (Model.DefaultVM.admin == true)
+        {
             <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
         }
         <p class="mb-1 fw-light">Welcome, @Model.DefaultVM.username</p>
-        <a asp-action="Cart" class="mb-1 fw-light me-3 text-light"> <i class=" bi bi-cart4 text-light"></i> View Cart</a>
+        <a asp-action="Cart" class="mb-1 fw-light me-3 text-light">
+            <i class="bi bi-cart4 text-light"></i> View Cart
+        </a>
     </div>
 }
 
@@ -23,13 +26,17 @@
 <div class="w-100 bg-zoolirante-light py-1 shadow"></div>
 
 <div class="container my-4">
-    <hr class="my-4 border-2 border-dark opacity-80">
+    <hr class="my-4 border-2 border-dark opacity-80" />
     <div class="row g-4">
         <!-- Search -->
         <div class="col-12 col-md-6">
             <form asp-action="Index" method="get" class="row gx-2">
                 <div class="input-group">
-                    <input type="text" name="searchMerchandise" class="form-control" placeholder="Search Merchandise" value='@ViewData["PresentFilter"]'>
+                    <input type="text"
+                           name="searchMerchandise"
+                           class="form-control"
+                           placeholder="Search Merchandise"
+                           value='@ViewData["PresentFilter"]' />
                     <button type="submit" class="btn btn-dark" style="z-index: 1;">Search</button>
                 </div>
             </form>
@@ -50,49 +57,74 @@
             </form>
         </div>
     </div>
-    <hr class="my-4 border-2 border-dark opacity-80">
-    @if (!string.IsNullOrEmpty(ViewBag.NotLoggedIn)) {
+    <hr class="my-4 border-2 border-dark opacity-80" />
+
+    @if (!string.IsNullOrEmpty(ViewBag.NotLoggedIn))
+    {
         <div class="alert alert-danger py-1 my-2">
             @ViewBag.NotLoggedIn
         </div>
     }
-    @if (!string.IsNullOrEmpty(ViewBag.ItemAdded)) {
+
+    @if (!string.IsNullOrEmpty(ViewBag.ItemAdded))
+    {
         <div class="alert alert-info py-1 my-2">
             @ViewBag.ItemAdded
         </div>
     }
 </div>
 
-
-<div class="container" >
+<div class="container">
     <div class="row g-2">
-        @foreach (var item in Model.MerchList) {
+        @foreach (var item in Model.MerchList)
+        {
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 hover-merch border-0 position-relative product-card text-center radius-2">
                     <!-- Merch image -->
-                    <img src="@item.ItemImage" alt="@item.ItemName" class="card-img-top radius-2" style="height:250px; object-fit: cover;">
+                    <img src="@item.ItemImage"
+                         alt="@item.ItemName"
+                         class="card-img-top radius-2"
+                         style="height:250px; object-fit: cover;" />
 
                     <!-- Orange info section -->
                     <div class="card-body text-dark text-center d-flex flex-column justify-content-end p-3">
-
                         <h6 class="fw-bold text-uppercase mb-1">@item.ItemName</h6>
-
-                        <p class="mb-2">@item.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))</p>
+                        <p class="mb-2">
+                            @item.ItemCost.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"))
+                        </p>
 
                         <!-- Add to cart button -->
                         <form asp-action="Index" method="post" class="d-inline-block position-relative" style="z-index:2;">
                             <input type="hidden" name="id" value="@item.ItemId" />
                             <input type="hidden" name="quantity" value="1" />
-                            <button type="submit" class="btn btn-outline-light bg-zoolirante w-100 radius-2" style="z-index: 0;">Add to cart</button>
+                            <button type="submit" class="btn btn-outline-light bg-zoolirante w-100 radius-2" style="z-index: 0;">
+                                Add to cart
+                            </button>
                         </form>
 
                         <!-- card clickable except button -->
-                        <a asp-action="Details" asp-route-id="@item.ItemId" class="stretched-link" aria-label="View @item.ItemName details"></a>
+                        <a asp-action="Details"
+                           asp-route-id="@item.ItemId"
+                           class="stretched-link"
+                           aria-label="View @item.ItemName details"></a>
                     </div>
-                    @if (Model.DefaultVM.admin == true) {
+
+                    @if (Model.DefaultVM.admin == true)
+                    {
                         <div class="card-footer text-end" style="z-index: 2;">
-                            <a asp-action="Edit" asp-route-id="@item.ItemId" class="btn btn-sm btn-dark radius-2">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-sm btn-danger radius-2">Delete</a>
+                            <a asp-action="Edit"
+                               asp-route-id="@item.ItemId"
+                               class="btn btn-sm btn-dark radius-2">Edit</a>
+
+                            <!-- Open confirm modal -->
+                            <button type="button"
+                                    class="btn btn-sm btn-danger radius-2"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#confirmDeleteModal"
+                                    data-item-id="@item.ItemId"
+                                    data-item-name="@item.ItemName">
+                                Delete
+                            </button>
                         </div>
                     }
                 </div>
@@ -100,3 +132,51 @@
         }
     </div>
 </div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content radius-2">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteLabel">
+                    Delete <span id="delName" class="fw-semibold"></span>?
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                This action cannot be undone. Are you sure you want to delete this item?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                <!-- Post back to Delete action -->
+                <form id="deleteForm" asp-action="Delete" method="post" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="delId" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        // Requires Bootstrap JS to be loaded on the page
+        const confirmModal = document.getElementById('confirmDeleteModal');
+
+        confirmModal.addEventListener('show.bs.modal', function (event) {
+            const triggerBtn = event.relatedTarget; // the button that opened the modal
+            const itemId = triggerBtn.getAttribute('data-item-id');
+            const itemName = triggerBtn.getAttribute('data-item-name');
+
+            // Fill the hidden input + label
+            document.getElementById('delId').value = itemId;
+            document.getElementById('delName').textContent = itemName;
+
+        });
+    </script>
+}
