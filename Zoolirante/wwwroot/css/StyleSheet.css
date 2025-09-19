@@ -1044,3 +1044,35 @@ input[type=number]::-webkit-outer-spin-button {
     opacity: 0;
     animation: titleFade 1s ease-out forwards;
 }
+
+.btn-zoolirante {
+    background-color: #FF8C42 !important; /* your Zoolirante orange */
+    color: #fff !important; /* white text */
+    border: none !important;
+    font-weight: bold;
+    border-radius: 0.5rem; /* optional rounded look */
+    transition: background-color 0.3s ease;
+}
+.btn-zoolirante:hover {
+        background-color: #e6762e !important; /* darker shade on hover */
+        color: #fff !important;
+    }
+
+
+.events-slide {
+    height: 420px; /* tweak height if you like */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #e9ecef; /* neutral while URLs are empty */
+    border-radius: 0.75rem;
+}
+
+/* Softer card look */
+.card.border-0 {
+    border-radius: 1rem;
+}
+
+.input-group-text {
+    background: #f7f7f7;
+}

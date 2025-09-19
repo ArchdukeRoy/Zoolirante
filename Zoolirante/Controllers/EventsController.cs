@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Zoolirante.Data;
 using Zoolirante.Models;
 using Zoolirante.ViewModels;
-using System.Text.Json; 
+using System.Text.Json;
 
 namespace Zoolirante.Controllers
 {
@@ -24,18 +24,41 @@ namespace Zoolirante.Controllers
         //GET
         public async Task<IActionResult> Index(string? category, EventListViewModel vm)
         {
-            ViewBag.category = category;
+            ViewBag.Category = category;
 
-            var events = _context.Events
-                .AsQueryable();
+            var events = _context.Events.AsQueryable();
+
+            var today = new DateOnly(2025, 9, 23);
 
 
-            if (!string.IsNullOrWhiteSpace(category))
+            var dateToday = DateOnly.FromDateTime(DateTime.Today);
+
+            switch (category)
             {
-                events = events.Where(e => e.Name.Contains(category));
+                case "Past":
+                    events = events.Where(e =>
+                    e.EventRollCalls.Any(rc => rc.RollDate.HasValue) &&
+                    e.EventRollCalls.Where(rc => rc.RollDate.HasValue)
+                    .All(rc => rc.RollDate!.Value < today));
+                    break;
+                case "Everyday":
+                    events = events.Where(e =>
+                    e.EventRollCalls.Any() &&
+                    e.EventRollCalls.All(rc => rc.RollDate == null));
+                    break;
+
             }
 
+
+
+
+            //if (!string.IsNullOrWhiteSpace(category))
+            //{
+            //    events = events.Where(e => e.Name.Contains(category));
+            //}
+
             vm.Events = events.ToList();
+            vm.EventRollCalls = _context.EventRollCalls.ToList();
             var vmJson = HttpContext.Session.GetString("DefaultVM");
             if (!string.IsNullOrEmpty(vmJson))
             {
