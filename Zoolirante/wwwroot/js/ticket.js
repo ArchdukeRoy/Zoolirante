@@ -123,3 +123,38 @@ function setupButtons() {
         };
     }
 
+    // Time slots
+    var timeButtons = document.querySelectorAll('.time-slot');
+    for (var i = 0; i < timeButtons.length; i++) {
+        timeButtons[i].onclick = function () {
+            selectTime(this);
+        };
+    }
+
+    // Guest buttons
+    var adultPlus = document.querySelector('.plus-btn[data-type="adult"]');
+    var adultMinus = document.querySelector('.minus-btn[data-type="adult"]');
+    var childPlus = document.querySelector('.plus-btn[data-type="child"]');
+    var childMinus = document.querySelector('.minus-btn[data-type="child"]');
+    var concessionPlus = document.querySelector('.plus-btn[data-type="concession"]');
+    var concessionMinus = document.querySelector('.minus-btn[data-type="concession"]');
+
+    if (adultPlus) adultPlus.onclick = function () { changeAdults(1); };
+    if (adultMinus) adultMinus.onclick = function () { changeAdults(-1); };
+    if (childPlus) childPlus.onclick = function () { changeChildren(1); };
+    if (childMinus) childMinus.onclick = function () { changeChildren(-1); };
+    if (concessionPlus) concessionPlus.onclick = function () { changeConcessions(1); };
+    if (concessionMinus) concessionMinus.onclick = function () { changeConcessions(-1); };
+
+    // Buy buttons
+    var dayBuy = document.querySelector('.buy-btn[data-ticket="day"]');
+    var unlimitedBuy = document.querySelector('.buy-btn[data-ticket="unlimited"]');
+
+    if (dayBuy) dayBuy.onclick = function () { buyDay(); };
+    if (unlimitedBuy) unlimitedBuy.onclick = function () { buyUnlimited(); };
+
+    // Cart button
+    var cartBtn = document.getElementById('cart-btn');
+    if (cartBtn) cartBtn.onclick = function () { showCart(); };
+}
+
