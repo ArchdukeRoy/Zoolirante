@@ -35,6 +35,70 @@
         </div>
     </div>
 
+    <!-- Time Selection Section -->
+    <div class="section time-section">
+        <h2 class="section-title">Select your arrival time</h2>
+        <div class="time-slots">
+            <button class="time-slot" data-time="9am">9am</button>
+            <button class="time-slot" data-time="10am">10am</button>
+            <button class="time-slot" data-time="11am">11am</button>
+            <button class="time-slot" data-time="12pm">12pm</button>
+            <button class="time-slot" data-time="after1pm">After 1pm</button>
+        </div>
+    </div>
+
+    <!-- Guest Selection Section -->
+    <div class="section guest-section">
+        <h2 class="section-title">Select the number of guests to view pricing:</h2>
+        <div class="guest-rows">
+            <div class="guest-row">
+                <div class="guest-info">
+                    <h4 class="guest-type">Adult</h4>
+                    <p class="guest-age">(16+ years)</p>
+                </div>
+                <div class="guest-counter">
+                    <button class="counter-btn minus-btn" data-type="adult">-</button>
+                    <span class="count-display" id="adult-count">0</span>
+                    <button class="counter-btn plus-btn" data-type="adult">+</button>
+                </div>
+            </div>
+
+            <div class="guest-row">
+                <div class="guest-info">
+                    <h4 class="guest-type">Child</h4>
+                    <p class="guest-age">(3-15 years)</p>
+                </div>
+                <div class="guest-counter">
+                    <button class="counter-btn minus-btn" data-type="child">-</button>
+                    <span class="count-display" id="child-count">0</span>
+                    <button class="counter-btn plus-btn" data-type="child">+</button>
+                </div>
+            </div>
+
+            <div class="guest-row">
+                <div class="guest-info">
+                    <h4 class="guest-type">Infant</h4>
+                    <p class="guest-age">(0-2 years)</p>
+                </div>
+                <div class="guest-counter">
+                    <span class="count-display">FREE</span>
+                </div>
+            </div>
+
+            <div class="guest-row">
+                <div class="guest-info">
+                    <h4 class="guest-type">Concession</h4>
+                    <p class="guest-age"></p>
+                </div>
+                <div class="guest-counter">
+                    <button class="counter-btn minus-btn" data-type="concession">-</button>
+                    <span class="count-display" id="concession-count">0</span>
+                    <button class="counter-btn plus-btn" data-type="concession">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @if (!string.IsNullOrEmpty(Model.username)) {
     <div class="alert alert-info mx-5 mt-3 py-2">
         Do stuff here
