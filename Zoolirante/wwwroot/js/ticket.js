@@ -268,3 +268,34 @@ function buyUnlimited() {
     alert('Unlimited Pass added! $' + price.toFixed(2));
 }
 
+// Update cart count
+function updateCart() {
+    var cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+        cartCount.textContent = cart.length;
+        cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+    }
+}
+
+// Show cart
+function showCart() {
+    if (cart.length === 0) {
+        alert('Cart is empty');
+        return;
+    }
+
+    var message = 'CART:\n\n';
+    var total = 0;
+
+    for (var i = 0; i < cart.length; i++) {
+        var item = cart[i];
+        message += item.type + '\n';
+        message += item.date + ' at ' + item.time + '\n';
+        message += item.adults + ' adults, ' + item.children + ' children, ' + item.concessions + ' concessions\n';
+        message += '$' + item.price.toFixed(2) + '\n\n';
+        total += item.price;
+    }
+
+    message += 'TOTAL: $' + total.toFixed(2);
+    alert(message);
+}
