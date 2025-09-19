@@ -19,12 +19,13 @@
 
 
 <div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
-    <h1>Our Events</h1>
+    <h1 class="title-fade">Our Events</h1>
 </div>
 
-<section class="container-fluid px-0 mb-4">
+<section class="container-fluid px-0 mb-4 bg-dark text-white">
     <div class="row g-0 align-items-center hero-row">
 
+        <!-- image -->
         <div class="col-12 col-lg-7">
             <img src="@Url.Content("~/images/EventsIndex.jpg")"
                  alt="Events hero"
@@ -34,10 +35,10 @@
         <!-- text -->
         <div class="col-12 col-lg-5 d-flex align-items-center">
             <div class="p-4 p-md-5 text-center text-lg-start w-100">
-                <h1 class="fw-bold display-5 text-success-emphasis mb-3">
+                <h1 class="fw-bold display-5 mb-3">
                     Events at Zoolirante
                 </h1>
-                <p id="eventTagline" class="lead text-muted mb-0">
+                <p id="eventTagline" class="lead mb-0">
                     Feeding Time, Conservation Talks, and more — there’s always something happening at the zoo!
                 </p>
             </div>
@@ -68,38 +69,49 @@
         }, 4000);
     });</script>
 
+
 @{
     string cat = (ViewBag.Category as string) ?? "";
 }
+
 
 <div class="container mb-4 d-flex justify-content-end">
     <div class="filter-bar">
         <span class="filter-label">FILTER BY</span>
 
-        <!-- SHOW ALL -->
+
         <a class="filter-pill pill-gold @(string.IsNullOrEmpty(cat) ? "is-active" : "")"
            href="@Url.Action("Index", new { category = (string?)null })">
             Show All
         </a>
 
-        @*FREE EVENTS*@
-        <a class="filter-pill pill-blue @(cat=="Free" ? "is-active" : "")"
-           href="@Url.Action("Index", new { category = "Free" })">
+
+        <a class="filter-pill pill-blue @(cat=="Past" ? "is-active" : "")"
+           href="@Url.Action("Index", new { category = "Past" })">
             Past Events
         </a>
 
-        <!-- MAJOR EVENTS -->
-        <!--<a class="filter-pill pill-orange @(cat=="Major" ? "is-active" : "")"
-           href="@Url.Action("Index", new { category = "Major" })">
-            Major Events
-        </a>-->
-        <!-- MEMBER EVENTS -->
-        <!--<a class="filter-pill pill-green @(cat=="Member" ? "is-active" : "")"
-           href="@Url.Action("Index", new { category = "Member" })">
-            Member Events-->
+
+        @*<a class="filter-pill pill-orange @(cat=="Major" ? "is-active" : "")"
+               href="@Url.Action("Index", new { category = "Major" })">
+                Upcoming Events
+            </a>*@
+
+        <a class="filter-pill pill-green @(cat=="Everyday" ? "is-active" : "")"
+           href="@Url.Action("Index", new { category = "Everyday" })">
+            Everyday
         </a>
     </div>
 </div>
+
+@if (Model.DefaultVM.admin == true)
+{
+    <div class="container mb-3 d-flex justify-content-end">
+        <a asp-action="Create" class="btn btn-primary px-4">
+            + Create Event
+        </a>
+    </div>
+}
 
 <div class="container">
     <div class="row g-4">
@@ -129,6 +141,7 @@
                     break;
             }
 
+            <!--EventsList Card-->
             <div class="col-12 col-md-4">
                 <div class="card h-100 shadow-sm border-0">
                     <img src="@imageUrl" alt="@item.Name" class="card-img-top" style="object-fit:cover; height:200px;" />
@@ -139,6 +152,41 @@
                         <p class="card-text text-muted small">
                             @item.Description
                         </p>
+
+                        <!--Dropdown dates-->
+                        <div class="dropdown mt-auto">
+                            <button class="btn btn-zoolirante dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton_@item.EventId"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                Dates
+                            </button>
+
+                            <ul class="dropdown-menu shadow rounded-3" aria-labelledby="dropdownMenuButton_@item.EventId">
+                                @foreach (var rc in Model.EventRollCalls.Where(r => r.EventId == item.EventId))
+                                {
+                                    if (rc.RollDate.HasValue)
+                                    {
+                                        <li>
+                                            <a class="dropdown-item">
+                                                @rc.RollDate?.ToString("dd MMM yyyy")  @rc.RollTime
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a class="dropdown-item">
+                                                Everyday @rc.RollTime
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+
+                        <!--Only Visible to admin-->
                     </div>
                     @if (Model.DefaultVM.admin == true)
                     {
@@ -149,7 +197,6 @@
                     }
                 </div>
             </div>
-            
         }
     </div>
 </div>

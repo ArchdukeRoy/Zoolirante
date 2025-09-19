@@ -1,39 +1,56 @@
 ﻿@model Zoolirante.Models.Event
-
 @{
-    ViewData["Title"] = "Create";
-    Layout = "Event";
+    ViewData["Title"] = "Create Event";
 }
 
-<h1>Create</h1>
+<div class="container py-4">
+    <h1 class="mb-4">Create Event</h1>
 
-<h4>Event</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    <form asp-action="Create" method="post" class="card shadow-sm border-0 p-4">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        <!-- Event Section -->
+        <h4 class="mb-3">Event Details</h4>
+        <div class="form-group mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" placeholder="e.g., Feeding Time" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <input asp-for="Description" class="form-control" placeholder="Short description..." />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <!-- Roll Call Section -->
+        <h4 class="mt-4 mb-3">Initial Roll Call (optional)</h4>
+        <div class="form-group mb-3">
+            <label for="rollDate" class="form-label">Date</label>
+            <input id="rollDate" name="rollDate" type="date" class="form-control" />
+            <div class="form-text">Leave empty for Everyday.</div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="rollTime" class="form-label">Time <span class="text-danger">*</span></label>
+            <input id="rollTime" name="rollTime" type="time" class="form-control" step="60" required />
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="zookeeperId" class="form-label">Zookeeper Id</label>
+            <input id="zookeeperId" name="zookeeperId" type="number" class="form-control" placeholder="e.g., 12" />
+            <div class="form-text">Optional — can assign later.</div>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4">Create</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
