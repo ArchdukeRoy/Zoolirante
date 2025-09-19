@@ -912,4 +912,17 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 15px;
 }
 
+/* Calendar */
+.calendar-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 }
