@@ -99,6 +99,67 @@
         </div>
     </div>
 
+    <!-- Ticket Cards Section -->
+    <div class="section tickets-section">
+        <div class="ticket-cards">
+
+            <!-- Day Ticket Card -->
+            <div class="ticket-card" data-ticket="day">
+                <div class="ticket-header">
+                    <h3 class="ticket-title">Day Ticket</h3>
+                    <p class="ticket-subtitle">All day family fun</p>
+                </div>
+                <div class="ticket-price">
+                    <span class="price-amount" id="day-price">$-</span>
+                </div>
+                <div class="price-note">
+                    <span class="note-text" id="day-note">Select the number of guests above to compare pricing</span>
+                </div>
+                <ul class="ticket-features">
+                    <li class="feature-item">
+                        <span class="feature-icon">🎟️</span>
+                        <span class="feature-text">1 day zoo entry</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">🚗</span>
+                        <span class="feature-text">FREE Parking</span>
+                    </li>
+                </ul>
+                <button class="buy-btn" data-ticket="day">Buy now</button>
+            </div>
+
+            <!-- Unlimited Pass Card -->
+            <div class="ticket-card best-value" data-ticket="unlimited">
+                <div class="badge">Best value</div>
+                <div class="ticket-header">
+                    <h3 class="ticket-title">Unlimited Pass</h3>
+                </div>
+                <div class="ticket-price">
+                    <span class="price-amount" id="unlimited-price">$-</span>
+                </div>
+                <div class="price-note">
+                    <span class="note-text" id="unlimited-note">Select the number of guests above to compare pricing</span>
+                </div>
+                <ul class="ticket-features">
+                    <li class="feature-item">
+                        <span class="feature-icon">♾️</span>
+                        <span class="feature-text">12 months zoo entry – UNLIMITED access to Zoolirante</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">🚗</span>
+                        <span class="feature-text">FREE parking</span>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">💰</span>
+                        <span class="feature-text">No joining fee</span>
+                    </li>
+                </ul>
+                <button class="buy-btn" data-ticket="unlimited">Buy now</button>
+            </div>
+
+        </div>
+    </div>
+
 @if (!string.IsNullOrEmpty(Model.username)) {
     <div class="alert alert-info mx-5 mt-3 py-2">
         Do stuff here
