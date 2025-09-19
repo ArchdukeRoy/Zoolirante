@@ -4,33 +4,70 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Species</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SpeciesImage" class="control-label"></label>
-                <input asp-for="SpeciesImage" class="form-control" />
-                <span asp-validation-for="SpeciesImage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
+    <h1>Create an Animal</h1>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container py-4">
+    <form asp-action="Create" method="post" class="card shadow-sm border-0 p-4">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Species Section -->
+        <h4 class="mb-3">Species Details</h4>
+
+        <div class="form-group mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" placeholder="e.g., African Lion" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <span>Species Description</span>
+            <textarea asp-for="SpeciesDescription" rows="4" class="form-control" placeholder="Short description..."></textarea>
+            <span asp-validation-for="SpeciesDescription" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Habitat" class="form-label"></label>
+            <select asp-for="Habitat" class="form-select">
+                <option value="">-- select habitat --</option>
+                <option>Land</option>
+                <option>Sky</option>
+                <option>Water</option>
+            </select>
+            <span asp-validation-for="Habitat" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Diet" class="form-label"></label>
+            <select asp-for="Diet" class="form-select">
+                <option value="">-- select diet --</option>
+                <option>Carnivore</option>
+                <option>Omnivore</option>
+                <option>Herbivore</option>
+            </select>
+            <span asp-validation-for="Diet" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="SpeciesImage" class="form-label">Main Image (bottom banner)</label>
+            <input asp-for="SpeciesImage" class="form-control" placeholder="/Images/species/lion.jpg or URL" />
+            <span asp-validation-for="SpeciesImage" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label asp-for="SpeciesImage2" class="form-label">Secondary Image (preview body)</label>
+            <input asp-for="SpeciesImage2" class="form-control" placeholder="/Images/species/lion2.jpg or URL" />
+            <span asp-validation-for="SpeciesImage2" class="text-danger"></span>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4">Create</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

@@ -49,6 +49,15 @@
                 </div>
             </form>
         </div>
+
+        @if (Model.DefaultVM.admin == true)
+        {
+            <div class="justify-content-end">
+                <a asp-action="Create" class="btn btn-primary px-4">
+                    + Create Item
+                </a>
+            </div>
+        }
     </div>
     <hr class="my-4 border-2 border-dark opacity-80">
     @if (!string.IsNullOrEmpty(ViewBag.NotLoggedIn)) {
@@ -62,6 +71,8 @@
         </div>
     }
 </div>
+
+
 
 
 <div class="container" >
@@ -92,7 +103,11 @@
                     @if (Model.DefaultVM.admin == true) {
                         <div class="card-footer text-end" style="z-index: 2;">
                             <a asp-action="Edit" asp-route-id="@item.ItemId" class="btn btn-sm btn-dark radius-2">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-sm btn-danger radius-2">Delete</a>
+                            <form asp-controller="Merchandise" asp-action="Delete" asp-route-id="@item.ItemId" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger radius-2" onclick="return confirm('Are you sure you want to delete this?');">
+                                    Delete
+                                </button>
+                            </form>
                         </div>
                     }
                 </div>

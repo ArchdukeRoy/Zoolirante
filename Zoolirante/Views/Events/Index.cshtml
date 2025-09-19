@@ -192,7 +192,11 @@
                     {
                         <div class="card-footer text-end">
                             <a asp-action="Edit" asp-route-id="@item.EventId" class="btn btn-sm btn-dark radius-2">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@item.EventId" class="btn btn-sm btn-danger radius-2">Delete</a>
+                            <form asp-controller="Events" asp-action="Delete" asp-route-id="@item.EventId" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger radius-2" onclick="return confirm('Are you sure you want to delete this?');">
+                                    Delete
+                                </button>
+                            </form>
                         </div>
                     }
                 </div>
