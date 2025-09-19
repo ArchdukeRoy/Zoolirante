@@ -6,65 +6,94 @@
 <div class="w-100 bg-zoolirante-light py-1 shadow"></div>
 <div class="container">
     <div class="row">
+        @*Account info*@
         <div class="col-md-6">
-            <div class="alert alert-info mt-3 py-2 me-0">
-                @*Username*@
-                <h5 class="h6 mb-1 fw-light">Username</h5>
-                <div class="input-group-sm d-flex align-items-center mb-2">
-                    <input type="text" value="@Model.Visitor.Username" class="form-control" style="max-width: 250px" readonly />
+            <div class="card shadow-sm border-0 h-100 mt-4">
+                <div class="card-header bg-dark text-white fw-bold">
+                    Account Information
                 </div>
-                @*First Name*@
-                <h5 class="h6 mb-1 fw-light">First Name</h5>
-                <div class="input-group-sm d-flex align-items-center mb-2">
-                    <input type="text" value="@Model.Person.FirstName" class="form-control" style="max-width: 250px" readonly />
-                </div>
-                @*Last Name*@
-                <h5 class="h6 mb-1 fw-light">Last Name</h5>
-                <div class="input-group-sm d-flex align-items-center mb-2">
-                    <input type="text" value="@Model.Person.LastName" class="form-control" style="max-width: 250px" readonly />
-                </div>
-                @*Email*@
-                <h5 class="h6 mb-1 fw-light">Email</h5>
-                <div class="input-group-sm d-flex align-items-center mb-2">
-                    <input id="emailField" type="password"
-                           value="@Model.Person.Email"
-                           class="form-control" style="max-width: 250px" readonly />
-                    <button type="button" class="btn btn-dark" onclick="toggleField('emailField')"><i class="bi bi-eye text-white"></i></button>
-                </div>
-                @*Password*@
-                <h5 class="h6 mb-1 fw-light">Password</h5>
-                <div class="input-group-sm d-flex align-items-center mb-2">
-                    <input id="passwordField" type="password"
-                           value="@Model.Visitor.PasswordHash"
-                           class="form-control" style="max-width: 250px" readonly />
-                    <button type="button" class="btn btn-dark" onclick="toggleField('passwordField')"><i class="bi bi-eye text-white"></i></button>
-                </div>
-                @*Phone*@
-                <h5 class="h6 mb-1 fw-light">Phone</h5>
-                <div class="input-group-sm d-flex align-items-center mb-2">
-                    <input id="phoneField" type="password"
-                           value="@Model.Visitor.Contact"
-                           class="form-control" style="max-width: 250px" readonly />
-                    <button type="button" class="btn btn-dark" onclick="toggleField('phoneField')"><i class="bi bi-eye text-white"></i></button>
+                <div class="card-body">
+                    <!-- Username -->
+                    <h6 class="fw-light mb-1">Username</h6>
+                    <input type="text" value="@Model.Visitor.Username" class="form-control mb-2" readonly />
+
+                    <!-- First Name -->
+                    <h6 class="fw-light mb-1">First Name</h6>
+                    <input type="text" value="@Model.Person.FirstName" class="form-control mb-2" readonly />
+
+                    <!-- Last Name -->
+                    <h6 class="fw-light mb-1">Last Name</h6>
+                    <input type="text" value="@Model.Person.LastName" class="form-control mb-2" readonly />
+
+                    <!-- Email -->
+                    <h6 class="fw-light mb-1">Email</h6>
+                    <div class="input-group mb-2">
+                        <input id="emailField" type="password" value="@Model.Person.Email" class="form-control" readonly />
+                        <button type="button" class="btn btn-outline-dark" onclick="toggleField('emailField')">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+
+                    <!-- Password -->
+                    <h6 class="fw-light mb-1">Password</h6>
+                    <div class="input-group mb-2">
+                        <input id="passwordField" type="password" value="@Model.Visitor.PasswordHash" class="form-control" readonly />
+                        <button type="button" class="btn btn-outline-dark" onclick="toggleField('passwordField')">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+
+                    <!-- Phone -->
+                    <h6 class="fw-light mb-1">Phone</h6>
+                    <div class="input-group mb-2">
+                        <input id="phoneField" type="password" value="@Model.Visitor.Contact" class="form-control" readonly />
+                        <button type="button" class="btn btn-outline-dark" onclick="toggleField('phoneField')">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+        @*Fav animals*@
         <div class="col-md-6">
-            <div class="alert alert-info mt-3 py-2 ms-0">
-                Favourite Animals: 
-                @foreach (var item in Model.DefaultVM.favouriteAnimals) {
-                    <li class="form-text">@item.AnimalName</li>
-                }
+            <div class="card shadow-sm border-0 h-100 mt-4">
+                <div class="card-header bg-dark text-white fw-bold">
+                    Favourite Animals
+                </div>
+                <div class="card-body">
+                    @if (Model.DefaultVM.favouriteAnimals.Any()) {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var item in Model.DefaultVM.favouriteAnimals) {
+                                <li class="list-group-item">@item.AnimalName</li>
+                            }
+                        </ul>
+                    } else {
+                        <p class="text-muted">No favourite animals added yet.</p>
+                    }
+                </div>
             </div>
         </div>
+        @*Purchase History*@
         <div class="col-md-6">
-            <div class="alert alert-info mt-3 py-2 me-0">
-                Purchase History:
+            <div class="card shadow-sm border-0 h-100 mt-4">
+                <div class="card-header bg-dark text-white fw-bold">
+                    Purchase History
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">No purchases yet.</p>
+                </div>
             </div>
         </div>
+
+        @*Visit History*@
         <div class="col-md-6">
-            <div class="alert alert-info mt-3 py-2 ms-0">
-                Visit History:
+            <div class="card shadow-sm border-0 h-100 mt-4">
+                <div class="card-header bg-dark text-white fw-bold">
+                    Visit History
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">No visits recorded yet.</p>
+                </div>
             </div>
         </div>
     </div>
