@@ -614,8 +614,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .bottomsection-link {
-    color: white;
-    text-decoration: none;
+    color: white !important;
+    text-decoration: none !important;
     margin-bottom: 20px;
 }
 
@@ -1147,6 +1147,16 @@ input[type=number]::-webkit-outer-spin-button {
     color: #8b4513;
     cursor: pointer;
     font-weight: bold;
+}
+
+    .time-slot:hover {
+        background-color: #fed7aa;
+    }
+
+    .time-slot.selected {
+        background-color: #d2691e;
+        color: white;
+    }
 
 @keyframes titleFade {
     from {
@@ -1159,20 +1169,6 @@ input[type=number]::-webkit-outer-spin-button {
         transform: translateX(0);
     }
 }
-
-.title-fade {
-    opacity: 0;
-    animation: titleFade 1s ease-out forwards;
-}
-
-    .time-slot:hover {
-        background-color: #fed7aa;
-    }
-
-    .time-slot.selected {
-        background-color: #d2691e;
-        color: white;
-    }
 
 /* Guest selection */
 .guest-rows {
@@ -1360,7 +1356,7 @@ input[type=number]::-webkit-outer-spin-button {
 /* Cart */
 .cart-container {
     position: fixed;
-    top: 100px;
+    top: 120px;
     right: 10px;
 }
 
