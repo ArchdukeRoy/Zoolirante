@@ -873,7 +873,6 @@ input[type=number]::-webkit-outer-spin-button {
         color: grey;
     }
 
-
 .event-img {
     object-fit: cover;
     width: 100%;
@@ -884,6 +883,7 @@ input[type=number]::-webkit-outer-spin-button {
     transition: opacity 0.8s ease-in-out;
 }
 
+/* ====== from TicketUIPage_David ====== */
 .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -1261,4 +1261,37 @@ input[type=number]::-webkit-outer-spin-button {
         bottom: 20px;
         top: auto;
     }
+}
+
+/* ====== from main ====== */
+.btn-zoolirante {
+    background-color: #FF8C42 !important; /* your Zoolirante orange */
+    color: #fff !important; /* white text */
+    border: none !important;
+    font-weight: bold;
+    border-radius: 0.5rem; /* optional rounded look */
+    transition: background-color 0.3s ease;
+}
+.btn-zoolirante:hover {
+        background-color: #e6762e !important; /* darker shade on hover */
+        color: #fff !important;
+    }
+
+
+.events-slide {
+    height: 420px; /* tweak height if you like */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #e9ecef; /* neutral while URLs are empty */
+    border-radius: 0.75rem;
+}
+
+/* Softer card look */
+.card.border-0 {
+    border-radius: 1rem;
+}
+
+.input-group-text {
+    background: #f7f7f7;
 }
