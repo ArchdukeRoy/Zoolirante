@@ -3,7 +3,14 @@
 <div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
     <h1>MyAccount</h1>
 </div>
+<head>
+    <link rel="stylesheet" href="~/css/MyAccount.css" />
+</head>
+
 <div class="w-100 bg-zoolirante-light py-1 shadow"></div>
+<div>
+    <p class="text-head" align> Hello @Model.Visitor.Username!!</p>
+</div>
 <div class="container">
     <div class="row">
         @*Account info*@
@@ -15,20 +22,20 @@
                 <div class="card-body">
                     <!-- Username -->
                     <h6 class="fw-light mb-1">Username</h6>
-                    <input type="text" value="@Model.Visitor.Username" class="form-control mb-2" readonly />
+                    <input type="text" value="@Model.Visitor.Username" class="form-control mb-2" style="background-color: bisque;" readonly />
 
                     <!-- First Name -->
                     <h6 class="fw-light mb-1">First Name</h6>
-                    <input type="text" value="@Model.Person.FirstName" class="form-control mb-2" readonly />
+                    <input type="text" value="@Model.Visitor.Username" class="form-control mb-2" style="background-color: bisque;" readonly />
 
                     <!-- Last Name -->
                     <h6 class="fw-light mb-1">Last Name</h6>
-                    <input type="text" value="@Model.Person.LastName" class="form-control mb-2" readonly />
+                    <input type="text" value="@Model.Person.LastName" class="form-control mb-2" style="background-color: bisque;" readonly />
 
                     <!-- Email -->
                     <h6 class="fw-light mb-1">Email</h6>
                     <div class="input-group mb-2">
-                        <input id="emailField" type="password" value="@Model.Person.Email" class="form-control" readonly />
+                        <input id="emailField" type="password" value="@Model.Person.Email" class="form-control" style="background-color: bisque;" readonly />
                         <button type="button" class="btn btn-outline-dark" onclick="toggleField('emailField')">
                             <i class="bi bi-eye"></i>
                         </button>
@@ -37,7 +44,7 @@
                     <!-- Password -->
                     <h6 class="fw-light mb-1">Password</h6>
                     <div class="input-group mb-2">
-                        <input id="passwordField" type="password" value="@Model.Visitor.PasswordHash" class="form-control" readonly />
+                        <input id="passwordField" type="password" value="@Model.Visitor.PasswordHash" class="form-control" style="background-color: bisque;" readonly />
                         <button type="button" class="btn btn-outline-dark" onclick="toggleField('passwordField')">
                             <i class="bi bi-eye"></i>
                         </button>
@@ -46,7 +53,7 @@
                     <!-- Phone -->
                     <h6 class="fw-light mb-1">Phone</h6>
                     <div class="input-group mb-2">
-                        <input id="phoneField" type="password" value="@Model.Visitor.Contact" class="form-control" readonly />
+                        <input id="phoneField" type="password" value="@Model.Visitor.Contact" class="form-control" style="background-color: bisque;" readonly />
                         <button type="button" class="btn btn-outline-dark" onclick="toggleField('phoneField')">
                             <i class="bi bi-eye"></i>
                         </button>
@@ -54,6 +61,7 @@
                 </div>
             </div>
         </div>
+   
         @*Fav animals*@
         <div class="col-md-6">
             <div class="card shadow-sm border-0 h-100 mt-4">
@@ -62,9 +70,9 @@
                 </div>
                 <div class="card-body">
                     @if (Model.DefaultVM.favouriteAnimals.Any()) {
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush"  >
                             @foreach (var item in Model.DefaultVM.favouriteAnimals) {
-                                <li class="list-group-item">@item.AnimalName</li>
+                                <li class="list-group-item" style="background-color: bisque;">@item.AnimalName</li>
                             }
                         </ul>
                     } else {
@@ -73,6 +81,7 @@
                 </div>
             </div>
         </div>
+        
         @*Purchase History*@
         <div class="col-md-6">
             <div class="card shadow-sm border-0 h-100 mt-4">
@@ -96,9 +105,28 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
+        <div class="col-md-6">
+            <div class="notification-toggle">
+                <div class="card shadow-sm border-0 h-100 mt-4">
+                    <div class="card-header bg-dark text-white fw-bold">
+                        Notificaiton Settings
+                    </div>
+                    <div class="card-body d-flex align-items-center gap-2" style=">
+                        <img id="bellIcon" src="https://cdn-icons-png.flaticon.com/128/1827/1827349.png" alt="Notification Bell" class="bell-icon">
+
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span id="notifStatus" class="notif-text">Notifications On / Off </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+</div>
+</div>
 
 <script>
     function toggleField(fieldId) {
