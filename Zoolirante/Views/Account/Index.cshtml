@@ -15,13 +15,23 @@
             <div class="d-flex justify-content-center card-body bg-light text-black">
                 <div style="width: 70%;">
                     @if (!string.IsNullOrEmpty(ViewBag.Error)) {
-                        <div class="alert alert-danger py-1">
+                        <div class="alert alert-danger py-1 mb-1 text-sm-start fw-light">
                             @ViewBag.Error
                         </div>
                     }
                     @if (TempData["Created"] != null) {
                         <div class="alert alert-info py-1">
                             @TempData["Created"]
+                        </div>
+                    }
+                    @if (TempData["SignInFirst"] != null) {
+                        <div class="alert alert-danger py-1 mb-1 text-sm-start fw-light">
+                            @TempData["SignInFirst"]
+                        </div>
+                    }
+                    @if (TempData["LoggedOut"] != null) {
+                        <div class="alert alert-info py-1 mb-1 text-sm-start fw-light">
+                            @TempData["LoggedOut"]
                         </div>
                     }
                     <form asp-controller="Account" asp-action="Index" method="post">

@@ -15,8 +15,7 @@
             <div class="card h-100 rounded-0 shadow-sm">
                 <div class="card-body">
                     <h1 class="card-title h3 mb-2 text-dark">Edit</h1>
-
-                    <form asp-action="Edit" method="post">
+                    <form asp-controller="AnimalList" asp-action="Edit" asp-route-id="@Model.SpeciesId" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="SpeciesId" />
 

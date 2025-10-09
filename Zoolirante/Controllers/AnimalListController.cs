@@ -62,7 +62,12 @@ namespace Zoolirante.Controllers
                 _context.Add(faM);
                 await _context.SaveChangesAsync();
                 
-                var faDT = new FavouriteAnimalDataTransfer {FavAnimalsId = faM.FavAnimalsId, AnimalId = id, VisitorId = visId };
+                var faDT = new FavouriteAnimalDataTransfer {
+                    FavAnimalsId = faM.FavAnimalsId, 
+                    AnimalId = id, 
+                    VisitorId = visId, 
+                    AnimalName =  _context.Species.FirstOrDefault(i => i.SpeciesId == id)?.Name
+                };
 
                 //Add to fa list in defaultVM
                 var vmJson = HttpContext.Session.GetString("DefaultVM")!;
