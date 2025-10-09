@@ -8,6 +8,7 @@ namespace Zoolirante.ViewModels {
         public string lastName { get; set; }
         public string username { get; set; }
         public Boolean admin { get; set; }
+        public string? email { get; set; }
         public List<FavouriteAnimalDataTransfer> favouriteAnimals { get; set; } = new();
         public List<MerchInOrder> temporaryCart {  get; set; } = new();
     }

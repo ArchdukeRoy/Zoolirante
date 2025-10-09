@@ -50,6 +50,7 @@ namespace Zoolirante.Controllers
             _defaultViewModel.username = user.Username;
             _defaultViewModel.firstName = person.FirstName;
             _defaultViewModel.lastName = person.LastName;
+            _defaultViewModel.email = person.Email;
 
             // Staff object instance is not assigned in dbCreation script. The connection is set here. 
             if (await _context.Staff.Where(i => i.StaffId == person.PersonId).FirstOrDefaultAsync() != null) {
