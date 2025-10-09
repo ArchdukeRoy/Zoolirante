@@ -329,8 +329,6 @@ function checkout() {
         return;
     }
 
-    var message = 'CART:\n\n';
-    var total = 0;
     var checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.disabled = true;
@@ -342,4 +340,39 @@ function checkout() {
         total += cart[i].price;
     }
 
+    var checkoutData = {
+        items: cart,
+        total: total
+    };
+
+    fetch('/Tickets/CreateCheckoutSession', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(checkoutData)
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (session) {
+            return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+            if (result.error) {
+                alert(result.error.message);
+            }
+            if (checkoutBtn) {
+                checkoutBtn.disabled = false;
+                checkoutBtn.textContent = 'Proceed to Checkout 💳';
+            }
+        })
+        .catch(function (error) {
+            console.error('Error:', error);
+            alert('Something went wrong. Please try again.');
+            if (checkoutBtn) {
+                checkoutBtn.disabled = false;
+                checkoutBtn.textContent = 'Proceed to Checkout 💳';
+            }
+        });
 }
