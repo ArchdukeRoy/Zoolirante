@@ -217,6 +217,24 @@
             <span class="cart-icon">🛒</span>
             <span class="cart-count" id="cart-count">0</span>
         </button>
+    <div id="checkout-section" style="display: none; position: fixed; top: 120px; right: 20px; width: 320px; z-index: 1000;">
+        <!-- Order Summary Card -->
+        <div style="background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; margin-bottom: 15px;">
+            <div style="background: #2c5f2d; color: white; padding: 15px; font-size: 18px; font-weight: bold;">
+                Order Summary
+            </div>
+            <div id="order-summary-content" style="padding: 20px; max-height: 400px; overflow-y: auto;">
+            </div>
+            <div style="border-top: 2px solid #e0e0e0; padding: 15px; background: #f9f9f9;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <span style="font-size: 18px; font-weight: bold;">Total:</span>
+                    <span id="order-total" style="font-size: 24px; font-weight: bold; color: #2c5f2d;">$0.00</span>
+                </div>
+                <button id="checkout-btn" style="width: 100%; background-color: #28a745; color: white; border: none; padding: 15px; font-size: 18px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: background-color 0.3s;">
+                    Proceed to Checkout 💳
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Notification -->
