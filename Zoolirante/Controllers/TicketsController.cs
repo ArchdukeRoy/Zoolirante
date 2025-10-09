@@ -11,6 +11,8 @@ using Zoolirante.ViewModels;
 using System.Text.Json;
 using Stripe;
 using Stripe.Checkout;
+using Zoolirante.Services;
+
 
 namespace Zoolirante.Controllers
 {
@@ -18,11 +20,13 @@ namespace Zoolirante.Controllers
     {
         private readonly ZooliranteContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IEmailService _emailService;
 
-        public TicketsController(ZooliranteContext context, IConfiguration configuration)
+        public TicketsController(ZooliranteContext context, IConfiguration configuration, IEmailService emailService)
         {
             _context = context;
             _configuration = configuration;
+            _emailService = emailService;
         }
 
         // GET: Tickets
@@ -203,6 +207,7 @@ namespace Zoolirante.Controllers
                 PaymentMethodTypes = new List<string> { "card" },
                 LineItems = lineItems,
                 Mode = "payment",
+                BillingAddressCollection = "required",
                 SuccessUrl = $"{Request.Scheme}://{Request.Host}/Tickets/Success?session_id={{CHECKOUT_SESSION_ID}}",
                 CancelUrl = $"{Request.Scheme}://{Request.Host}/Tickets/Index",
                 Metadata = new Dictionary<string, string>
@@ -224,21 +229,20 @@ namespace Zoolirante.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Verify payment with Stripe
             StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
             var service = new SessionService();
             var session = service.Get(session_id);
 
             if (session.PaymentStatus == "paid")
             {
-                // Deserialize items from metadata
                 var itemsJson = session.Metadata["items"];
                 var items = System.Text.Json.JsonSerializer.Deserialize<List<CartItem>>(itemsJson);
 
-                // Check if items deserialized successfully
                 if (items != null && items.Count > 0)
                 {
-                    // Save each ticket as merchandise
+                    var ticketDetails = new List<TicketDetail>();
+
+                    // Save to database and collect ticket IDs
                     foreach (var item in items)
                     {
                         var merchandise = new Merchandise
@@ -248,17 +252,43 @@ namespace Zoolirante.Controllers
                             ItemCost = item.Price,
                             ItemImage = null
                         };
-
                         _context.Add(merchandise);
+                        await _context.SaveChangesAsync(); // Save to get the ID
+
+                        // Add ticket details with the generated ID
+                        ticketDetails.Add(new TicketDetail
+                        {
+                            TicketId = merchandise.ItemId,
+                            Type = item.Type,
+                            Date = item.Date,
+                            Time = item.Time,
+                            Adults = item.Adults,
+                            Children = item.Children,
+                            Concessions = item.Concessions,
+                            Price = item.Price
+                        });
                     }
 
-                    await _context.SaveChangesAsync();
+                    // Send email receipt with QR codes
+                    try
+                    {
+                        var customerEmail = session.CustomerDetails?.Email ?? "test@example.com";
+                        var customerName = session.CustomerDetails?.Name ?? "Valued Customer";
 
-                    ViewBag.Message = "Payment successful! Your tickets have been confirmed and saved.";
-                }
-                else
-                {
-                    ViewBag.Message = "Payment successful, but there was an issue saving ticket details.";
+                        await _emailService.SendTicketReceiptAsync(
+                            customerEmail,
+                            customerName,
+                            ticketDetails,
+                            session_id
+                        );
+
+                        ViewBag.Message = "Payment successful! Check your email for your tickets with QR codes.";
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Email failed: {ex.Message}");
+                        ViewBag.Message = "Payment successful! (Email confirmation pending)";
+                    }
                 }
 
                 ViewBag.SessionId = session_id;
