@@ -505,14 +505,21 @@ input[type=number]::-webkit-outer-spin-button {
     font-family: Arial;
 }
 
-.map-wrap {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    aspect-ratio: 16/9;
-    margin: 40px auto;
-    background: url('/Images/ZOOMAP.png') center/contain no-repeat;
+.section-map {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2rem;
 }
+
+    .section-map .map-container {
+        flex: 2; /* makes it take up more horizontal space than the description */
+    }
+
+    .section-map .section-description {
+        flex: 1;
+    }
+
 
 .pin {
     position: absolute;
@@ -1455,4 +1462,8 @@ input[type=number]::-webkit-outer-spin-button {
 .nav-link:hover .bi-cart3 {
     color: #ffb74d; /* your brand color */
     transform: scale(1.1);
+}
+
+.section-map .description-map {
+    color: #000;
 }
