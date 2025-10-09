@@ -1,4 +1,8 @@
 ﻿// Simple variables
+﻿
+var stripe = Stripe('pk_test_51SGCNnFrc6RfCr2UlqAhZJcjFDv5rVu7C8QzXlqLheVGAIz7kLpE1qgGLoAvpEQXqUSo5dn8KPyfwIeSWjkjt78p00KLaekc7Z');
+
+// Simple variables
 var selectedDate = '';
 var selectedTime = '';
 var adults = 0;
@@ -21,6 +25,14 @@ window.onload = function () {
     createCalendar();
     setupButtons();
     updatePrices();
+
+    // Add checkout button handler
+    var checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.onclick = function () {
+            checkout();
+        };
+    }
 };
 
 // Create simple calendar
