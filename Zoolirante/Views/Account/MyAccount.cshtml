@@ -17,7 +17,10 @@
         <div class="col-md-6">
             <div class="card shadow-sm border-0 h-100 mt-4">
                 <div class="card-header bg-dark text-white fw-bold">
-                    Account Information
+                    <img id="profileIcon" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/account-grey-icon.png" alt="profile icon" class="profile-icon">
+                    <span id="profileStatus" class="profile-text">  Account Information </span>
+       
+
                 </div>
                 <div class="card-body">
                     <!-- Username -->
@@ -61,7 +64,8 @@
                 </div>
             </div>
         </div>
-   
+     
+        
         @*Fav animals*@
         <div class="col-md-6">
             <div class="card shadow-sm border-0 h-100 mt-4">
@@ -70,9 +74,12 @@
                 </div>
                 <div class="card-body">
                     @if (Model.DefaultVM.favouriteAnimals.Any()) {
-                        <ul class="list-group list-group-flush"  >
+                        <ul class="list-group list-group-flush" >
                             @foreach (var item in Model.DefaultVM.favouriteAnimals) {
                                 <li class="list-group-item" style="background-color: bisque;">@item.AnimalName</li>
+                            }
+                        </ul>
+                    }
 
                     @if (Model.DefaultVM.favouriteAnimals.Any())
                     {
@@ -145,14 +152,11 @@
                             }
                         </ul>
                     }
-                    else
-                    {
-                        <p class="text-muted">No favourite animals added yet.</p>
-                    }
+                    else {<p class="text-muted">No favourite animals added yet.</p>}
                 </div>
             </div>
         </div>
-        
+
         @*Purchase History*@
         <div class="col-md-6">
             <div class="card shadow-sm border-0 h-100 mt-4">
@@ -181,11 +185,11 @@
             <div class="notification-toggle">
                 <div class="card shadow-sm border-0 h-100 mt-4">
                     <div class="card-header bg-dark text-white fw-bold">
-                        Notificaiton Settings
+                        <img id="profileIcon" src="https://www.citypng.com/public/uploads/preview/white-notification-bell-icon-transparent-background-701751695033958n33jtfuju8.png?v=2025083107" alt="profile icon" class="profile-icon">
+                    <span id="profileStatus" class="profile-text">  Notificaiton Settings </span>
                     </div>
                     <div class="card-body d-flex align-items-center gap-2" style=">
                         <img id="bellIcon" src="https://cdn-icons-png.flaticon.com/128/1827/1827349.png" alt="Notification Bell" class="bell-icon">
-
                         <label class="switch">
                             <input type="checkbox">
                             <span class="slider round"></span>
@@ -193,11 +197,12 @@
                         <span id="notifStatus" class="notif-text">Notifications On / Off </span>
                     </div>
                 </div>
+
             </div>
         </div>
-        
 </div>
 </div>
+
 
 <script>
     function toggleField(fieldId) {
