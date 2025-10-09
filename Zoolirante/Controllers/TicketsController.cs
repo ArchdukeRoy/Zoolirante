@@ -17,8 +17,10 @@ namespace Zoolirante.Controllers
     public class TicketsController : Controller
     {
         private readonly ZooliranteContext _context;
+        private readonly IConfiguration _configuration;
 
         public TicketsController(ZooliranteContext context)
+        public TicketsController(ZooliranteContext context, IConfiguration configuration)
         {
             _context = context;
         }
@@ -28,6 +30,8 @@ namespace Zoolirante.Controllers
         {
             var vmJson = HttpContext.Session.GetString("DefaultVM");
             if (!string.IsNullOrEmpty(vmJson)) {
+            if (!string.IsNullOrEmpty(vmJson))
+            {
                 vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
             }
             return View(vm);
@@ -167,5 +171,52 @@ namespace Zoolirante.Controllers
         {
             return _context.Tickets.Any(e => e.TicketId == id);
         }
+
+        [HttpPost]
+        public IActionResult CreateCheckoutSession([FromBody] CheckoutRequest request)
+        {
+            StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
+
+            var lineItems = new List<SessionLineItemOptions>();
+
+            foreach (var item in request.Items)
+            {
+                var description = $"{item.Date} at {item.Time} - {item.Adults} adults, {item.Children} children, {item.Concessions} concessions";
+
+                lineItems.Add(new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        Currency = "aud",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = item.Type,
+                            Description = description,
+                        },
+                        UnitAmount = (long)(item.Price * 100),
+                    },
+                    Quantity = 1,
+                });
+            }
+
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                LineItems = lineItems,
+                Mode = "payment",
+                SuccessUrl = $"{Request.Scheme}://{Request.Host}/Tickets/Success?session_id={{CHECKOUT_SESSION_ID}}",
+                CancelUrl = $"{Request.Scheme}://{Request.Host}/Tickets/Index",
+                Metadata = new Dictionary<string, string>
+        {
+            { "items", System.Text.Json.JsonSerializer.Serialize(request.Items) }
+        }
+            };
+
+            var service = new SessionService();
+            Session session = service.Create(options);
+
+            return Json(new { id = session.Id });
+        }
+
     }
 }
