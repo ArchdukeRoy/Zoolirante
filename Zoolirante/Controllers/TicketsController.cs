@@ -23,6 +23,7 @@ namespace Zoolirante.Controllers
         public TicketsController(ZooliranteContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: Tickets
@@ -216,6 +217,60 @@ namespace Zoolirante.Controllers
             Session session = service.Create(options);
 
             return Json(new { id = session.Id });
+        }
+
+        public async Task<IActionResult> Success(string session_id)
+        {
+            if (string.IsNullOrEmpty(session_id))
+            {
+                return RedirectToAction("Index");
+            }
+
+            // Verify payment with Stripe
+            StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
+            var service = new SessionService();
+            var session = service.Get(session_id);
+
+            if (session.PaymentStatus == "paid")
+            {
+                // Deserialize items from metadata
+                var itemsJson = session.Metadata["items"];
+                var items = System.Text.Json.JsonSerializer.Deserialize<List<CartItem>>(itemsJson);
+
+                // Check if items deserialized successfully
+                if (items != null && items.Count > 0)
+                {
+                    // Save each ticket as merchandise
+                    foreach (var item in items)
+                    {
+                        var merchandise = new Merchandise
+                        {
+                            ItemName = $"{item.Type} - {item.Date} at {item.Time}",
+                            ItemDescription = $"{item.Adults} Adult(s), {item.Children} Child(ren), {item.Concessions} Concession(s)",
+                            ItemCost = item.Price,
+                            ItemImage = null
+                        };
+
+                        _context.Add(merchandise);
+                    }
+
+                    await _context.SaveChangesAsync();
+
+                    ViewBag.Message = "Payment successful! Your tickets have been confirmed and saved.";
+                }
+                else
+                {
+                    ViewBag.Message = "Payment successful, but there was an issue saving ticket details.";
+                }
+
+                ViewBag.SessionId = session_id;
+            }
+            else
+            {
+                ViewBag.Message = "Payment verification failed.";
+            }
+
+            return View();
         }
 
     }
