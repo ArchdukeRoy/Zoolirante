@@ -43,7 +43,6 @@ C:\Users\Valued Customer\.nuget\packages\bootstrap\5.3.8\contentFiles\any\any\ww
 C:\Users\Valued Customer\.nuget\packages\bootstrap\5.3.8\contentFiles\any\any\wwwroot\js\bootstrap.min.js
 C:\Users\Valued Customer\.nuget\packages\bootstrap\5.3.8\contentFiles\any\any\wwwroot\js\bootstrap.min.js.map
 wwwroot\css\MembersPage.css
-wwwroot\css\site.css
 wwwroot\css\StyleSheet.css
 wwwroot\favicon.ico
 wwwroot\Images\AnimalEnrichment.jpg
@@ -133,3 +132,4 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\css\site.css
