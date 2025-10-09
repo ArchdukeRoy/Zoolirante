@@ -12,6 +12,9 @@ builder.Services.AddSession(options => {
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Add email and QR services
+builder.Services.AddScoped<Zoolirante.Services.IQrCodeService, Zoolirante.Services.QrCodeService>();
+builder.Services.AddScoped<Zoolirante.Services.IEmailService, Zoolirante.Services.EmailService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
