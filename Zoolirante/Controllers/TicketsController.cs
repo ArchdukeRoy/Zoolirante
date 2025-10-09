@@ -279,6 +279,15 @@ namespace Zoolirante.Controllers
             public decimal Total { get; set; }
         }
 
+        public class CartItem
+        {
+            public string ?Type { get; set; }
+            public string ?Date { get; set; }
+            public string ?Time { get; set; }
+            public int Adults { get; set; }
+            public int Children { get; set; }
             public int Concessions { get; set; }
+            public decimal Price { get; set; }
+        }
     }
 }
