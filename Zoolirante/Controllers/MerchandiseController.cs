@@ -25,6 +25,7 @@ namespace Zoolirante.Controllers
         public async Task<IActionResult> Index(string searchMerchandise, string priceFilter, MerchViewModel vm)
         {
             var merch = from i in _context.Merchandises
+                        where !i.ItemName.Contains("Ticket") && !i.ItemName.Contains("Pass")
                         select i;
 
             // Search feature
