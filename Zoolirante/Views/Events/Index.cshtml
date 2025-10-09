@@ -2,13 +2,11 @@
 
 @{
     ViewData["Title"] = "Index";
-
 }
-
 
 @if (!string.IsNullOrEmpty(Model.DefaultVM.username))
 {
-    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px">
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px; z-index: 4;">
         @if (Model.DefaultVM.admin == true)
         {
             <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
@@ -17,27 +15,124 @@
     </div>
 }
 
+<!-- Hero Section -->
 
-<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
-    <h1 class="title-fade">Our Events</h1>
-</div>
+
+<section class="hero-video-wrap position-relative text-center text-white" style="margin-top:-2px;">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+           poster="/Images/events-poster.jpg">
+        <source src="/Images/hpVids/events.mp4" type="video/mp4" />
+
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content d-flex flex-column justify-content-center align-items-center">
+        <h1 class="display-4 fw-bold title-fade mb-2">Our Events</h1>
+        <p class="lead mb-0">Experience the wild come alive — day and night at Zoolirante!</p>
+    </div>
+</section>
 
 <section class="container-fluid px-0 mb-4 bg-dark text-white">
     <div class="row g-0 align-items-center hero-row">
 
-        <!-- image -->
+        <!-- Carousel (Replaces Static Image) -->
         <div class="col-12 col-lg-7">
-            <img src="@Url.Content("~/images/EventsIndex.jpg")"
-                 alt="Events hero"
-                 class="w-100 event-img">
+            @{
+                var slides = new List<(string Url, string Title, string? Desc)>();
+                if (Model.Events != null)
+                {
+                    foreach (var item in Model.Events)
+                    {
+                        string imageUrl;
+                        switch (item.Name)
+                        {
+                            case "Feeding Time":
+                                imageUrl = "https://d1dxs113ar9ebd.cloudfront.net/225batonrouge/2021/05/Tigerfeeding.jpg";
+                                break;
+                            case "Conservation Talk":
+                                imageUrl = Url.Content("~/Images/Zookeeper-talk.jpg");
+                                break;
+                            case "Behind the Scenes Tour":
+                                imageUrl = Url.Content("~/Images/Behindthescene.jpg");
+                                break;
+                            case "Animal Enrichment":
+                                imageUrl = Url.Content("~/Images/AnimalEnrichment.jpg");
+                                break;
+                            case "Junior Zookeeper Experience":
+                                imageUrl = Url.Content("~/Images/JuniorZookeeper.jpg");
+                                break;
+                            default:
+                                imageUrl = Url.Content("~/Images/AnimalEnrichment.jpg");
+                                break;
+                        }
+                        slides.Add((imageUrl, item.Name, item.Description));
+                    }
+                }
+                var maxSlides = Math.Min(6, slides.Count);
+            }
+
+            <div id="eventsHeroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                <div class="carousel-inner">
+                    @if (maxSlides > 0)
+                    {
+                        for (int i = 0; i < maxSlides; i++)
+                        {
+                            var slide = slides[i];
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@slide.Url"
+                                     class="d-block w-100 event-img"
+                                     alt="@slide.Title"
+                                     style="height: 420px; object-fit: cover;">
+                         
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="carousel-item active">
+                            <img src="@Url.Content("~/images/EventsIndex.jpg")"
+                                 class="d-block w-100 event-img"
+                                 alt="Events hero"
+                                 style="height: 420px; object-fit: cover;">
+                        </div>
+                    }
+                </div>
+
+                <!-- Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#eventsHeroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+                <!-- Indicators -->
+                @if (maxSlides > 1)
+                {
+                    <div class="carousel-indicators">
+                        @for (int i = 0; i < maxSlides; i++)
+                        {
+                            <button type="button"
+                                    data-bs-target="#eventsHeroCarousel"
+                                    data-bs-slide-to="@i"
+                                    class="@(i == 0 ? "active" : "")"
+                                    aria-current="@(i == 0 ? "true" : "false")"
+                                    aria-label="Slide @(i + 1)">
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
         </div>
 
-        <!-- text -->
+        <!-- Text Section -->
         <div class="col-12 col-lg-5 d-flex align-items-center">
             <div class="p-4 p-md-5 text-center text-lg-start w-100">
-                <h1 class="fw-bold display-5 mb-3">
-                    Events at Zoolirante
-                </h1>
+                <h1 class="fw-bold display-5 mb-3">Events at Zoolirante</h1>
                 <p id="eventTagline" class="lead mb-0">
                     Feeding Time, Conservation Talks, and more — there’s always something happening at the zoo!
                 </p>
@@ -46,56 +141,49 @@
     </div>
 </section>
 
-<script>document.addEventListener("DOMContentLoaded", function () {
-        const taglines = [
-            " Watch our tigers roar at Feeding Time!",
-            " Learn about wildlife at our Conservation Talks.",
-            " Go behind the scenes and discover animal care.",
-            " See how animals play during Enrichment sessions.",
-            " Become a Junior Zookeeper for a day!"
-        ];
+<!-- Animated Taglines -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const taglines = [
+        "Watch our tigers roar at Feeding Time!",
+        "Learn about wildlife at our Conservation Talks.",
+        "Go behind the scenes and discover animal care.",
+        "See how animals play during Enrichment sessions.",
+        "Become a Junior Zookeeper for a day!"
+    ];
+    let index = 0;
+    const taglineElement = document.getElementById("eventTagline");
+    if (!taglineElement) return;
 
-        let index = 0;
-        const taglineElement = document.getElementById("eventTagline");
-        if (!taglineElement) return;
-
-        setInterval(() => {
-            taglineElement.style.opacity = 0;
-            setTimeout(() => {
-                taglineElement.textContent = taglines[index];
-                taglineElement.style.opacity = 1;
-                index = (index + 1) % taglines.length;
-            }, 800);
-        }, 4000);
-    });</script>
-
+    setInterval(() => {
+        taglineElement.style.opacity = 0;
+        setTimeout(() => {
+            taglineElement.textContent = taglines[index];
+            taglineElement.style.opacity = 1;
+            index = (index + 1) % taglines.length;
+        }, 800);
+    }, 4000);
+});
+</script>
 
 @{
     string cat = (ViewBag.Category as string) ?? "";
 }
 
-
+<!-- Filter Bar -->
 <div class="container mb-4 d-flex justify-content-end">
     <div class="filter-bar">
         <span class="filter-label">FILTER BY</span>
-
 
         <a class="filter-pill pill-gold @(string.IsNullOrEmpty(cat) ? "is-active" : "")"
            href="@Url.Action("Index", new { category = (string?)null })">
             Show All
         </a>
 
-
         <a class="filter-pill pill-blue @(cat=="Past" ? "is-active" : "")"
            href="@Url.Action("Index", new { category = "Past" })">
             Past Events
         </a>
-
-
-        @*<a class="filter-pill pill-orange @(cat=="Major" ? "is-active" : "")"
-               href="@Url.Action("Index", new { category = "Major" })">
-                Upcoming Events
-            </a>*@
 
         <a class="filter-pill pill-green @(cat=="Everyday" ? "is-active" : "")"
            href="@Url.Action("Index", new { category = "Everyday" })">
@@ -104,6 +192,7 @@
     </div>
 </div>
 
+<!-- Admin Button -->
 @if (Model.DefaultVM.admin == true)
 {
     <div class="container mb-3 d-flex justify-content-end">
@@ -113,6 +202,7 @@
     </div>
 }
 
+<!-- Event Cards -->
 <div class="container">
     <div class="row g-4">
         @foreach (var item in Model.Events)
@@ -141,7 +231,7 @@
                     break;
             }
 
-            <!--EventsList Card-->
+            <!-- Event Card -->
             <div class="col-12 col-md-4">
                 <div class="card h-100 shadow-sm border-0">
                     <img src="@imageUrl" alt="@item.Name" class="card-img-top" style="object-fit:cover; height:200px;" />
@@ -149,11 +239,9 @@
                         <h5 class="card-title fw-bold text-dark text-uppercase" style="font-size:1.1rem;">
                             @item.Name
                         </h5>
-                        <p class="card-text text-muted small">
-                            @item.Description
-                        </p>
+                        <p class="card-text text-muted small">@item.Description</p>
 
-                        <!--Dropdown dates-->
+                        <!-- Dropdown Dates -->
                         <div class="dropdown mt-auto">
                             <button class="btn btn-zoolirante dropdown-toggle"
                                     type="button"
@@ -185,9 +273,9 @@
                                 }
                             </ul>
                         </div>
-
-                        <!--Only Visible to admin-->
                     </div>
+
+                    <!-- Admin Buttons -->
                     @if (Model.DefaultVM.admin == true)
                     {
                         <div class="card-footer text-end">

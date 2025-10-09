@@ -1,0 +1,149 @@
+﻿/* Login Page Mobile Adjustments */
+
+body.pt-5 {
+        padding-top: 64px; 
+        padding-left: 10px; 
+        padding-right: 10px; 
+        background-color: #F6EAD2; 
+        color: #000; 
+        min-height: 100vh; 
+        overflow-x: hidden;
+}
+
+
+body.pt-5 > .d-flex.justify-content-center.align-items-center {
+        margin-bottom: 24px !important; 
+        min-height: calc(100vh - 120px);
+    }
+
+
+body.pt-5 .card.shadow {
+        width: 100% !important; 
+        max-width: 420px; 
+        margin: 0 auto; 
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+
+body.pt-5 .card-header {
+        padding: .75rem 1rem;
+    }
+
+body.pt-5 .card-body {
+        padding: 1rem 1.2rem;
+    }
+
+       
+body.pt-5 .card-body > div {
+        width: 100% !important;
+    }
+
+
+body.pt-5 input.form-control {
+        height: 44px !important;
+        font-size: 1rem;
+        border-radius: .5rem;
+    }
+
+   
+body.pt-5 button.btn {
+        height: 44px !important;
+        width: 48%;
+        border-radius: .5rem;
+        font-weight: 500;
+        background-color: #FF9A00; 
+        border: none;
+    }
+
+   
+body.pt-5 .d-flex.justify-content-between.align-items-center {
+        gap: .75rem;
+        flex-wrap: wrap;
+    }
+
+
+body.pt-5 .text-info {
+        text-decoration: none;
+        font-size: .95rem;
+    }
+
+
+@media (min-width: 576px) and (max-width: 768px) {
+   body.pt-5 .card.shadow {
+        box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+}
+
+
+/*  Membership card alignment on mobile ===== */
+@media (max-width: 768px) {
+
+    
+    .Membership-List .row > [class*="col-sm-4"] {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        display: flex;
+        justify-content: center; 
+    }
+
+   
+    .Membership-List .card {
+        width: 90% !important;
+        max-width: 420px;
+        margin: 0 auto 1.5rem;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+        
+        .Membership-List .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+    
+    .Membership-List .card-body {
+        text-align: center;
+        padding: 1rem 1.25rem;
+    }
+
+    .Membership-List .card-title,
+    .Membership-List .card-price,
+    .Membership-List .card-text {
+        text-align: center;
+    }
+
+    
+    .Membership-List .GetMembership {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: .7rem;
+        margin-top: .75rem;
+        border-radius: .6rem;
+    }
+
+    
+    h2 {
+        padding: 0 1rem;
+        font-size: 1.25rem;
+        line-height: 1.3;
+    }
+
+    .membership-banner {
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+        .membership-banner h2 {
+            font-size: 1.4rem;
+        }
+
+        .membership-banner p {
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+}

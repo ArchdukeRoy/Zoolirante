@@ -1,20 +1,20 @@
-html {
-  font-size: 14px;
+﻿html {
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -40,41 +40,313 @@ body {
 
 
 .filter-bar {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .filter-label {
-  font-weight: 800;
-  letter-spacing: .02em;
+    font-weight: 800;
+    letter-spacing: .02em;
 }
 
 .filter-pill {
-  --pill: #999;
-  display: inline-block;
-  padding: .6rem 1.2rem;
-  border-radius: 999px;
-  font-weight: 800;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 2px solid var(--pill);
-  color: var(--pill);
-  background: transparent;
-  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+    --pill: #999;
+    display: inline-block;
+    padding: .6rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--pill);
+    color: var(--pill);
+    background: transparent;
+    transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
 }
 
-.filter-pill:hover {
-  box-shadow: 0 0 0 .15rem rgba(0,0,0,.05);
+    .filter-pill:hover {
+        box-shadow: 0 0 0 .15rem rgba(0,0,0,.05);
+    }
+
+    .filter-pill.is-active {
+        background: var(--pill);
+        color: #fff;
+    }
+
+.pill-gold {
+    --pill: #D39A21;
 }
 
-.filter-pill.is-active {
-  background: var(--pill);
-  color: #fff;
+.pill-blue {
+    --pill: #6C7FB5;
 }
 
-.pill-gold   { --pill: #D39A21; }   
-.pill-blue   { --pill: #6C7FB5; }   
-.pill-orange { --pill: #EA951C; }   
-.pill-green  { --pill: #1C7A69; }  
+.pill-orange {
+    --pill: #EA951C;
+}
+
+.pill-green {
+    --pill: #1C7A69;
+}
+
+/* === Universal video hero === */
+.hero-video-wrap {
+    --hero-height: clamp(260px, 48vh, 560px);
+    --overlay: rgba(0,0,0,0.35);
+    position: relative;
+    height: var(--hero-height);
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+}
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--overlay);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    min-height: inherit;
+    height: 100%;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .hero-video {
+        display: none;
+    }
+
+    .hero-video-wrap {
+        background: #000;
+    }
+}
+
+
+/* Make the hero carousel fill its column and crop nicely */
+.hero-row {
+    min-height: clamp(260px, 48vh, 560px);
+}
+
+#eventsHeroCarousel,
+#eventsHeroCarousel .carousel-inner,
+#eventsHeroCarousel .carousel-item {
+    height: 100%;
+}
+
+.events-hero-img {
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+    #eventsHeroCarousel {
+        animation: none !important;
+    }
+
+        #eventsHeroCarousel .carousel-item {
+            transition: none !important;
+        }
+}
+
+
+/* ===== Mobile-only tweaks for the animal-page-section ===== */
+@media (max-width: 767.98px) {
+    .animal-page-section {
+        margin-top: 24px !important;
+        padding: 0 1rem; /* safe side padding on phones */
+    }
+
+        /* Stack the two halves vertically */
+        .animal-page-section .description-half,
+        .animal-page-section .animal-showcase-half {
+            width: 100% !important;
+            max-width: 100%;
+        }
+
+        /* Put the showcase first (optional). 
+     Remove this block if you want text first. */
+        .animal-page-section .animal-showcase-half {
+            order: -1;
+        }
+
+        /* Make the banner image responsive and not oversized */
+        .animal-page-section .zoosection-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 40vh; /* keeps it from dominating */
+            object-fit: cover;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Tighter spacing for paragraphs */
+        .animal-page-section .description-half p {
+            margin: 0.5rem 0 0.75rem;
+            line-height: 1.6;
+            font-size: 0.98rem;
+        }
+
+        /* Buttons: full-width + comfy tap targets */
+        .animal-page-section .animalpage-btn,
+        .animal-page-section {
+            display: block;
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 0.75rem;
+        }
+
+            /* Card grid: ensure columns don’t cram; add gaps */
+            .animal-page-section .custom-card-section .row {
+                row-gap: 1rem;
+            }
+
+            /* Let each card breathe and avoid edge-to-edge */
+            .animal-page-section .col-sm-5 {
+                width: 100%;
+                padding: 0; /* remove Bootstrap g-0 effects */
+            }
+
+                .animal-page-section .col-sm-5 > .card {
+                    margin: 0.25rem 0 0.75rem;
+                    padding: 0.75rem;
+                    border-radius: 0.75rem;
+                    box-shadow: 0 0.5rem 1.25rem rgba(0,0,0,.08);
+                }
+
+            /* Card body spacing & typography */
+            .animal-page-section .card .card-body {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .animal-page-section .card .custom-title {
+                font-size: 0.85rem;
+                letter-spacing: .02em;
+                opacity: .9;
+                margin-bottom: 0.25rem;
+            }
+
+            .animal-page-section .card .custom-header {
+                font-size: 1.25rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .animal-page-section .card .custom-bodytext {
+                font-size: 0.98rem;
+                line-height: 1.55;
+            }
+
+            /* Animal images inside the cards */
+            .animal-page-section .lioncard-img,
+            .animal-page-section .giraffecard-img {
+                display: block;
+                width: min(70%, 320px); /* scale nicely on phones */
+                height: auto;
+                object-fit: contain;
+                margin: 0.5rem auto 0; /* center under text */
+            }
+
+            /* Make the whole card tappable without accidental scroll traps */
+            .animal-page-section .lion-card,
+            .animal-page-section .giraffe-card {
+                cursor: pointer;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+            }
+}
+
+/* Optional: slightly larger phones / small tablets get a bit more room */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .animal-page-section {
+        padding: 0 1.25rem;
+    }
+
+        .animal-page-section .zoosection-image {
+            max-height: 48vh;
+        }
+
+        .animal-page-section .lioncard-img,
+        .animal-page-section .giraffecard-img {
+            width: min(60%, 360px);
+        }
+}
+
+
+/* --- Mobile-only tweaks (≤ 768px) --- */
+@media (max-width: 767.98px) {
+    /* Put description first, then the card half */
+    .animal-page-section {
+        display: flex;
+        flex-direction: column; /* stack vertically on mobile */
+        gap: 1rem; /* space between the two halves */
+    }
+
+        .animal-page-section .description-half {
+            order: 1;
+        }
+
+        .animal-page-section .animal-showcase-half {
+            order: 2;
+        }
+
+    /* Keep the two cards side-by-side on mobile */
+    .animal-showcase-half .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -8px;
+        margin-right: -8px;
+    }
+
+    .animal-showcase-half .col-sm-5 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    /* Friendly spacing inside cards on small screens */
+    .animal-showcase-half .card .card-body {
+        padding: 1rem 1.25rem;
+    }
+
+    /* Make the animal images scale neatly */
+    .lioncard-img,
+    .giraffecard-img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Optional: add some breathing room around the section */
+    .animal-page-section {
+        margin-top: 24px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .discovermore-btn {
+        display: block;
+        margin: 1.5rem auto 0 auto; /* top margin for spacing + centered horizontally */
+        text-align: center;
+        width: 80%; /* optional: make it a bit wider for easier tapping */
+    }
+}

@@ -4,7 +4,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<body class="bg-dark"></body>
+
+
+@* Show only when logged in *@
+@if (!string.IsNullOrEmpty(Model?.username))
+{
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px; z-index: 4;">
+        @if (Model.admin == true)
+        {
+            <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
+        }
+        <p class="mb-1 fw-light mx-3">Welcome, @Model.username</p>
+    </div>
+}
+
 
 @*Banner*@
 <div id="hpSlides" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4500">
@@ -14,17 +27,18 @@
             <video autoplay muted loop playsinline style="width: 100vw; height: 65vh; object-fit: cover;">
                 <source src="/Images/hpVids/home.mp4" type="video/mp4">
             </video>
-            <div class="carousel-caption d-none d-md-block z-5">
+            <div class="carousel-caption d-block z-5">
                 <h1 class="fw-bold">Welcome to Zoolirante!</h1>
                 <p class="fs-4">Discover animals, events, and more!</p>
             </div>
+
         </div>
-            <div class="carousel-item">
+        <div class="carousel-item">
             <a asp-area="" asp-controller="AnimalList" asp-action="Index">
                 <video autoplay muted loop playsinline style="width: 100vw; height: 65vh; object-fit: cover;">
                     <source src="/Images/hpVids/animals.mp4" type="video/mp4">
                 </video>
-                <div class="carousel-caption d-none d-md-block z-5">
+                <div class="carousel-caption d-block z-5">
                     <h1 class="fw-bold">Animal Showcase</h1>
                     <p class="fs-4"> Roar into adventure!! explore learn and play!</p>
                 </div>
@@ -36,7 +50,7 @@
                 <video autoplay muted loop playsinline style="width: 100vw; height: 65vh; object-fit: cover;">
                     <source src="/Images/hpVids/events.mp4" type="video/mp4">
                 </video>
-                <div class="carousel-caption d-none d-md-block z-5">
+                <div class="carousel-caption d-block z-5">
                     <h1 class="fw-bold">Events</h1>
                     <p class="fs-4"> Watch our tigers roar at Feeding Time!</p>
                 </div>
@@ -45,13 +59,13 @@
 
         <div class="carousel-item">
             <a asp-area="" asp-controller="Merchandise" asp-action="Index">
-            <video autoplay muted loop playsinline style="width: 100vw; height: 65vh; object-fit: cover;">
-                <source src="/Images/hpVids/merch.mp4" type="video/mp4">
-            </video>
-            <div class="carousel-caption d-none d-md-block z-5">
-                <h1 class="fw-bold">Shop</h1>
-                <p class="fs-4">Come pick up a memory and never forget your time </p>
-            </div>
+                <video autoplay muted loop playsinline style="width: 100vw; height: 65vh; object-fit: cover;">
+                    <source src="/Images/hpVids/merch.mp4" type="video/mp4">
+                </video>
+                <div class="carousel-caption d-block z-5">
+                    <h1 class="fw-bold">Shop</h1>
+                    <p class="fs-4">Come pick up a memory and never forget your time </p>
+                </div>
             </a>
 
         </div>
@@ -66,11 +80,10 @@
 </div>
 
 @*Cards*@
-<div class="container-fluid px-0">
+<div class="container-fluid px-50" style="background-color: black;">
     <div class="row g-0">
-
         <div class="col-sm-4">
-            <div class="card card-tickets h-100 radius-bottom-2">
+            <div class="card card-tickets h-100 radius-bottom-2 mt-3">
                 <div class="img-dark-sides">
                     <img src="/Images/zoo-ticket.png" alt="Tickets" class="card-img-top" style="height: 450px;">
                 </div>
@@ -88,7 +101,7 @@
         </div>
 
         <div class="col-sm-4">
-            <div class="card card-merchandise h-100 radius-bottom-2">
+            <div class="card card-merchandise h-100 radius-bottom-1 mt-3">
                 <div class="img-dark-sides">
                     <img src="https://azwp-az-prod-1-ap-southeast-2.s3.amazonaws.com/uploads/2024/03/9249-Where-to-Shop-Web-Assets_updated_TH-elephantasia.jpg"
                          alt="Merchandise" class="card-img-top" style="height: 450px; object-fit: cover;">
@@ -107,7 +120,7 @@
         </div>
 
         <div class="col-sm-4">
-            <div class="card card-events h-100 radius-bottom-2">
+            <div class="card card-events h-100 radius-bottom-1 mt-3">
                 <div class="img-dark-sides">
                     <img src="https://www.mandai.com/content/dam/mandai/singapore-zoo/things-to-do/zebra-feeding-900x600.jpg"
                          alt="Events" class="card-img-top" style="height: 450px; object-fit: cover;">
@@ -117,7 +130,7 @@
                     <p class="card-text">Discover our interesting events and encounters with animals</p>
                     <div class="row">
                         <div class="col-4">
-                            <a class="btn btn-primary custom-btn-event mt-auto" href="">Learn more</a>
+                            <a class="btn btn-primary custom-btn-event mt-auto" href="/Events/Index">Learn more</a>
                         </div>
                         <div class="col-8"></div>
                     </div>
@@ -163,15 +176,15 @@
                         <div class="card-body">
 
                             <div class="card-title custom-title"> Our Animal</div>
-                                <div class="card-title custom-header"> Lions</div>
-                                <div class="card-text custom-bodytext">
+                            <div class="card-title custom-header"> Lions</div>
+                            <div class="card-text custom-bodytext">
                                 “Step into the heart of Zoolirante and feel the ground tremble as our mighty lions roam — rulers of the wild waiting to meet you.”
-                                </div>
+                            </div>
                         </div>
                         <img class="lioncard-img" src="https://www.freeiconspng.com/thumbs/lion-png/amazing-lion-png-clipart-6.png" />
 
                     </div>
-                   
+
                 </div>
 
                 <div class="col-sm-5">
@@ -181,11 +194,11 @@
                         <div class="card-body">
                             <div class="card-title custom-title"> Our Animal</div>
                             <div class="card-title custom-header"> Giraffe</div>
-                                <div class="card-text custom-bodytext">
+                            <div class="card-text custom-bodytext">
                                 “Wander through the treetops with Zoolirante’s graceful giraffes, where every gentle glance and towering stride tells a story of the savannah.”
-                                </div>
-                            
-                        </div> 
+                            </div>
+
+                        </div>
                         <img class="giraffecard-img" src="https://www.pikpng.com/pngl/b/97-970776_stock-png-giraffe-head-by-earthymoon-pluspng-giraffe.png" />
 
                     </div>
@@ -195,9 +208,9 @@
         </div>
 
         <div> <a class="btn btn-primary radius-2 discovermore-btn" href="/AnimalList/Index">Discover More</a></div>
-     
+
     </div>
- 
+
 </section>
 
 <section class="section-map">
@@ -233,4 +246,3 @@
     </div>
 
 </section>
-
