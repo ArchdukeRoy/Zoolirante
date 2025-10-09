@@ -14,12 +14,29 @@
     </div>
 }
 
-<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
-    <h1 class="title-fade">Our Animal Showcase</h1>
-</div>
+<!-- Video hero -->
+<section class="hero-video-wrap position-relative text-center text-white" style="margin-top:-2px;">
+    <!-- The video fills the section -->
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+           poster="/Images/animal-showcase-poster.jpg">
+        <!-- Provide at least mp4; webm is a nice extra -->
+        <source src="/Images/hpVids/animals.mp4" type="video/mp4" />
+        
+        <!-- Fallback text -->
+        Your browser does not support the video tag.
+    </video>
 
+    <!-- Optional dark overlay for text contrast -->
+    <div class="hero-overlay"></div>
 
-<div class="w-100 bg-zoolirante-light py-1 shadow"></div>
+    
+    <!-- Centered text overlay -->
+    <div class="hero-content d-flex flex-column justify-content-center align-items-center">
+        <h1 class="display-4 fw-bold mb-2 title-fade">Our Animal Showcase</h1>
+        <p class="lead mb-0">Discover land, sky, and water species</p>
+    </div>
+</section>
+
 
 <div class="container"> 
     <p class="pt-4 pb-3">

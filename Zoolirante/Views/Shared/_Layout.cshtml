@@ -38,9 +38,27 @@
                         <li class="nav-item me-3">
                             <a class="nav-link" asp-area="" asp-controller="Merchandise" asp-action="Index">Merch</a>
                         </li>
+                        @* Cart link only when there are items *@
+                        @{
+                            var cartCount = Context.Session.GetInt32("CartCount") ?? 0;
+                        }
+                        @if (cartCount > 0)
+                        {
+                            <li class="nav-item me-3 position-relative">
+                                <a class="nav-link d-flex align-items-center" asp-area="" asp-controller="Merchandise" asp-action="Cart" aria-label="View cart">
+                                    <i class="bi bi-cart3 me-1" style="font-size: 1.6rem;"></i>
+                                    <span class="position-absolute top-0 start-50 translate- badge rounded-pill bg-danger"
+                                          style="font-size:.65rem; transform: translate(50%, 40%) !important;">
+                                        @cartCount
+                                    </span>
+                                </a>
+                            </li>
+                        }
                         <li class="nav-item me-3">
                             <a class="btn text-dark bg-zoolirante-secondary radius-2 mx-2 shadow" asp-area="" asp-controller="Member" asp-action="Index">Become Member</a>
                         </li>
+
+
                         @if (!Context.Session.GetInt32("id").HasValue || Context.Session.GetInt32("id") == 0) {
                             <li class="nav-item me-3">
                                 <a class="btn text-dark bg-zoolirante-secondary radius-2 shadow" asp-area="" asp-controller="Account" asp-action="Index">Login</a>

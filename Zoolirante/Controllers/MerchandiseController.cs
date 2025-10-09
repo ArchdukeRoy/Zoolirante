@@ -101,6 +101,7 @@ namespace Zoolirante.Controllers
             }
             
             HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(vm.DefaultVM));
+            UpdateCartCountFromDefaultVM(vm.DefaultVM);
 
             ViewBag.ItemAdded = quantity + " " + MerchItem.Select(i => i.ItemName).FirstOrDefault() + " added to cart.";
             return View(vm);
@@ -119,6 +120,7 @@ namespace Zoolirante.Controllers
             }
 
             ViewBag.TotalCost = totalCost;
+            UpdateCartCountFromDefaultVM(vm);
 
             return View(vm);
         }
@@ -259,5 +261,33 @@ namespace Zoolirante.Controllers
         {
             return _context.Merchandises.Any(e => e.ItemId == id);
         }
+
+        private void UpdateCartCountFromDefaultVM(Zoolirante.ViewModels.DefaultViewModel vm)
+        {
+            var totalQty = vm?.temporaryCart?.Sum(i => i.Quantity) ?? 0;
+            HttpContext.Session.SetInt32("CartCount", totalQty);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateQuantity(int itemId, int delta)
+        {
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            var vm = string.IsNullOrEmpty(vmJson)
+                ? new DefaultViewModel()
+                : JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+
+            var line = vm.temporaryCart.FirstOrDefault(i => i.ItemId == itemId);
+            if (line != null)
+            {
+                line.Quantity = Math.Max(1, line.Quantity + delta); // clamp at 1
+                HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(vm));
+                UpdateCartCountFromDefaultVM(vm); // ✅ update badge
+            }
+
+            return RedirectToAction(nameof(Cart)); // PRG back to Cart view
+        }
+
+
     }
 }

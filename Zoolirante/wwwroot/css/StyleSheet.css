@@ -1455,3 +1455,13 @@ input[type=number]::-webkit-outer-spin-button {
 .input-group-text {
     background: #f7f7f7;
 }
+
+.nav-link .bi-cart3 {
+    transition: color 0.3s, transform 0.2s;
+}
+
+.nav-link:hover .bi-cart3 {
+    color: #ffb74d; /* your brand color */
+    transform: scale(1.1);
+}
+
