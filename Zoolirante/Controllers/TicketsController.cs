@@ -273,5 +273,12 @@ namespace Zoolirante.Controllers
             return View();
         }
 
+        public class CheckoutRequest
+        {
+            public List<CartItem> ?Items { get; set; }
+            public decimal Total { get; set; }
+        }
+
+            public int Concessions { get; set; }
     }
 }
