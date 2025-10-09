@@ -62,6 +62,12 @@ input:checked + .slider:before {
     }
 
 .bell-icon {
+    width: 28px;
+    height: 28px;
+    transition: filter 0.3s ease;
+    filter: grayscale(1);
+}
+.profile-icon {
     width: 35px;
     height: 35px;
     transition: filter 0.3s ease;
