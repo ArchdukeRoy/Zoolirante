@@ -47,3 +47,10 @@ namespace Zoolirante.Services
             await client.DisconnectAsync(true);
         }
 
+        private string BuildTicketReceiptHtml(string customerName, List<TicketDetail> tickets, string sessionId)
+        {
+            var total = tickets.Sum(t => t.Price);
+            var receiptDate = DateTime.Now.ToString("MMMM dd, yyyy");
+
+            var html = $@"
+        </div>
