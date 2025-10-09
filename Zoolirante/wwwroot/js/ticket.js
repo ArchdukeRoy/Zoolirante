@@ -1,6 +1,6 @@
-﻿// Simple variables
 ﻿
 var stripe = Stripe('pk_test_51SGCNnFrc6RfCr2UlqAhZJcjFDv5rVu7C8QzXlqLheVGAIz7kLpE1qgGLoAvpEQXqUSo5dn8KPyfwIeSWjkjt78p00KLaekc7Z');
+
 
 // Simple variables
 var selectedDate = '';
@@ -165,9 +165,6 @@ function setupButtons() {
     if (dayBuy) dayBuy.onclick = function () { buyDay(); };
     if (unlimitedBuy) unlimitedBuy.onclick = function () { buyUnlimited(); };
 
-    // Cart button
-    var cartBtn = document.getElementById('cart-btn');
-    if (cartBtn) cartBtn.onclick = function () { showCart(); };
 }
 
 // Select time
@@ -246,7 +243,6 @@ function buyDay() {
     });
 
     updateCart();
-    alert('Day Ticket added! $' + price.toFixed(2));
 }
 
 // Buy unlimited pass
@@ -277,7 +273,6 @@ function buyUnlimited() {
     });
 
     updateCart();
-    alert('Unlimited Pass added! $' + price.toFixed(2));
 }
 
 // Update cart count
