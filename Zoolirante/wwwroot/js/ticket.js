@@ -273,16 +273,20 @@ function buyUnlimited() {
     });
 
     updateCart();
+
 }
 
 // Update cart count
+// Update cart count and order summary
+// Update cart count and order summary
 function updateCart() {
-    var cartCount = document.getElementById('cart-count');
-    if (cartCount) {
-        cartCount.textContent = cart.length;
-        cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+    var checkoutSection = document.getElementById('checkout-section');
+    var orderSummaryContent = document.getElementById('order-summary-content');
+    var orderTotal = document.getElementById('order-total');
+
+    if (checkoutSection) {
+        checkoutSection.style.display = cart.length > 0 ? 'block' : 'none';
     }
-}
 
 // Show cart
 function showCart() {
