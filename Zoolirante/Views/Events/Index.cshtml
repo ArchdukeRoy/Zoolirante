@@ -8,7 +8,7 @@
 
 @if (!string.IsNullOrEmpty(Model.DefaultVM.username))
 {
-    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px">
+    <div class="w-100 bg-dark py-1 text-white d-flex justify-content-between fixed-top" style="margin-top: 70px; z-index: 4;">
         @if (Model.DefaultVM.admin == true)
         {
             <p class="mb-1 fw-light ms-3">Admin Privileges Enabled</p>
@@ -18,9 +18,21 @@
 }
 
 
-<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
-    <h1 class="title-fade">Our Events</h1>
-</div>
+<section class="hero-video-wrap position-relative text-center text-white" style="margin-top:-2px;">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+           poster="/Images/events-poster.jpg">
+        <source src="/Images/hpVids/events.mp4" type="video/mp4" />
+
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content d-flex flex-column justify-content-center align-items-center">
+        <h1 class="display-4 fw-bold title-fade mb-2">Our Events</h1>
+        <p class="lead mb-0">Experience the wild come alive — day and night at Zoolirante!</p>
+    </div>
+</section>
 
 <section class="container-fluid px-0 mb-4 bg-dark text-white">
     <div class="row g-0 align-items-center hero-row">
@@ -46,28 +58,29 @@
     </div>
 </section>
 
-<script>document.addEventListener("DOMContentLoaded", function () {
-        const taglines = [
-            " Watch our tigers roar at Feeding Time!",
-            " Learn about wildlife at our Conservation Talks.",
-            " Go behind the scenes and discover animal care.",
-            " See how animals play during Enrichment sessions.",
-            " Become a Junior Zookeeper for a day!"
-        ];
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+            const taglines = [
+                " Watch our tigers roar at Feeding Time!",
+                " Learn about wildlife at our Conservation Talks.",
+                " Go behind the scenes and discover animal care.",
+                " See how animals play during Enrichment sessions.",
+                " Become a Junior Zookeeper for a day!"
+            ];
 
-        let index = 0;
-        const taglineElement = document.getElementById("eventTagline");
-        if (!taglineElement) return;
+            let index = 0;
+            const taglineElement = document.getElementById("eventTagline");
+            if (!taglineElement) return;
 
-        setInterval(() => {
-            taglineElement.style.opacity = 0;
-            setTimeout(() => {
-                taglineElement.textContent = taglines[index];
-                taglineElement.style.opacity = 1;
-                index = (index + 1) % taglines.length;
-            }, 800);
-        }, 4000);
-    });</script>
+            setInterval(() => {
+                taglineElement.style.opacity = 0;
+                setTimeout(() => {
+                    taglineElement.textContent = taglines[index];
+                    taglineElement.style.opacity = 1;
+                    index = (index + 1) % taglines.length;
+                }, 800);
+            }, 4000);
+        });</script>
 
 
 @{
@@ -86,7 +99,7 @@
         </a>
 
 
-        <a class="filter-pill pill-blue @(cat=="Past" ? "is-active" : "")"
+        <a class="filter-pill pill-blue @(cat == "Past" ? "is-active" : "")"
            href="@Url.Action("Index", new { category = "Past" })">
             Past Events
         </a>
@@ -97,7 +110,7 @@
                 Upcoming Events
             </a>*@
 
-        <a class="filter-pill pill-green @(cat=="Everyday" ? "is-active" : "")"
+        <a class="filter-pill pill-green @(cat == "Everyday" ? "is-active" : "")"
            href="@Url.Action("Index", new { category = "Everyday" })">
             Everyday
         </a>
