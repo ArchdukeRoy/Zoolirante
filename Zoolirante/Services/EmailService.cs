@@ -144,3 +144,16 @@ namespace Zoolirante.Services
             return html;
         }
     }
+
+    public class TicketDetail
+    {
+        public int TicketId { get; set; }
+        public string Type { get; set; } = string.Empty;
+        public string Date { get; set; } = string.Empty;
+        public string Time { get; set; } = string.Empty;
+        public int Adults { get; set; }
+        public int Children { get; set; }
+        public int Concessions { get; set; }
+        public decimal Price { get; set; }
+    }
+}
