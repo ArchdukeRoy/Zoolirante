@@ -73,14 +73,6 @@
                     Favourite Animals
                 </div>
                 <div class="card-body">
-                    @if (Model.DefaultVM.favouriteAnimals.Any()) {
-                        <ul class="list-group list-group-flush" >
-                            @foreach (var item in Model.DefaultVM.favouriteAnimals) {
-                                <li class="list-group-item" style="background-color: bisque;">@item.AnimalName</li>
-                            }
-                        </ul>
-                    }
-
                     @if (Model.DefaultVM.favouriteAnimals.Any())
                     {
                         <ul class="list-group list-group-flush">
