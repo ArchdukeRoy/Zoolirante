@@ -4,13 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="w-100 bg-dark py-5 text-white text-center" style="margin-top: -2px">
-    <h1>Entry Tickets</h1>
-</div>
-<div class="w-100 bg-zoolirante-light py-1 shadow"></div>
+<section class="hero-video-wrap position-relative text-center text-white" style="margin-top:-2px;">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+           poster="/Images/events-poster.jpg">
+        <source src="/Images/hpVids/Tickets.mp4" type="video/mp4" />
+
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content d-flex flex-column justify-content-center align-items-center">
+        <h1 class="display-4 fw-bold title-fade mb-2">
+            Tickets & Membership
+        </h1>
+        <p class="lead mb-0">Plan your visit and book your tickets online</p>
+    </div>
+</section>
 
 <div class="container">
-    <h1 class="main-title">Tickets & Membership</h1>
 
     <!-- Date Selection Section -->
     <div class="section date-section">

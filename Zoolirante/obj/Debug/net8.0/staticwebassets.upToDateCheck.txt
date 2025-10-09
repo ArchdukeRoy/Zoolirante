@@ -63,6 +63,7 @@ wwwroot\Images\hpVids\animals.mp4
 wwwroot\Images\hpVids\events.mp4
 wwwroot\Images\hpVids\home.mp4
 wwwroot\Images\hpVids\merch.mp4
+wwwroot\Images\hpVids\Tickets.mp4
 wwwroot\Images\JuniorZookeeper.jpg
 wwwroot\Images\logo.png
 wwwroot\Images\panda-banner.jpg
