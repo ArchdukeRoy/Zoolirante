@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Payment Success";
+}
+
+<div class="container text-center mt-5">
+    <div style="font-size: 100px; color: #28a745; margin: 20px 0;">✓</div>
+    <h1 class="text-success">Payment Successful!</h1>
+    <p class="lead mt-4">@ViewBag.Message</p>
+    <p>Your tickets have been confirmed.</p>
+
+    <div class="mt-4">
+        <a href="/Tickets/Index" class="btn btn-primary btn-lg mx-2">Buy More Tickets</a>
+        <a href="/" class="btn btn-secondary btn-lg mx-2">Return to Home</a>
+    </div>
+</div>

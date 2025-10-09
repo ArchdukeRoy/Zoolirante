@@ -1,4 +1,8 @@
-﻿// Simple variables
+﻿
+var stripe = Stripe('pk_test_51SGCNnFrc6RfCr2UlqAhZJcjFDv5rVu7C8QzXlqLheVGAIz7kLpE1qgGLoAvpEQXqUSo5dn8KPyfwIeSWjkjt78p00KLaekc7Z');
+
+
+// Simple variables
 var selectedDate = '';
 var selectedTime = '';
 var adults = 0;
@@ -21,6 +25,14 @@ window.onload = function () {
     createCalendar();
     setupButtons();
     updatePrices();
+
+    // Add checkout button handler
+    var checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.onclick = function () {
+            checkout();
+        };
+    }
 };
 
 // Create simple calendar
@@ -153,9 +165,6 @@ function setupButtons() {
     if (dayBuy) dayBuy.onclick = function () { buyDay(); };
     if (unlimitedBuy) unlimitedBuy.onclick = function () { buyUnlimited(); };
 
-    // Cart button
-    var cartBtn = document.getElementById('cart-btn');
-    if (cartBtn) cartBtn.onclick = function () { showCart(); };
 }
 
 // Select time
@@ -234,7 +243,6 @@ function buyDay() {
     });
 
     updateCart();
-    alert('Day Ticket added! $' + price.toFixed(2));
 }
 
 // Buy unlimited pass
@@ -265,37 +273,106 @@ function buyUnlimited() {
     });
 
     updateCart();
-    alert('Unlimited Pass added! $' + price.toFixed(2));
+
 }
 
 // Update cart count
+// Update cart count and order summary
+// Update cart count and order summary
 function updateCart() {
-    var cartCount = document.getElementById('cart-count');
-    if (cartCount) {
-        cartCount.textContent = cart.length;
-        cartCount.style.display = cart.length > 0 ? 'flex' : 'none';
+    var checkoutSection = document.getElementById('checkout-section');
+    var orderSummaryContent = document.getElementById('order-summary-content');
+    var orderTotal = document.getElementById('order-total');
+
+    if (checkoutSection) {
+        checkoutSection.style.display = cart.length > 0 ? 'block' : 'none';
+    }
+
+    // Update order summary
+    if (orderSummaryContent && cart.length > 0) {
+        var summaryHtml = '';
+        var total = 0;
+
+        for (var i = 0; i < cart.length; i++) {
+            var item = cart[i];
+            total += item.price;
+
+            summaryHtml += `
+                <div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 15px; margin-bottom: 15px;">
+                    <div style="font-weight: bold; color: #2c5f2d; margin-bottom: 5px;">${item.type}</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 3px;">
+                        📅 ${item.date}
+                    </div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 3px;">
+                        🕐 ${item.time}
+                    </div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                        👥 ${item.adults} Adult(s), ${item.children} Child(ren), ${item.concessions} Concession(s)
+                    </div>
+                    <div style="font-weight: bold; color: #2c5f2d;">
+                        $${item.price.toFixed(2)}
+                    </div>
+                </div>
+            `;
+        }
+
+        orderSummaryContent.innerHTML = summaryHtml;
+
+        if (orderTotal) {
+            orderTotal.textContent = '$' + total.toFixed(2);
+        }
     }
 }
-
-// Show cart
-function showCart() {
+function checkout() {
     if (cart.length === 0) {
         alert('Cart is empty');
         return;
     }
 
-    var message = 'CART:\n\n';
-    var total = 0;
-
-    for (var i = 0; i < cart.length; i++) {
-        var item = cart[i];
-        message += item.type + '\n';
-        message += item.date + ' at ' + item.time + '\n';
-        message += item.adults + ' adults, ' + item.children + ' children, ' + item.concessions + ' concessions\n';
-        message += '$' + item.price.toFixed(2) + '\n\n';
-        total += item.price;
+    var checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.disabled = true;
+        checkoutBtn.textContent = 'Processing...';
     }
 
-    message += 'TOTAL: $' + total.toFixed(2);
-    alert(message);
+    var total = 0;
+    for (var i = 0; i < cart.length; i++) {
+        total += cart[i].price;
+    }
+
+    var checkoutData = {
+        items: cart,
+        total: total
+    };
+
+    fetch('/Tickets/CreateCheckoutSession', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(checkoutData)
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (session) {
+            return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+            if (result.error) {
+                alert(result.error.message);
+            }
+            if (checkoutBtn) {
+                checkoutBtn.disabled = false;
+                checkoutBtn.textContent = 'Proceed to Checkout 💳';
+            }
+        })
+        .catch(function (error) {
+            console.error('Error:', error);
+            alert('Something went wrong. Please try again.');
+            if (checkoutBtn) {
+                checkoutBtn.disabled = false;
+                checkoutBtn.textContent = 'Proceed to Checkout 💳';
+            }
+        });
 }
