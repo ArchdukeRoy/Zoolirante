@@ -19,7 +19,6 @@ namespace Zoolirante.Controllers
         private readonly ZooliranteContext _context;
         private readonly IConfiguration _configuration;
 
-        public TicketsController(ZooliranteContext context)
         public TicketsController(ZooliranteContext context, IConfiguration configuration)
         {
             _context = context;
@@ -30,7 +29,6 @@ namespace Zoolirante.Controllers
         public IActionResult Index(DefaultViewModel vm)
         {
             var vmJson = HttpContext.Session.GetString("DefaultVM");
-            if (!string.IsNullOrEmpty(vmJson)) {
             if (!string.IsNullOrEmpty(vmJson))
             {
                 vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
