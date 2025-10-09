@@ -15,55 +15,91 @@
 </head>
 <body>
     <header class="mt-5">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-zoolirante box-shadow fixed-top" style="z-index: 5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-zoolirante box-shadow fixed-top" style="z-index:5">
             <div class="container-fluid">
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="/Images/logo.png" alt="Zoolirante">
+                    <img src="/Images/logo.png" alt="Zoolirante" class="img-fluid" style="height:40px;">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        ria-expanded="false" aria-label="Toggle navigation">
+
+                <!-- Mobile toggler -->
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#mainNav"
+                        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav ms-auto align-items-center">
-                        <li class="nav-item me-4">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item me-4">
-                            <a class="nav-link" asp-area="" asp-controller="AnimalList" asp-action="Index">Animals</a>
-                        </li>
-                        <li class="nav-item me-4">
-                            <a class="nav-link" asp-area="" asp-controller="Events" asp-action="Index">Events</a>
-                        </li>
-                        <li class="nav-item me-4">
-                            <a class="nav-link" asp-area="" asp-controller="Tickets" asp-action="Index">Tickets</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link" asp-area="" asp-controller="Merchandise" asp-action="Index">Merch</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="btn text-dark bg-zoolirante-secondary radius-2 mx-2 shadow" asp-area="" asp-controller="Member" asp-action="Index">Become Member</a>
-                        </li>
-                        @if (!Context.Session.GetInt32("id").HasValue || Context.Session.GetInt32("id") == 0) {
-                            <li class="nav-item me-3">
-                                <a class="btn text-dark bg-zoolirante-secondary radius-2 shadow" asp-area="" asp-controller="Account" asp-action="Index">Login</a>
+
+                <!-- Offcanvas menu on mobile, inline on desktop -->
+                <div class="offcanvas offcanvas-end bg-zoolirante" tabindex="-1" id="mainNav" aria-labelledby="mainNavLabel">
+                    <div class="offcanvas-header d-lg-none">
+                        <h5 id="mainNavLabel" class="mb-0">Menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                            <li class="nav-item"><a class="nav-link py-2 px-3" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="nav-item"><a class="nav-link py-2 px-3" asp-controller="AnimalList" asp-action="Index">Animals</a></li>
+                            <li class="nav-item"><a class="nav-link py-2 px-3" asp-controller="Events" asp-action="Index">Events</a></li>
+                            <li class="nav-item"><a class="nav-link py-2 px-3" asp-controller="Tickets" asp-action="Index">Tickets</a></li>
+                            <li class="nav-item"><a class="nav-link py-2 px-3" asp-controller="Merchandise" asp-action="Index">Merch</a></li>
+
+                            @* Cart (only when items exist) *@
+                            @{
+                                var cartCount = Context.Session.GetInt32("CartCount") ?? 0;
+                            }
+                            @if (cartCount > 0)
+                            {
+                                <li class="nav-item position-relative">
+                                    <a class="nav-link d-flex align-items-center py-2 px-3 position-relative"
+                                       asp-controller="Merchandise" asp-action="Cart" aria-label="View cart">
+                                        <i class="bi bi-cart3 me-1" style="font-size:1.6rem;"></i>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                              style="font-size:.7rem; transform:translate(-35%,-40%) !important;">
+                                            @cartCount
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+
+                            <li class="nav-item my-2 my-lg-0">
+                                <a class="btn bg-zoolirante-secondary text-dark radius-2 shadow w-100 w-lg-auto py-2 px-3"
+                                   asp-controller="Member" asp-action="Index">
+                                    Become Member
+                                </a>
                             </li>
-                        } else {
-                            <li class="nav-item me-3">
-                                <a class="btn text-dark radius-2 shadow" style="background-color: #faa5a0;" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+
+                            @if (!Context.Session.GetInt32("id").HasValue || Context.Session.GetInt32("id") == 0)
+                            {
+                                <li class="nav-item my-2 my-lg-0">
+                                    <a class="btn bg-zoolirante-secondary text-dark radius-2 shadow w-100 w-lg-auto py-2 px-3"
+                                       asp-controller="Account" asp-action="Index">Login</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item my-2 my-lg-0">
+                                    <a class="btn text-dark radius-2 shadow w-100 w-lg-auto py-2 px-3"
+                                       style="background-color:#faa5a0" asp-controller="Account" asp-action="Logout">Logout</a>
+                                </li>
+                            }
+
+                            <!-- Book Now as a proper dropdown (tap-friendly) -->
+                            <li class="nav-item dropdown my-2 my-lg-0">
+                                <a class="btn btn-dark text-light dropdown-toggle w-100 w-lg-auto py-2 px-3"
+                                   href="#" id="bookNowMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Book Now
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow rounded-3" aria-labelledby="bookNowMenu">
+                                    <li><a class="dropdown-item py-2" asp-controller="Tickets" asp-action="Index">Buy Tickets</a></li>
+                                    <li><a class="dropdown-item py-2" asp-controller="Account" asp-action="MyAccount">My Account</a></li>
+                                </ul>
                             </li>
-                        }
-                        <li class="nav-item dropdown-hover">
-                            <a class="btn text-light btn-dark dropdown-toggle" style="padding-block: 22.5px; border-radius: 0rem; margin-right: -12px; box-shadow: -5px 0 10px -2px rgba(0,0,0,0.1);" href="#">Book Now</a>
-                            <div class="dropdown-menu-custom" style="width: 113%;">
-                                <a class="dropdown-item-custom py-2 shadow" asp-area="" asp-controller="Tickets" asp-action="Index">Buy Tickets</a>
-                                <a class="dropdown-item-custom py-2 shadow" style="border-bottom-left-radius: 1rem;" asp-area="" asp-controller="Account" asp-action="MyAccount">My Account</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                        </ul>
+                    </div> <!-- /offcanvas-body -->
+                </div>   <!-- /offcanvas -->
             </div>
         </nav>
+
     </header>
     <div class="container-fluid px-0 mx-0" style="overflow-x: hidden;">
         <main role="main" class="pb-3 pt-4">
@@ -71,48 +107,50 @@
         </main>
     </div>
 
-    <section class="bottom-section">
+    <section class="bottom-section bg-dark text-white py-4 mt-4">
         <div class="container">
-            <div class="row custom-row">
-                <div class="col-sm-2">
-                    <h1 class="header-bottom">Location</h1>
-                    <p class="text">Somewhere in the middle of Australia</p>
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-2">
+                    <h6 class="text-uppercase fw-bold mb-2">Location</h6>
+                    <p class="mb-0 small">Somewhere in the middle of Australia</p>
                 </div>
 
-                <div class="col-sm-2">
-                    <h1 class="header-bottom">Hours</h1>
-                    <p class="text">9AM - 5PM (Weekday)</p>
-                    <p class="text">10AM - 5PM (Weekend)</p>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <h6 class="text-uppercase fw-bold mb-2">Hours</h6>
+                    <p class="mb-0 small">9AM – 5PM (Weekday)</p>
+                    <p class="mb-0 small">10AM – 5PM (Weekend)</p>
                 </div>
 
-                <div class="col-sm-2">
-                    <h1 class="header-bottom">Ticket & Membership</h1>
-                    <a href="/Tickets/Index" class="bottomsection-link"> Buy Tickets</a>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <h6 class="text-uppercase fw-bold mb-2">Tickets & Membership</h6>
+                    <a href="/Tickets/Index" class="link-light d-inline-block py-1">Buy Tickets</a>
                 </div>
 
-                <div class="col-sm-2">
-                    <h1 class="header-bottom">Visit</h1>
-                    <a href="/AnimalList/Index" class="bottomsection-link text-white">Find Animals</a><br />
-                    <a href="/Merchandise/Index" class="bottomsection-link text-white">Visit Merch Shop</a>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <h6 class="text-uppercase fw-bold mb-2">Visit</h6>
+                    <a href="/AnimalList/Index" class="link-light d-inline-block py-1">Find Animals</a><br />
+                    <a href="/Merchandise/Index" class="link-light d-inline-block py-1">Visit Merch Shop</a>
                 </div>
 
-                <div class="col-sm-2">
-                    <h1 class="header-bottom">Events & Experience</h1>
-                    <a href="/Events/Index" class="bottomsection-link"> All Events</a>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <h6 class="text-uppercase fw-bold mb-2">Events & Experience</h6>
+                    <a href="/Events/Index" class="link-light d-inline-block py-1">All Events</a>
                 </div>
 
-                <div class="col-sm-2">
-                    <h1 class="header-bottom">About Us</h1>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <h6 class="text-uppercase fw-bold mb-2">About Us</h6>
+                    <a href="/Home/Privacy" class="link-light d-inline-block py-1">Privacy</a>
                 </div>
             </div>
 
-            <div class="row custom-row">
+            <div class="row mt-4">
                 <div class="col-12">
-                    <img class="img-fluid w-100" src="/Images/pandaBannerCropped.jpg" alt="Panda Banner">
+                    <img class="img-fluid w-100 rounded-3" src="/Images/pandaBannerCropped.jpg" alt="Panda Banner" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
+
 
     <footer class="footer text-muted" style="background-color: #6B5B47;">
         <div class="ms-5 text-white">
