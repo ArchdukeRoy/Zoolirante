@@ -288,8 +288,42 @@ function updateCart() {
         checkoutSection.style.display = cart.length > 0 ? 'block' : 'none';
     }
 
-// Show cart
-function showCart() {
+    // Update order summary
+    if (orderSummaryContent && cart.length > 0) {
+        var summaryHtml = '';
+        var total = 0;
+
+        for (var i = 0; i < cart.length; i++) {
+            var item = cart[i];
+            total += item.price;
+
+            summaryHtml += `
+                <div style="border-bottom: 1px solid #e0e0e0; padding-bottom: 15px; margin-bottom: 15px;">
+                    <div style="font-weight: bold; color: #2c5f2d; margin-bottom: 5px;">${item.type}</div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 3px;">
+                        📅 ${item.date}
+                    </div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 3px;">
+                        🕐 ${item.time}
+                    </div>
+                    <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                        👥 ${item.adults} Adult(s), ${item.children} Child(ren), ${item.concessions} Concession(s)
+                    </div>
+                    <div style="font-weight: bold; color: #2c5f2d;">
+                        $${item.price.toFixed(2)}
+                    </div>
+                </div>
+            `;
+        }
+
+        orderSummaryContent.innerHTML = summaryHtml;
+
+        if (orderTotal) {
+            orderTotal.textContent = '$' + total.toFixed(2);
+        }
+    }
+}
+function checkout() {
     if (cart.length === 0) {
         alert('Cart is empty');
         return;
