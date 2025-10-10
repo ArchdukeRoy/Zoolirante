@@ -9,16 +9,20 @@ using Zoolirante.Data;
 using Zoolirante.Models;
 using Zoolirante.ViewModels;
 using System.Text.Json;
+using Stripe;
+using Stripe.Checkout;
 
 namespace Zoolirante.Controllers
 {
     public class MerchandiseController : Controller
     {
         private readonly ZooliranteContext _context;
+        private readonly IConfiguration _configuration;
 
-        public MerchandiseController(ZooliranteContext context)
+        public MerchandiseController(ZooliranteContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         /* search and filter feature*/
@@ -293,6 +297,102 @@ namespace Zoolirante.Controllers
             }
 
             return RedirectToAction(nameof(Cart)); // PRG back to Cart view
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Checkout()
+        {
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (string.IsNullOrEmpty(vmJson))
+            {
+                return RedirectToAction("Cart");
+            }
+
+            var vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+
+            if (vm.temporaryCart == null || !vm.temporaryCart.Any())
+            {
+                return RedirectToAction("Cart");
+            }
+
+            // Set up Stripe
+            StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
+
+            var lineItems = new List<SessionLineItemOptions>();
+
+            foreach (var item in vm.temporaryCart)
+            {
+                var merchItem = _context.Merchandises.Find(item.ItemId);
+                if (merchItem != null)
+                {
+                    lineItems.Add(new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            Currency = "aud",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = merchItem.ItemName,
+                                Description = merchItem.ItemDescription,
+                            },
+                            UnitAmount = (long)(item.UnitPrice * 100),
+                        },
+                        Quantity = item.Quantity,
+                    });
+                }
+            }
+
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                LineItems = lineItems,
+                Mode = "payment",
+                BillingAddressCollection = "required",
+                SuccessUrl = $"{Request.Scheme}://{Request.Host}/Merchandise/PaymentSuccess?session_id={{CHECKOUT_SESSION_ID}}",
+                CancelUrl = $"{Request.Scheme}://{Request.Host}/Merchandise/Cart",
+            };
+
+            var service = new SessionService();
+            Session session = service.Create(options);
+
+            return Redirect(session.Url);
+        }
+
+        public IActionResult PaymentSuccess(string session_id)
+        {
+            if (string.IsNullOrEmpty(session_id))
+            {
+                return RedirectToAction("Index");
+            }
+
+            StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
+            var service = new SessionService();
+            var session = service.Get(session_id);
+
+            if (session.PaymentStatus == "paid")
+            {
+                // Clear the cart
+                var vmJson = HttpContext.Session.GetString("DefaultVM");
+                if (!string.IsNullOrEmpty(vmJson))
+                {
+                    var vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+                    vm.temporaryCart.Clear();
+                    HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(vm));
+                    UpdateCartCountFromDefaultVM(vm);
+                }
+
+                ViewBag.Message = "Payment successful! Thank you for your purchase.";
+                ViewBag.SessionId = session_id;
+                ViewBag.CustomerEmail = session.CustomerDetails?.Email;
+                ViewBag.AmountPaid = ((decimal)(session.AmountTotal ?? 0) / 100m).ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"));
+            }
+            else
+            {
+                ViewBag.Message = "Payment verification failed.";
+            }
+
+            return View();
         }
     }
 }
