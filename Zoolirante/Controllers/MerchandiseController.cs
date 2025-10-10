@@ -18,6 +18,7 @@ namespace Zoolirante.Controllers
         private readonly IConfiguration _configuration;
 
         public MerchandiseController(ZooliranteContext context)
+        public MerchandiseController(ZooliranteContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
@@ -358,5 +359,39 @@ namespace Zoolirante.Controllers
         }
 
         public IActionResult PaymentSuccess(string session_id)
+        {
+            if (string.IsNullOrEmpty(session_id))
+            {
+                return RedirectToAction("Index");
+            }
+
+            StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
+            var service = new SessionService();
+            var session = service.Get(session_id);
+
+            if (session.PaymentStatus == "paid")
+            {
+                // Clear the cart
+                var vmJson = HttpContext.Session.GetString("DefaultVM");
+                if (!string.IsNullOrEmpty(vmJson))
+                {
+                    var vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+                    vm.temporaryCart.Clear();
+                    HttpContext.Session.SetString("DefaultVM", JsonSerializer.Serialize(vm));
+                    UpdateCartCountFromDefaultVM(vm);
+                }
+
+                ViewBag.Message = "Payment successful! Thank you for your purchase.";
+                ViewBag.SessionId = session_id;
+                ViewBag.CustomerEmail = session.CustomerDetails?.Email;
+                ViewBag.AmountPaid = ((decimal)(session.AmountTotal ?? 0) / 100m).ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-AU"));
+            }
+            else
+            {
+                ViewBag.Message = "Payment verification failed.";
+            }
+
+            return View();
+        }
     }
 }
