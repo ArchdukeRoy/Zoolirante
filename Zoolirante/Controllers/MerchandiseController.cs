@@ -9,6 +9,8 @@ using Zoolirante.Data;
 using Zoolirante.Models;
 using Zoolirante.ViewModels;
 using System.Text.Json;
+using Stripe;
+using Stripe.Checkout;
 
 namespace Zoolirante.Controllers
 {
