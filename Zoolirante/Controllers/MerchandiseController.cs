@@ -15,10 +15,12 @@ namespace Zoolirante.Controllers
     public class MerchandiseController : Controller
     {
         private readonly ZooliranteContext _context;
+        private readonly IConfiguration _configuration;
 
         public MerchandiseController(ZooliranteContext context)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         /* search and filter feature*/
@@ -294,5 +296,67 @@ namespace Zoolirante.Controllers
 
             return RedirectToAction(nameof(Cart)); // PRG back to Cart view
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Checkout()
+        {
+            var vmJson = HttpContext.Session.GetString("DefaultVM");
+            if (string.IsNullOrEmpty(vmJson))
+            {
+                return RedirectToAction("Cart");
+            }
+
+            var vm = JsonSerializer.Deserialize<DefaultViewModel>(vmJson)!;
+
+            if (vm.temporaryCart == null || !vm.temporaryCart.Any())
+            {
+                return RedirectToAction("Cart");
+            }
+
+            // Set up Stripe
+            StripeConfiguration.ApiKey = _configuration["Stripe:SecretKey"];
+
+            var lineItems = new List<SessionLineItemOptions>();
+
+            foreach (var item in vm.temporaryCart)
+            {
+                var merchItem = _context.Merchandises.Find(item.ItemId);
+                if (merchItem != null)
+                {
+                    lineItems.Add(new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            Currency = "aud",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = merchItem.ItemName,
+                                Description = merchItem.ItemDescription,
+                            },
+                            UnitAmount = (long)(item.UnitPrice * 100),
+                        },
+                        Quantity = item.Quantity,
+                    });
+                }
+            }
+
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                LineItems = lineItems,
+                Mode = "payment",
+                BillingAddressCollection = "required",
+                SuccessUrl = $"{Request.Scheme}://{Request.Host}/Merchandise/PaymentSuccess?session_id={{CHECKOUT_SESSION_ID}}",
+                CancelUrl = $"{Request.Scheme}://{Request.Host}/Merchandise/Cart",
+            };
+
+            var service = new SessionService();
+            Session session = service.Create(options);
+
+            return Redirect(session.Url);
+        }
+
+        public IActionResult PaymentSuccess(string session_id)
     }
 }
