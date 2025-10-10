@@ -343,10 +343,94 @@ body {
 }
 
 @media (max-width: 767.98px) {
+    /* Center the Discover More button itself */
     .discovermore-btn {
-        display: block;
-        margin: 1.5rem auto 0 auto; /* top margin for spacing + centered horizontally */
+        display: block; /* take a line */
+        width: max-content; /* shrink to content so margins can center */
+        margin: 1rem auto 0 auto !important; /* center horizontally */
         text-align: center;
-        width: 80%; /* optional: make it a bit wider for easier tapping */
+        padding: 0.8rem 1.25rem; /* comfy tap target */
     }
+
+    /* Make the immediate wrapper center inline content */
+    .animal-showcase-half > div {
+        text-align: center;
+    }
+}
+
+/* Desktop / default layout */
+.section-map {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.section-description,
+.map-container {
+    flex: 1 1 0;
+}
+
+    /* Center the text block contents neatly */
+    .section-description .description-map {
+        max-width: 900px; /* optional: nice readable width */
+        margin: 0 auto; /* centers the block itself */
+        text-align: center; /* centers the text inside */
+    }
+
+/* Mobile: stack, description first, tighter spacing */
+@media (max-width: 767.98px) {
+    .section-map {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch !important; /* <— ensure children fill width */
+        gap: 0.5rem;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    /* Make both halves truly full-width */
+    .section-description,
+    .map-container {
+        flex: 1 1 auto;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+
+    .map-container {
+        order: 2;
+    }
+
+    .section-description .description-map {
+        padding: 0.5rem 1rem;
+    }
+
+    .map-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .map-wrap {
+        width: 95vw; /* expands close to full screen width */
+        height: 400px; /* increase height for better visibility */
+        background-size: cover; /* make the map fill the area */
+        border-radius: 8px;
+    }
+
+        .map-wrap img,
+        .map-wrap iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+}
+
+/* Safety: avoid stray floats or alignment overrides */
+.section-description, .map-container {
+    float: none;
 }
