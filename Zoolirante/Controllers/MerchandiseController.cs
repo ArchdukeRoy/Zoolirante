@@ -19,7 +19,6 @@ namespace Zoolirante.Controllers
         private readonly ZooliranteContext _context;
         private readonly IConfiguration _configuration;
 
-        public MerchandiseController(ZooliranteContext context)
         public MerchandiseController(ZooliranteContext context, IConfiguration configuration)
         {
             _context = context;
